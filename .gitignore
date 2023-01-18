@@ -5,6 +5,8 @@
 /front/node_modules
 /.pnp
 .pnp.js
+/back/dist
+/back/dist/node_modules
 
 # testing
 /coverage
