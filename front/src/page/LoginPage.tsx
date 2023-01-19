@@ -1,3 +1,9 @@
+import Layout from "../modules/layout/Layout";
+
 export const LoginPage = () => {
-  return <h1>Авторизация</h1>;
+  return (
+    <Layout>
+      <h1>Авторизация</h1>
+    </Layout>
+  );
 };

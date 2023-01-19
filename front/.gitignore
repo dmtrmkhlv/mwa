@@ -2,13 +2,8 @@
 
 # dependencies
 /node_modules
-/front/node_modules
 /.pnp
 .pnp.js
-/back/dist
-/back/dist/node_modules
-/back/node_modules
-/back/db.sqlite
 
 # testing
 /coverage
