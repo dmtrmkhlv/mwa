@@ -1,4 +1,4 @@
-import { AccountCircle, Check } from "@mui/icons-material";
+import { AccountCircle, Check, Email } from "@mui/icons-material";
 import { Box, Button, Container, FormGroup, InputAdornment, TextField } from "@mui/material";
 import Layout from "../modules/layout/Layout";
 
@@ -10,7 +10,7 @@ export const SignUpPage = () => {
       
       
 
-      <Box className="reg-wrapper">
+      <Box className="reg-wrapper"> 
 
         <Box
           component="form"
@@ -39,6 +39,13 @@ export const SignUpPage = () => {
               id="outlined-email-input"
               label="E-mail"
               type="email"
+              InputProps={{
+                startAdornment: (
+                    <InputAdornment position="start">
+                    <Email />
+                    </InputAdornment>
+                ),
+              }}
             />
             <TextField
                 id="outlined-password-input"
