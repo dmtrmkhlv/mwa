@@ -24,6 +24,10 @@ export function BasicMenu() {
     navigate("/login");
     setAnchorEl(null);
   };
+  const handleFour = () => {
+    navigate("/signup");
+    setAnchorEl(null);
+  };
   const handleThree = () => {
     navigate("/test");
     setAnchorEl(null);
@@ -53,6 +57,7 @@ export function BasicMenu() {
       >
         <MenuItem onClick={handleOne}>Главная</MenuItem>
         <MenuItem onClick={handleTwo}>Авторизация</MenuItem>
+        <MenuItem onClick={handleFour}>Регистрация</MenuItem>
         <MenuItem onClick={handleThree}>Подарок</MenuItem>
       </Menu>
     </div>

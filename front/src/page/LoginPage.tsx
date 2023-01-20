@@ -1,9 +1,10 @@
-import { FormControlUnstyled, FormControlUnstyledState } from "@mui/base";
+
 import { AccountCircle, Check } from "@mui/icons-material";
-import { Input, InputAdornment, TextField } from "@mui/material";
+import { Button, Container, InputAdornment, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import Layout from "../modules/layout/Layout";
+import FormGroup from '@mui/material/FormGroup';
 
 
 
@@ -11,7 +12,7 @@ export const LoginPage = () => {
   return (
     <Layout>
       
-      <Box className="auth-header" component="h1">Авторизация</Box>
+      <Container className="auth-header" component="h1">Авторизация</Container>
       
       
 
@@ -26,38 +27,33 @@ export const LoginPage = () => {
           autoComplete="off"
         >
 
-
-          <TextField 
-            id="outlined-basic" 
-            label="Required" 
-            variant="outlined" 
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <AccountCircle />
-                </InputAdornment>
-              ),
-            }}
-            type="text" required 
-          />
-          <TextField
-            id="outlined-password-input"
-            label="Password"
-            type="password"
-            autoComplete="current-password"
-          />
+          <FormGroup row={false}>
+            <TextField 
+              id="outlined-basic" 
+              label="Обязательно" 
+              variant="outlined" 
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <AccountCircle />
+                  </InputAdornment>
+                ),
+              }}
+              type="text" required 
+            />
+            
+            <TextField
+              id="outlined-password-input"
+              label="Пароль"
+              type="password"
+              autoComplete="current-password"
+            />
+          </FormGroup>
         </Box>
 
 
         <Box>
-        <FormControlUnstyled defaultValue="" required>
-          {({ filled, focused }: FormControlUnstyledState) => (
-            <React.Fragment>
-              <Input className={filled ? 'filled' : ''} />
-              {filled && !focused && <Check>✔</Check>}
-            </React.Fragment>
-          )}
-        </FormControlUnstyled>
+        <Button variant="contained" type="submit"><Check></Check> Войти</Button>
         </Box>
       </Box>
     </Layout>
