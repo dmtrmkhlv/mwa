@@ -6,4 +6,5 @@ export interface DataState<T> {
 
 export interface IUser {
   username: string;
+  session: Boolean;
 }

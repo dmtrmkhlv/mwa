@@ -3,7 +3,7 @@ import Layout from "../modules/layout/Layout";
 
 export const TestPage = () => {
   return (
-    <Layout>
+    <Layout isRequire={true}>
       <CustomImageList />
     </Layout>
   );

@@ -1,15 +1,18 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import "./App.css";
+import { Route, routing } from "./modules";
 import { MainPage, LoginPage, SignUpPage, TestPage } from "./page";
+
+const route = routing();
+route.create(MainPage, "/");
+route.create(LoginPage, "/login");
+route.create(SignUpPage, "/signup");
+route.create(TestPage, "/test");
 
 export const App = () => {
   return (
-    <Routes>
-      <Route path="/" element={<MainPage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/signup" element={<SignUpPage />} />
-      <Route path="/test" element={<TestPage />} />
-    </Routes>
+    <BrowserRouter>
+      <Route route={route.get} />
+    </BrowserRouter>
   );
 };
