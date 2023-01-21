@@ -12,9 +12,9 @@ export class UsersService {
     @InjectRepository(User) private usersRepository: Repository<User>,
   ) {}
   async create(createUserDto: CreateUserDto) {
-    const newUser = new User();
-    newUser.firstName = createUserDto.firstName;
-    return await this.usersRepository.save(newUser);
+    const newUser = this.usersRepository.create(createUserDto);
+    return this.usersRepository.save(newUser);
+
   }
 
   async findAll() {
@@ -27,17 +27,18 @@ export class UsersService {
     return users;
   }
 
-  findOne(id: number) {
-    return this.usersRepository.findOneBy({ id_user: id });
+  async findOne(username: string): Promise<User | undefined> {
+    return this.usersRepository.findOneBy({ username });
+
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto) {
-    const user = await this.findOne(id);
+  async update(username: string, updateUserDto: UpdateUserDto) {
+    const user = await this.findOne(username);
     return this.usersRepository.save({ ...user, ...updateUserDto });
   }
 
-  async remove(id: number) {
-    const user = await this.findOne(id);
+  async remove(username: string) {
+    const user = await this.findOne(username);
     return this.usersRepository.remove(user);
   }
 }
