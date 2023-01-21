@@ -1,3 +1,7 @@
+import { Event } from 'src/event/entities/event.entity';
+
 export class CreateUserDto {
-  name: string;
+  id: number;
+  firstName: string;
+  events: Event[];
 }
