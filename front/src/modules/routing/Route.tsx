@@ -6,6 +6,7 @@ interface RouteComponents {
   components: FC<PageProps>;
   path: string;
   isRequire: Require;
+  describe: string;
 }
 
 interface RouteProps {
@@ -17,9 +18,10 @@ export const routing = () => {
   function createRoute(
     components: FC<PageProps>,
     path: string,
-    isRequire: Require
+    isRequire: Require,
+    describe: string
   ) {
-    Arr.push({ components, path, isRequire });
+    Arr.push({ components, path, isRequire, describe });
   }
   return { get: Arr, create: createRoute };
 };
