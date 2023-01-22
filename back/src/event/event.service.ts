@@ -1,6 +1,9 @@
-import { Injectable } from '@nestjs/common';
+
+import { Injectable, Request } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import dataSource from 'db/data-source';
+import { User } from 'src/users/entities/user.entity';
+
 import { Repository } from 'typeorm';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
@@ -10,19 +13,28 @@ import { Event } from './entities/event.entity';
 export class EventService {
   constructor(
     @InjectRepository(Event) private eventsRepository: Repository<Event>,
+
+    @InjectRepository(User) private usersRepository: Repository<User>,
   ) {}
+
   async create(createEventDto: CreateEventDto) {
-    const newEvent = new Event();
-    newEvent.title = createEventDto.title;
-    newEvent.description = createEventDto.description;
+    const newEvent = this.eventsRepository.create(createEventDto);
     return await this.eventsRepository.save(newEvent);
   }
 
-  async findAll() {
-    const eventRepository = dataSource.getRepository(Event);
-    const events = await eventRepository.find({
+  async findAll(@Request() req) {
+    console.log(req.user);
+    const user = this.usersRepository.findOneBy({
+      userId: req.user.userId,
+    });
+    console.log(await user);
+    const events = this.eventsRepository.find({
       relations: {
-        user: true,
+        creator: true,
+      },
+      where: {
+        creator: await user,
+
       },
     });
     return events;

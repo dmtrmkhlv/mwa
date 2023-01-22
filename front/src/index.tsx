@@ -4,8 +4,7 @@ import "./index.css";
 import { App } from "./App";
 import { Provider } from "react-redux";
 import reportWebVitals from "./reportWebVitals";
-import { setupStore } from "./store";
-import { BrowserRouter } from "react-router-dom";
+import { setupStore } from "./modules/store";
 
 const store = setupStore();
 
@@ -13,16 +12,11 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  // <React.StrictMode>
-  <Provider store={store}>
-    <BrowserRouter>
+  <React.StrictMode>
+    <Provider store={store}>
       <App />
-    </BrowserRouter>
-  </Provider>
-  // </React.StrictMode>
+    </Provider>
+  </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
