@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import dataSource from 'db/data-source';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -10,26 +11,36 @@ export class UsersService {
   constructor(
     @InjectRepository(User) private usersRepository: Repository<User>,
   ) {}
-  create(createUserDto: CreateUserDto) {
+  async create(createUserDto: CreateUserDto) {
+
     const newUser = this.usersRepository.create(createUserDto);
     return this.usersRepository.save(newUser);
+
   }
 
-  findAll() {
-    return this.usersRepository.find();
+  async findAll() {
+    const userRepository = dataSource.getRepository(User);
+    const users = await userRepository.find({
+      relations: {
+        events: true,
+      },
+    });
+    return users;
   }
 
-  findOne(id: number) {
-    return this.usersRepository.findOneBy({ id });
+
+  async findOne(username: string): Promise<User | undefined> {
+    return this.usersRepository.findOneBy({ username });
+
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto) {
-    const user = await this.findOne(id);
+  async update(username: string, updateUserDto: UpdateUserDto) {
+    const user = await this.findOne(username);
     return this.usersRepository.save({ ...user, ...updateUserDto });
   }
 
-  async remove(id: number) {
-    const user = await this.findOne(id);
+  async remove(username: string) {
+    const user = await this.findOne(username);
     return this.usersRepository.remove(user);
   }
 }

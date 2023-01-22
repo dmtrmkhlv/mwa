@@ -56,8 +56,8 @@ export function BasicMenu() {
         }}
       >
         <MenuItem onClick={handleOne}>Главная</MenuItem>
-        <MenuItem onClick={handleTwo}>Авторизация</MenuItem>
-        <MenuItem onClick={handleFour}>Регистрация</MenuItem>
+        {/* <MenuItem onClick={handleTwo}>Авторизация</MenuItem>
+        <MenuItem onClick={handleFour}>Регистрация</MenuItem> */}
         <MenuItem onClick={handleThree}>Подарок</MenuItem>
       </Menu>
     </div>
