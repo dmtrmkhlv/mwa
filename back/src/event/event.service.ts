@@ -1,7 +1,9 @@
+
 import { Injectable, Request } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import dataSource from 'db/data-source';
 import { User } from 'src/users/entities/user.entity';
+
 import { Repository } from 'typeorm';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
@@ -11,6 +13,7 @@ import { Event } from './entities/event.entity';
 export class EventService {
   constructor(
     @InjectRepository(Event) private eventsRepository: Repository<Event>,
+
     @InjectRepository(User) private usersRepository: Repository<User>,
   ) {}
 
@@ -31,6 +34,7 @@ export class EventService {
       },
       where: {
         creator: await user,
+
       },
     });
     return events;
