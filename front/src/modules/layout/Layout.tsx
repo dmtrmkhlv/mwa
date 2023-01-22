@@ -24,11 +24,11 @@ export default function Layout(props: LayoutProps): JSX.Element {
   return (
     <RequireAuth isAuth={session} isRequire={getRequireBoolean()}>
       <>
-        <PrimarySearchAppBar />
+        <PrimarySearchAppBar session={session} />
 
         <Container maxWidth="xl">
           <Breadcrumbs />
-          {session ? <h1>Зарегистрирован</h1> : <h1>Не зарегистрирован</h1>}
+
           <Box
             sx={{
               mt: 2,
