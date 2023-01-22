@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { userAuthenticatedOut } from "../../../store/ActionCreator";
+import { userAuthenticatedOut } from "../../store/ActionCreator";
 import { useAppDispatch } from "../../hooks";
 
 export const Main = () => {

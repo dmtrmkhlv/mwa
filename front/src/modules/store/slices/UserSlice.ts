@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { DataState, IUser } from "../../interfaces";
+import { DataState, IUser } from "../../../interfaces";
 import { loginAccount } from "../ThunkCreator";
 
 const mokUser: IUser = {

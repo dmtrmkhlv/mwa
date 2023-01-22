@@ -1,9 +1,9 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
+import axios, { AxiosInstance } from "axios";
 
 const baseEnv = process.env;
 export const baseURL = () => {
   if (process.env.NODE_ENV === "development") {
-    return baseEnv.REACT_APP_BASE_URL_TEST;
+    return baseEnv.REACT_APP_BASE_URL;
   } else {
     return baseEnv.REACT_APP_BASE_URL;
   }

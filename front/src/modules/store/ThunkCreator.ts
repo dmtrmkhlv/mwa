@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { apifetch } from "../modules";
+import { apifetch } from "..";
 
 type CreateUserResponse = {
   access_token: string;

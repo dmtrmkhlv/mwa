@@ -1,10 +1,7 @@
-import { ReactNode } from "react";
 import { useLocation, Navigate } from "react-router-dom";
 import { RequireAuthProps } from "./RequireAuthProps";
 
 export const RequireAuth = (props: RequireAuthProps): JSX.Element => {
-  // const user = useSelector(userSelector);
-  // const dispatch = useDispatch();
   const { children, isAuth, isRequire } = props;
 
   let location = useLocation();

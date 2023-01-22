@@ -1,4 +1,4 @@
-import { IUser } from "../interfaces";
+import { IUser } from "../../interfaces";
 import { AppDispatch } from "./index";
 import { UserSlice } from "./slices/UserSlice";
 

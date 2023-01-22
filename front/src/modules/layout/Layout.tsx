@@ -13,8 +13,16 @@ import { useRequireAuth } from "../requireAuth/useRequireAuth";
 export default function Layout(props: LayoutProps): JSX.Element {
   const { session } = useRequireAuth();
   const { children, isRequire } = props;
+  const getRequireBoolean = () => {
+    if (isRequire === "protected") {
+      return true;
+    } else if (isRequire === "public") {
+      return false;
+    }
+    return false;
+  };
   return (
-    <RequireAuth isAuth={session} isRequire={isRequire}>
+    <RequireAuth isAuth={session} isRequire={getRequireBoolean()}>
       <>
         <PrimarySearchAppBar />
 
