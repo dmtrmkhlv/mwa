@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../modules";
 import { loginAccount } from "../../store/ThunkCreator";
+import { IUser } from "../../../interfaces";
 
 export const Login = () => {
   const { value: user, error } = useAppSelector((state) => state.UserReducer);
