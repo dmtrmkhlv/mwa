@@ -13,5 +13,5 @@ export class User {
   password: string;
 
   @OneToMany(() => Event, (event) => event.creator)
-  events: Event[];
+  events!: Event[];
 }
