@@ -20,9 +20,11 @@ export class EventService {
   }
 
   async findAll(@Request() req) {
+    console.log(req.user);
     const user = this.usersRepository.findOneBy({
-      userId: req.userId,
+      userId: req.user.userId,
     });
+    console.log(await user);
     const events = this.eventsRepository.find({
       relations: {
         creator: true,
