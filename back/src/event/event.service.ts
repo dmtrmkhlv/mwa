@@ -1,4 +1,3 @@
-
 import { Injectable, Request } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import dataSource from 'db/data-source';
@@ -34,7 +33,6 @@ export class EventService {
       },
       where: {
         creator: await user,
-
       },
     });
     return events;
