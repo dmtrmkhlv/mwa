@@ -6,9 +6,13 @@ export class Event {
   @PrimaryGeneratedColumn()
   id_event: number;
   @Column('text')
+
+
   title: string;
   @Column('text')
   description: string;
   @ManyToOne(() => User, (user) => user.events)
+
   creator: User;
+
 }

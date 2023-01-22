@@ -1,3 +1,4 @@
+
 import {
   Controller,
   Get,
@@ -15,15 +16,19 @@ import { UpdateEventDto } from './dto/update-event.dto';
 import { ApiBearerAuth, ApiBody } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
+
 @Controller('event')
 export class EventController {
   constructor(private readonly eventService: EventService) {}
 
+
   @ApiBody({ type: CreateEventDto })
+
   @Post()
   create(@Body() createEventDto: CreateEventDto) {
     return this.eventService.create(createEventDto);
   }
+
 
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
@@ -46,4 +51,5 @@ export class EventController {
   // remove(@Param('id') id: string) {
   //   return this.eventService.remove(+id);
   // }
+
 }
