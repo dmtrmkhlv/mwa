@@ -1,4 +1,4 @@
-import { Button, Container } from '@mui/material';
+import { Box, Button, Container } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import './Header.css';
 
@@ -6,7 +6,7 @@ import './Header.css';
 
 export const Header = () => {
     return (
-        <Container className='header_wrap'>
+        <Box sx={{ width: 1 }} className='header_wrap'>
             <div className='header_wrap__inner'>
                 <a href='/' title='Home'>
                     <img src={'../images/logo_orange_little.png'} alt='Our Wishlist Logo'/>
@@ -19,6 +19,6 @@ export const Header = () => {
                 </nav>
                 <Button className='signup' href={'/signup'}>Войти</Button>
             </div>
-        </Container>
+        </Box>
     )
 }
