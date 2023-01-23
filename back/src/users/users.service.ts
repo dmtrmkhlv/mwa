@@ -12,15 +12,12 @@ export class UsersService {
     @InjectRepository(User) private usersRepository: Repository<User>,
   ) {}
   async create(createUserDto: CreateUserDto) {
-
     const newUser = this.usersRepository.create(createUserDto);
     return this.usersRepository.save(newUser);
-
   }
 
   async findAll() {
-    const userRepository = dataSource.getRepository(User);
-    const users = await userRepository.find({
+    const users = this.usersRepository.find({
       relations: {
         events: true,
       },
@@ -28,10 +25,8 @@ export class UsersService {
     return users;
   }
 
-
   async findOne(username: string): Promise<User | undefined> {
     return this.usersRepository.findOneBy({ username });
-
   }
 
   async update(username: string, updateUserDto: UpdateUserDto) {
