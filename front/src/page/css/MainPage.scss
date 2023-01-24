@@ -1,5 +1,5 @@
 .MuiBox-root {
-    
+
     .main_cont-sides {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -48,7 +48,7 @@
         .main_cont-sides-pad {
             padding: 0 20%;
         }
-        
+
         .learn_more {
             border: 2px solid #F7941E;
             border-radius: 5px;
@@ -58,27 +58,254 @@
     }
 
     .main_cont-occasions {
+        flex: 0 0 100%;
+        padding-bottom: 107px;
 
         .occasions-center {
             text-align: center;
         }
 
+        h2 {
+            font-weight: 400;
+            font-size: 32px;
+            line-height: 39px;
+            text-align: center;
+            margin-top: 96px;
+            margin-bottom: 22px;
+        }
+
+        &>p {
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 1.4;
+            margin: 0 0 64px;
+        }
+
         .occasions-cont {
-            display: block;
-            width: 100%;
-            margin: auto;
+            display: grid;
+            grid-template-columns: 70px auto 70px;
+            align-items: center;
+            height: 396px;
+            justify-content: center;
+
+            &>img {
+                cursor: pointer;
+            }
+
+            .occasions-cont__inner {
+                width: calc(270px * 4 + 120px);
+                margin: auto;
+                overflow-x: hidden;
+                padding-bottom: 30px;
+                display: flex;
+                flex-wrap: nowrap;
+                position: relative;
+            }
 
             .occasions-cont-item {
                 display: inline-block;
                 margin: 0 15px;
+                box-shadow: 10px 10px 15px rgb(0 0 0 / 5%);
+                background-color: #FAFAFA;
+                max-width: 270px;
+                left: 0;
+                transition: .3s ease;
+
+                &>div {
+                    padding: 24px;
+
+                    &>p {
+                        font-weight: 400;
+                        font-size: 20px;
+                        line-height: 24px;
+                        hyphens: auto;
+                        margin-top: 0;
+                    }
+
+                    &>a {
+                        font-weight: 400;
+                        font-size: 14px;
+                        line-height: 19px;
+                        text-decoration: none;
+                        color: #000000
+                    }
+                }
+
+                &>img {
+                    display: block;
+                }
             }
 
-            .occasions-cont-item:first-child {
-                margin-left: 0;
+
+        }
+    }
+
+    .begin:before {
+        position: absolute;
+        left: 0;
+        width: calc((100% - 1488px) / 2);
+        height: 100%;
+        background-color: #F7941E;
+    }
+
+    .begin:after {
+        position: absolute;
+        right: 0;
+        width: calc((100% - 1488px) / 2);
+        height: 100%;
+        background-color: #F7941E;
+    }
+
+    .begin {
+        background-color: #F7941E;
+        width: 100%;
+        position: relative;
+        height: 240px;
+
+
+
+        .begin__inner {
+            display: flex;
+            max-width: 780px;
+            width: 100%;
+            align-items: center;
+            margin: auto;
+            height: 100%;
+            gap: 30px;
+
+            .begin__reg {
+                width: 100%;
+
+                h2 {
+                    font-weight: 700;
+                    font-size: 32px;
+                    line-height: 1.4;
+                    margin: 0;
+                }
+
+                a {
+                    margin-top: 0;
+                    display: block;
+                    font-weight: 300;
+                    font-size: 22px;
+                    line-height: 1.4;
+                    color: #000;
+                    text-decoration: none;
+                }
             }
 
-            .occasions-cont-item:last-child {
-                margin-right: 0;
+            .reg {
+                background: rgba(35, 31, 32, 0.8);
+                border-radius: 5px;
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 22px;
+                display: flex;
+                align-items: center;
+                text-align: center;
+                text-transform: uppercase;
+                color: #FFFFFF;
+                height: 52px;
+                flex: 0 0 220px;
+                border: 1px solid rgba(35, 31, 32, 0.8);
+            }
+
+            .why {
+                background: transparent;
+                border-radius: 5px;
+                font-size: 18px;
+                line-height: 22px;
+                display: flex;
+                align-items: center;
+                text-align: center;
+                text-transform: uppercase;
+                color: #000;
+                height: 52px;
+                flex: 0 0 220px;
+                border: 1px solid #000000;
+            }
+        }
+    }
+
+    .histories {
+        .histories__inner {
+            h2 {
+                font-weight: 400;
+                font-size: 32px;
+                line-height: 39px;
+                text-align: center;
+                margin-top: 88px;
+                margin-bottom: 22px;
+            }
+
+            &>p {
+                margin-bottom: 71px;
+                text-align: center;
+            }
+
+            .histories__block {
+                display: flex;
+                align-items: center;
+
+                img {
+                    display: block;
+                }
+
+                .readmore_text {
+                    background-color: #231F20;
+                    font-weight: 400;
+                    font-size: 32px;
+                    line-height: 39px;
+                    color: #FFFFFF;
+                    height: 100%;
+                    padding: 48px 48px 0 78px;
+                    padding: 48px 48px 0 78px;
+                    height: 370px;
+                    box-sizing: border-box;
+                }
+
+                a {
+                    font-weight: 400;
+                    font-size: 18px;
+                    line-height: 1.4;
+                    color: #FFFFFF;
+                    text-decoration: none;
+                }
+            }
+
+            .other__histories {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                align-items: flex-start;
+                gap: 30px;
+                margin-top: 40px;
+                margin-bottom: 40px;
+
+                &>div {
+                    background: #FFFFFF;
+                    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
+                    padding: 54px 47px;
+                    height: 330px;
+                    box-sizing: border-box;
+
+                    h3 {
+                        font-weight: 700;
+                        font-size: 24px;
+                        line-height: 1.4;
+                    }
+
+                    p {
+                        font-weight: 400;
+                        font-size: 18px;
+                    }
+
+                    a {
+                        font-weight: 400;
+                        font-size: 14px;
+                        text-decoration: none;
+                        color: #000;
+                    }
+                }
             }
         }
     }
