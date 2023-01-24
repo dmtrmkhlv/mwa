@@ -8,11 +8,12 @@ import happy_brthd from "../images/happy_brthd.jpg";
 import annyversary from "../images/annyversary.jpg";
 import valentines from "../images/valentines.jpg";
 import christmas from "../images/christmas.jpg";
+import { useNavigate } from "react-router-dom";
 
 export const MainMaxim = () => {
+  const navigate = useNavigate();
   return (
     <>
-      <Header />
       <Box>
         <div className="main_cont-sides">
           <div>

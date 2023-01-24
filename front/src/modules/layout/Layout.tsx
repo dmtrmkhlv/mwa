@@ -9,6 +9,7 @@ import { Breadcrumbs, PrimarySearchAppBar } from "../components";
 import { Container } from "@mui/material";
 import { RequireAuth } from "../requireAuth/RequireAuth";
 import { useRequireAuth } from "../requireAuth/useRequireAuth";
+import { Header } from "../components/Header/Header";
 
 export default function Layout(props: LayoutProps): JSX.Element {
   const { session } = useRequireAuth();
@@ -24,11 +25,9 @@ export default function Layout(props: LayoutProps): JSX.Element {
   return (
     <RequireAuth isAuth={session} isRequire={getRequireBoolean()}>
       <>
-        <PrimarySearchAppBar session={session} />
+        {session ? <PrimarySearchAppBar session={session} /> : <Header />}
 
         <Container maxWidth="xl">
-          <Breadcrumbs />
-
           <Box
             sx={{
               mt: 2,
