@@ -5,9 +5,10 @@ import { UsersModule } from './users/users.module';
 
 import { AuthModule } from './auth/auth.module';
 import { EventModule } from './event/event.module';
+import { GiftModule } from './gift/gift.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(dataSourceOptions), UsersModule, AuthModule, EventModule],
+  imports: [TypeOrmModule.forRoot(dataSourceOptions), UsersModule, AuthModule, EventModule, GiftModule],
 
 })
 export class AppModule {}

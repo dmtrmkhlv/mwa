@@ -1,9 +1,6 @@
-import { User } from 'src/users/entities/user.entity';
-
 export class CreateEventDto {
-
+  userCreatorId: string;
+  date?: string;
   title: string;
   description: string;
-  creator: User;
-
 }

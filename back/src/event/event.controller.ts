@@ -1,4 +1,3 @@
-
 import {
   Controller,
   Get,
@@ -16,19 +15,18 @@ import { UpdateEventDto } from './dto/update-event.dto';
 import { ApiBearerAuth, ApiBody } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
-
 @Controller('event')
 export class EventController {
   constructor(private readonly eventService: EventService) {}
 
-
   @ApiBody({ type: CreateEventDto })
-
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @Post()
-  create(@Body() createEventDto: CreateEventDto) {
+  create(@Request() req, @Body() createEventDto: CreateEventDto) {
+    createEventDto.userCreatorId = req.user.userId;
     return this.eventService.create(createEventDto);
   }
-
 
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
@@ -37,19 +35,26 @@ export class EventController {
     return this.eventService.findAll(req);
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.eventService.findOne(+id);
-  // }
+  @Get(':id')
+  findOneByEventId(@Param('id') id: string) {
+    return this.eventService.findOneByEventId(id);
+  }
 
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateEventDto: UpdateEventDto) {
-  //   return this.eventService.update(+id, updateEventDto);
-  // }
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  @Patch(':id')
+  update(
+    @Request() req,
+    @Param('id') id: string,
+    @Body() updateEventDto: UpdateEventDto,
+  ) {
+    return this.eventService.update(req.user.userId, id, updateEventDto);
+  }
 
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.eventService.remove(+id);
-  // }
-
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  @Delete(':id')
+  remove(@Request() req, @Param('id') id: string) {
+    return this.eventService.remove(req.user.userId, id);
+  }
 }

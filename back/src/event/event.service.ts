@@ -1,8 +1,7 @@
 import { Injectable, Request } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import dataSource from 'db/data-source';
+import { ServerResponse } from 'src/dto/server-response.dto';
 import { User } from 'src/users/entities/user.entity';
-
 import { Repository } from 'typeorm';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
@@ -12,8 +11,6 @@ import { Event } from './entities/event.entity';
 export class EventService {
   constructor(
     @InjectRepository(Event) private eventsRepository: Repository<Event>,
-
-    @InjectRepository(User) private usersRepository: Repository<User>,
   ) {}
 
   async create(createEventDto: CreateEventDto) {
@@ -22,33 +19,50 @@ export class EventService {
   }
 
   async findAll(@Request() req) {
-    console.log(req.user);
-    const user = this.usersRepository.findOneBy({
-      userId: req.user.userId,
-    });
-    console.log(await user);
     const events = this.eventsRepository.find({
       relations: {
-        creator: true,
+        gifts: true,
       },
       where: {
-        creator: await user,
+        userCreatorId: req.user.userId,
       },
     });
-    return events;
+    return await events;
   }
 
-  findOne(id: number) {
-    return this.eventsRepository.findOneBy({ id_event: id });
+  findOneById(id: string): Promise<Event | undefined> {
+    return this.eventsRepository.findOneBy({ id: id });
   }
 
-  async update(id: number, updateEventDto: UpdateEventDto) {
-    const event = await this.findOne(id);
-    return this.eventsRepository.save({ ...event, ...updateEventDto });
+  async findOneByEventId(id: string) {
+    const event = this.eventsRepository.find({
+      relations: {
+        gifts: true,
+      },
+      where: {
+        id: id,
+      },
+    });
+    return await event;
   }
 
-  async remove(id: number) {
-    const event = await this.findOne(id);
-    return this.eventsRepository.remove(event);
+  async update(
+    userId: string,
+    id: string,
+    updateEventDto: UpdateEventDto,
+  ): Promise<Event | ServerResponse> {
+    const event = await this.findOneById(id);
+    if (event.userCreatorId === userId) {
+      return this.eventsRepository.save({ ...event, ...updateEventDto });
+    }
+    return { statusCode: 403, message: 'Запрещено обновлять чужие Event' };
+  }
+
+  async remove(userId: string, id: string): Promise<Event | ServerResponse> {
+    const event = await this.findOneById(id);
+    if (event.userCreatorId === userId) {
+      return this.eventsRepository.remove(event);
+    }
+    return { statusCode: 403, message: 'Запрещено удалять чужие Event' };
   }
 }
