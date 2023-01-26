@@ -17,8 +17,10 @@
   grid-template-columns: 100px auto 200px;
   align-items: center;
 }
-.header_wrap .header_wrap__inner .mobile_nav_buttons {
-  display: none;
+@media (min-width: 769px) {
+  .header_wrap .header_wrap__inner .mobile_nav_buttons {
+    display: none;
+  }
 }
 .header_wrap .header_wrap__inner .mobile_nav_buttons .nav_images {
   left: calc(100% - 70px);
@@ -40,6 +42,7 @@
 @media (max-width: 768px) {
   .header_wrap .header_wrap__inner {
     grid-template-columns: 100%;
+    display: block;
   }
 }
 .header_wrap .header_wrap__inner.noactive {
@@ -101,5 +104,6 @@
 @media (max-width: 768px) {
   .header_wrap .header_wrap__inner .header_wrap-nav .header_wrap-main-nav {
     margin: 7px 24px;
+    text-align: center;
   }
 }/*# sourceMappingURL=Header.css.map */
