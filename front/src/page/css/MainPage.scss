@@ -6,11 +6,21 @@
         align-items: center;
         background-color: #F1F1F2;
 
+        @media(max-width:768px) {
+            grid-template-columns: 100%;
+        }
+
         h1 {
             font-weight: 600;
             font-size: 48px;
             line-height: 59px;
             padding: 0 20%;
+
+            @media(max-width:768px) {
+                font-size: 30px;
+                line-height: 46px;
+                padding: 0 10%;
+            }
         }
 
         .create_wish {
@@ -22,6 +32,12 @@
             color: #fff;
             padding: 19px 13px;
             margin: auto 22.4%;
+
+            @media(max-width:768px) {
+                margin: 0 auto 30px;
+                display: block;
+                width: max-content;
+            }
         }
 
         img {
@@ -54,6 +70,10 @@
             border-radius: 5px;
             color: #F7941E;
             padding: 18px 37px;
+
+            @media(max-width:768px) {
+                margin-bottom: 30px;
+            }
         }
     }
 
@@ -88,8 +108,13 @@
             height: 396px;
             justify-content: center;
 
+            @media(max-width: 768px) {
+                overflow: hidden;
+            }
+
             &>img {
                 cursor: pointer;
+                margin: auto;
             }
 
             .occasions-cont__inner {
@@ -100,6 +125,11 @@
                 display: flex;
                 flex-wrap: nowrap;
                 position: relative;
+
+                @media(max-width: 768px) {
+                    flex-wrap: wrap;
+                    width: 100%;
+                }
             }
 
             .occasions-cont-item {
@@ -110,6 +140,11 @@
                 max-width: 270px;
                 left: 0;
                 transition: .3s ease;
+
+                @media(max-width: 768px) {
+                    margin: 0 0 25px;
+                    width: 100%;
+                }
 
                 &>div {
                     padding: 24px;
@@ -162,6 +197,10 @@
         position: relative;
         height: 240px;
 
+        @media(max-width: 768px) {
+            height: auto;
+            padding: 30px;
+        }
 
 
         .begin__inner {
@@ -172,6 +211,10 @@
             margin: auto;
             height: 100%;
             gap: 30px;
+
+            @media(max-width: 768px) {
+                flex-wrap: wrap;
+            }
 
             .begin__reg {
                 width: 100%;
@@ -247,8 +290,16 @@
                 display: flex;
                 align-items: center;
 
+                @media(max-width: 768px) {
+                    flex-wrap: wrap;
+                }
+
                 img {
                     display: block;
+
+                    @media(max-width: 768px) {
+                        width: 100%;
+                    }
                 }
 
                 .readmore_text {
@@ -262,6 +313,13 @@
                     padding: 48px 48px 0 78px;
                     height: 370px;
                     box-sizing: border-box;
+
+                    @media(max-width: 768px) {
+                        height: auto;
+                        padding: 30px;
+                        font-size: 24px;
+                        line-height: 34px;
+                    }
                 }
 
                 a {
@@ -281,12 +339,21 @@
                 margin-top: 40px;
                 margin-bottom: 40px;
 
+                @media(max-width: 768px) {
+                    grid-template-columns: 1fr;
+                }
+
                 &>div {
                     background: #FFFFFF;
                     box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
                     padding: 54px 47px;
                     height: 330px;
                     box-sizing: border-box;
+
+                    @media(max-width: 768px) {
+                        height: auto;
+                        padding: 30px;
+                    }
 
                     h3 {
                         font-weight: 700;

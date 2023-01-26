@@ -4,11 +4,23 @@
   align-items: center;
   background-color: #F1F1F2;
 }
+@media (max-width: 768px) {
+  .MuiBox-root .main_cont-sides {
+    grid-template-columns: 100%;
+  }
+}
 .MuiBox-root .main_cont-sides h1 {
   font-weight: 600;
   font-size: 48px;
   line-height: 59px;
   padding: 0 20%;
+}
+@media (max-width: 768px) {
+  .MuiBox-root .main_cont-sides h1 {
+    font-size: 30px;
+    line-height: 46px;
+    padding: 0 10%;
+  }
 }
 .MuiBox-root .main_cont-sides .create_wish {
   background: #F7941E;
@@ -19,6 +31,15 @@
   color: #fff;
   padding: 19px 13px;
   margin: auto 22.4%;
+}
+@media (max-width: 768px) {
+  .MuiBox-root .main_cont-sides .create_wish {
+    margin: 0 auto 30px;
+    display: block;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+  }
 }
 .MuiBox-root .main_cont-sides img {
   width: 100%;
@@ -48,6 +69,11 @@
   color: #F7941E;
   padding: 18px 37px;
 }
+@media (max-width: 768px) {
+  .MuiBox-root .main_cont-sides .learn_more {
+    margin-bottom: 30px;
+  }
+}
 .MuiBox-root .main_cont-occasions {
   flex: 0 0 100%;
   padding-bottom: 107px;
@@ -76,8 +102,14 @@
   height: 396px;
   justify-content: center;
 }
+@media (max-width: 768px) {
+  .MuiBox-root .main_cont-occasions .occasions-cont {
+    overflow: hidden;
+  }
+}
 .MuiBox-root .main_cont-occasions .occasions-cont > img {
   cursor: pointer;
+  margin: auto;
 }
 .MuiBox-root .main_cont-occasions .occasions-cont .occasions-cont__inner {
   width: 1200px;
@@ -88,6 +120,12 @@
   flex-wrap: nowrap;
   position: relative;
 }
+@media (max-width: 768px) {
+  .MuiBox-root .main_cont-occasions .occasions-cont .occasions-cont__inner {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+}
 .MuiBox-root .main_cont-occasions .occasions-cont .occasions-cont-item {
   display: inline-block;
   margin: 0 15px;
@@ -96,6 +134,12 @@
   max-width: 270px;
   left: 0;
   transition: 0.3s ease;
+}
+@media (max-width: 768px) {
+  .MuiBox-root .main_cont-occasions .occasions-cont .occasions-cont-item {
+    margin: 0 0 25px;
+    width: 100%;
+  }
 }
 .MuiBox-root .main_cont-occasions .occasions-cont .occasions-cont-item > div {
   padding: 24px;
@@ -139,6 +183,12 @@
   position: relative;
   height: 240px;
 }
+@media (max-width: 768px) {
+  .MuiBox-root .begin {
+    height: auto;
+    padding: 30px;
+  }
+}
 .MuiBox-root .begin .begin__inner {
   display: flex;
   max-width: 780px;
@@ -147,6 +197,11 @@
   margin: auto;
   height: 100%;
   gap: 30px;
+}
+@media (max-width: 768px) {
+  .MuiBox-root .begin .begin__inner {
+    flex-wrap: wrap;
+  }
 }
 .MuiBox-root .begin .begin__inner .begin__reg {
   width: 100%;
@@ -211,8 +266,18 @@
   display: flex;
   align-items: center;
 }
+@media (max-width: 768px) {
+  .MuiBox-root .histories .histories__inner .histories__block {
+    flex-wrap: wrap;
+  }
+}
 .MuiBox-root .histories .histories__inner .histories__block img {
   display: block;
+}
+@media (max-width: 768px) {
+  .MuiBox-root .histories .histories__inner .histories__block img {
+    width: 100%;
+  }
 }
 .MuiBox-root .histories .histories__inner .histories__block .readmore_text {
   background-color: #231F20;
@@ -225,6 +290,14 @@
   padding: 48px 48px 0 78px;
   height: 370px;
   box-sizing: border-box;
+}
+@media (max-width: 768px) {
+  .MuiBox-root .histories .histories__inner .histories__block .readmore_text {
+    height: auto;
+    padding: 30px;
+    font-size: 24px;
+    line-height: 34px;
+  }
 }
 .MuiBox-root .histories .histories__inner .histories__block a {
   font-weight: 400;
@@ -241,12 +314,23 @@
   margin-top: 40px;
   margin-bottom: 40px;
 }
+@media (max-width: 768px) {
+  .MuiBox-root .histories .histories__inner .other__histories {
+    grid-template-columns: 1fr;
+  }
+}
 .MuiBox-root .histories .histories__inner .other__histories > div {
   background: #FFFFFF;
   box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
   padding: 54px 47px;
   height: 330px;
   box-sizing: border-box;
+}
+@media (max-width: 768px) {
+  .MuiBox-root .histories .histories__inner .other__histories > div {
+    height: auto;
+    padding: 30px;
+  }
 }
 .MuiBox-root .histories .histories__inner .other__histories > div h3 {
   font-weight: 700;

@@ -2,7 +2,8 @@ import { Box, Button } from "@mui/material";
 import { Container } from "@mui/system";
 import Layout from "../modules/layout/Layout";
 import { Header } from "./Header/Header";
-import './css/MainPage.css'
+import { Footer } from "./Footer/Footer";
+import './css/MainPage.css';
 import { useState } from "react";
 
 
@@ -24,6 +25,7 @@ export const MainPage = () => {
 
   
   return (
+    <>
     <Layout>
       <Header/>
 
@@ -153,6 +155,12 @@ export const MainPage = () => {
         </Box>
       </Box>
 
+
+      
+
     </Layout>
+
+    <Footer />
+    </>
   );
 };
