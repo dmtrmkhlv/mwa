@@ -1,12 +1,11 @@
 import { FC } from "react";
 import { PageProps } from "../interfaces";
-import { CustomImageList, routing } from "../modules";
 import Layout from "../modules/layout/Layout";
 
-export const TestPage: FC<PageProps> = ({ isRequire }) => {
+export const DevelopPage: FC<PageProps> = ({ isRequire }) => {
   return (
     <Layout isRequire={isRequire}>
-      <CustomImageList />
+      <h1>В разработке...</h1>
     </Layout>
   );
 };

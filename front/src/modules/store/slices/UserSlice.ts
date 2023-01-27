@@ -1,14 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { DataState, IUser } from "../../../interfaces";
+import { DataState, IUserSession } from "../../../interfaces";
 import { loginAccount } from "../ThunkCreator";
 
-const mokUser: IUser = {
+const mokUser: IUserSession = {
   username: "",
   session: false,
 };
 
-export const initialState: DataState<IUser> = {
-  // value: [],
+export const initialState: DataState<IUserSession> = {
   value: mokUser,
   loading: false,
   error: "",

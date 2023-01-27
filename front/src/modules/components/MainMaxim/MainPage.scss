@@ -1,0 +1,85 @@
+.MuiBox-root {
+    
+    .main_cont-sides {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        background-color: #F1F1F2;
+
+        h1 {
+            font-weight: 600;
+            font-size: 48px;
+            line-height: 59px;
+            padding: 0 20%;
+        }
+
+        .create_wish {
+            background: #F7941E;
+            border-radius: 5px;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 22px;
+            color: #fff;
+            padding: 19px 13px;
+            margin: auto 22.4%;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            display: block;
+        }
+
+        h2 {
+            font-weight: 500;
+            font-size: 32px;
+            line-height: 1.4;
+            color: rgba(0, 0, 0, 0.8);
+        }
+
+        p {
+            font-weight: 300;
+            font-size: 20px;
+            line-height: 1.4;
+            color: rgba(0, 0, 0, 0.9);
+        }
+
+        .main_cont-sides-pad {
+            padding: 0 20%;
+        }
+        
+        .learn_more {
+            border: 2px solid #F7941E;
+            border-radius: 5px;
+            color: #F7941E;
+            padding: 18px 37px;
+        }
+    }
+
+    .main_cont-occasions {
+
+        .occasions-center {
+            text-align: center;
+        }
+
+        .occasions-cont {
+            display: block;
+            width: 100%;
+            margin: auto;
+
+            .occasions-cont-item {
+                display: inline-block;
+                margin: 0 15px;
+            }
+
+            .occasions-cont-item:first-child {
+                margin-left: 0;
+            }
+
+            .occasions-cont-item:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+}
