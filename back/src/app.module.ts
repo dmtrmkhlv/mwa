@@ -8,7 +8,12 @@ import { EventModule } from './event/event.module';
 import { GiftModule } from './gift/gift.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(dataSourceOptions), UsersModule, AuthModule, EventModule, GiftModule],
-
+  imports: [
+    TypeOrmModule.forRoot(dataSourceOptions),
+    UsersModule,
+    AuthModule,
+    EventModule,
+    GiftModule,
+  ],
 })
 export class AppModule {}
