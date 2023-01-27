@@ -25,7 +25,7 @@ export class EventController {
   @Post()
   create(@Request() req, @Body() createEventDto: CreateEventDto) {
     createEventDto.userCreatorId = req.user.userId;
-    return this.eventService.create(createEventDto);
+    return this.eventService.create(req.user.userId, createEventDto);
   }
 
   @ApiBearerAuth()

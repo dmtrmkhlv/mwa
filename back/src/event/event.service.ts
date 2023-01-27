@@ -11,11 +11,28 @@ import { Event } from './entities/event.entity';
 export class EventService {
   constructor(
     @InjectRepository(Event) private eventsRepository: Repository<Event>,
+    @InjectRepository(User) private usersRepository: Repository<User>,
   ) {}
 
-  async create(createEventDto: CreateEventDto) {
-    const newEvent = this.eventsRepository.create(createEventDto);
-    return await this.eventsRepository.save(newEvent);
+  async create(userId: string, createEventDto: CreateEventDto) {
+    // const newEvent = this.eventsRepository.create(createEventDto);
+    // newEvent.gifts = [];
+    // return await this.eventsRepository.save(newEvent);
+
+    const newEventCreate = this.eventsRepository.create(createEventDto);
+    newEventCreate.gifts = [];
+
+    const newEvent = await this.eventsRepository.save(newEventCreate);
+
+    const user = await this.usersRepository.findOne({
+      where: { id: userId },
+      relations: ['events'],
+    });
+    user.events.push(newEventCreate);
+
+    await this.usersRepository.save(user);
+
+    return newEvent;
   }
 
   async findAll(@Request() req) {

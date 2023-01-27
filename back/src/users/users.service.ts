@@ -13,6 +13,7 @@ export class UsersService {
   ) {}
   async create(createUserDto: CreateUserDto) {
     const newUser = this.usersRepository.create(createUserDto);
+    newUser.events = [];
     return this.usersRepository.save(newUser);
   }
 
@@ -20,11 +21,7 @@ export class UsersService {
     const user = this.usersRepository.find({
       relations: {
         events: true,
-        gifts: true,
       },
-      // where: {
-      //   userCreatorId: user,
-      // },
     });
 
     return await user;
@@ -34,7 +31,6 @@ export class UsersService {
     const user = this.usersRepository.find({
       relations: {
         events: true,
-        gifts: true,
       },
       where: {
         id: id,

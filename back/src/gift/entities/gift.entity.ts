@@ -13,7 +13,7 @@ export class Gift {
   @Column('varchar')
   userCreatorId: string;
 
-  @Column('varchar')
+  @Column({ default: '' })
   userBookId: string;
 
   @Column('varchar')
@@ -25,9 +25,12 @@ export class Gift {
   @Column('varchar')
   description: string;
 
-  @ManyToOne(() => Event, (event) => event.gifts)
-  event: Event;
+  // @ManyToOne(() => Event, (event) => event.gifts)
+  // event: Event;
 
-  @ManyToOne(() => User, (user) => user.gifts)
-  user: User;
+  // @ManyToOne(() => User, (user) => user.gifts)
+  // user: User;
+
+  @ManyToOne((type) => Event, (event) => event.gifts)
+  event: Event;
 }

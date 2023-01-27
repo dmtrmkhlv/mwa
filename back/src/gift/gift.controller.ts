@@ -29,7 +29,7 @@ export class GiftController {
   ) {
     createGiftDto.eventId = eventId;
     createGiftDto.userCreatorId = req.user.userId;
-    return this.giftService.create(createGiftDto);
+    return this.giftService.create(eventId, createGiftDto);
   }
 
   @ApiBearerAuth()

@@ -5,16 +5,31 @@ import { Repository } from 'typeorm';
 import { CreateGiftDto } from './dto/create-gift.dto';
 import { UpdateGiftDto } from './dto/update-gift.dto';
 import { Gift } from './entities/gift.entity';
+import { Event } from 'src/event/entities/event.entity';
 
 @Injectable()
 export class GiftService {
   constructor(
     @InjectRepository(Gift) private giftRepository: Repository<Gift>,
+    @InjectRepository(Event) private eventsRepository: Repository<Event>,
   ) {}
-  async create(createGiftDto: CreateGiftDto): Promise<Gift> {
-    const newGift = this.giftRepository.create(createGiftDto);
-    newGift.userBookId = '';
-    return await this.giftRepository.save(newGift);
+  async create(eventId: string, createGiftDto: CreateGiftDto): Promise<Gift> {
+    // const newGift = this.giftRepository.create(createGiftDto);
+    // return await this.giftRepository.save(newGift);
+
+    const newGiftCreate = this.giftRepository.create(createGiftDto);
+    const newGift = await this.giftRepository.save(newGiftCreate);
+
+    const getEvent = await this.eventsRepository.findOne({
+      where: { id: eventId },
+      relations: ['gifts'],
+    });
+
+    getEvent.gifts.push(newGiftCreate);
+
+    await this.eventsRepository.save(getEvent);
+
+    return newGift;
   }
 
   async findAll(userId: string): Promise<Gift[] | undefined> {

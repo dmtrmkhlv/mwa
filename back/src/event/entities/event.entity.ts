@@ -1,6 +1,7 @@
 import {
   Column,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -25,9 +26,16 @@ export class Event {
   @Column('varchar')
   description: string;
 
-  @OneToMany(() => Gift, (gift) => gift.event)
-  gifts: Gift[];
+  // @OneToMany(() => Gift, (gift) => gift.event)
+  // gifts: Gift[];
 
-  @ManyToOne(() => User, (user) => user.events)
+  // @ManyToOne(() => User, (user) => user.events)
+  // user: User;
+
+  @ManyToOne((type) => User, (user) => user.events)
   user: User;
+
+  @OneToMany((type) => Gift, (gift) => gift.event, { eager: true })
+  @JoinColumn()
+  gifts: Gift[];
 }
