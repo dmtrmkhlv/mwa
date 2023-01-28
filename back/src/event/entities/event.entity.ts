@@ -1,18 +1,33 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Gift } from 'src/gift/entities/gift.entity';
 import { User } from '../../users/entities/user.entity';
 
 @Entity('event')
 export class Event {
-  @PrimaryGeneratedColumn()
-  id_event: number;
-  @Column('text')
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
+  @Column('varchar')
+  userCreatorId: string;
 
+  @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
+  date: string;
+
+  @Column('varchar')
   title: string;
-  @Column('text')
+
+  @Column('varchar')
   description: string;
+
+  @OneToMany(() => Gift, (gift) => gift.event)
+  gifts: Gift[];
+
   @ManyToOne(() => User, (user) => user.events)
-
-  creator: User;
-
+  user: User;
 }

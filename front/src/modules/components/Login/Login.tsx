@@ -1,39 +1,17 @@
 import { AccountCircle, Check } from "@mui/icons-material";
-import { Button, Container, InputAdornment, TextField } from "@mui/material";
-import { Box } from "@mui/system";
-import { Link, useNavigate } from "react-router-dom";
-import React, { ChangeEvent, useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../../modules";
-import { loginAccount } from "../../store/ThunkCreator";
-import { IUser } from "../../../interfaces";
+import {
+  Button,
+  InputAdornment,
+  TextField,
+  Typography,
+  Box,
+} from "@mui/material";
+import { Link } from "react-router-dom";
+import { useLogin } from "./useLogin";
 
 export const Login = () => {
-  const { value: user, error } = useAppSelector((state) => state.UserReducer);
-  const dispatch = useAppDispatch();
-  let navigate = useNavigate();
-  const [form, setForm] = useState({
-    username: "",
-    password: "",
-  });
-  let from = "/";
-  const handleForm = (e: ChangeEvent<HTMLInputElement>) => {
-    setForm((formProps) => ({
-      ...formProps,
-      [e.target.name]: e.target.value,
-    }));
-  };
-  const annoyingSubmitButton = () => {
-    // const user = { username: "john", password: "changeme" };
-    dispatch(loginAccount(form));
-    console.log(error);
-  };
-  useEffect(() => {
-    console.log(error);
-    if (user.session) {
-      console.log("Здесь");
-      setTimeout(() => navigate(from, { replace: true }), 500);
-    }
-  }, [user.session]);
+  const { username, password, error, handlerForm, submitButton } = useLogin();
+
   return (
     <>
       <Box className="auth-header" component="h1">
@@ -60,8 +38,8 @@ export const Login = () => {
             }}
             type="text"
             name="username"
-            value={form.username}
-            onChange={handleForm}
+            value={username}
+            onChange={handlerForm}
             required
           />
 
@@ -70,14 +48,14 @@ export const Login = () => {
             label="Пароль"
             type="password"
             name="password"
-            value={form.password}
-            onChange={handleForm}
+            value={password}
+            onChange={handlerForm}
           />
           <Button
             sx={{ m: 1 }}
             type="submit"
             variant="contained"
-            onClick={annoyingSubmitButton}
+            onClick={submitButton}
           >
             <Check /> Войти
           </Button>
@@ -86,6 +64,17 @@ export const Login = () => {
           </Box>
         </Box>
       </Box>
+      {error !== "" ? (
+        <Typography
+          variant="h6"
+          gutterBottom
+          sx={{ color: "red", m: 1, width: "23ch" }}
+        >
+          {error}
+        </Typography>
+      ) : (
+        <></>
+      )}
     </>
   );
 };

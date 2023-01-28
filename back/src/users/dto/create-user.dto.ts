@@ -1,8 +1,12 @@
-import { Event } from 'src/event/entities/event.entity';
+import { IsString } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateUserDto {
-
+  @ApiProperty()
+  @IsString()
   username: string;
-  password: string;
 
+  @ApiProperty()
+  @IsString()
+  password: string;
 }
