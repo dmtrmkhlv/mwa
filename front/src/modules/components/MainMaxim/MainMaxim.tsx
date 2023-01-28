@@ -10,6 +10,9 @@ import christmas from "../images/christmas.jpg";
 
 export const MainMaxim = () => {
   const navigate = useNavigate();
+  const navigateCreate = () => {
+    setTimeout(() => navigate("/create", { replace: true }), 500);
+  };
   return (
     <>
       <Box>
@@ -18,7 +21,7 @@ export const MainMaxim = () => {
             <div>
               <h1>Расскажите родным и друзьям, о чём мечтаете!</h1>
             </div>
-            <Button className="create_wish" href={"/create"}>
+            <Button className="create_wish" onClick={navigateCreate}>
               Создать список
             </Button>
           </div>

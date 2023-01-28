@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import {
   RootState,
@@ -23,11 +23,12 @@ export const useLogin: useLoginFunc = () => {
   const { value: user, error } = useSelector(selectUser);
   const dispatch = useAppDispatch();
   let navigate = useNavigate();
+  let location = useLocation();
   const [form, setForm] = useState({
     username: "",
     password: "",
   });
-  let from = "/";
+  let from = location.state?.from?.pathname || "/";
   const handleForm = (e: ChangeEvent<HTMLInputElement>) => {
     setForm((formProps) => ({
       ...formProps,
@@ -37,9 +38,11 @@ export const useLogin: useLoginFunc = () => {
   const submitButton = () => {
     dispatch(loginAccount(form));
     console.log(error);
+    console.log(from);
   };
   useEffect(() => {
     console.log(error);
+
     if (user.session) {
       setTimeout(() => navigate(from, { replace: true }), 500);
     }

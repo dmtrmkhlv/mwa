@@ -4,6 +4,7 @@ import { loginAccount } from "../ThunkCreator";
 
 const mokUser: IUserSession = {
   username: "",
+  userId: null,
   session: false,
 };
 
@@ -31,6 +32,7 @@ export const UserSlice = createSlice({
       state.value = {
         username: action.payload.username,
         session: action.payload.session,
+        userId: action.payload.userId,
       };
     });
     builder.addCase(loginAccount.rejected, (state, action) => {

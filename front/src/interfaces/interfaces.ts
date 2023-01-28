@@ -1,5 +1,7 @@
 export type Require = "protected" | "public";
 
+export type Role = "norequired" | "creator" | "giver";
+
 export interface PageProps {
   isRequire: Require;
 }
@@ -12,6 +14,7 @@ export interface DataState<T> {
 
 interface IUser {
   username: string;
+  userId?: number | null;
 }
 interface IUserId {
   id: number;

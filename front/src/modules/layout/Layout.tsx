@@ -5,7 +5,12 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { LayoutProps } from "./LayoutProps";
-import { Breadcrumbs, PrimarySearchAppBar } from "../components";
+import {
+  Breadcrumbs,
+  DrawerAppBar,
+  Footer,
+  PrimarySearchAppBar,
+} from "../components";
 import { Container } from "@mui/material";
 import { RequireAuth } from "../requireAuth/RequireAuth";
 import { useRequireAuth } from "../requireAuth/useRequireAuth";
@@ -25,7 +30,7 @@ export default function Layout(props: LayoutProps): JSX.Element {
   return (
     <RequireAuth isAuth={session} isRequire={getRequireBoolean()}>
       <>
-        {session ? <PrimarySearchAppBar session={session} /> : <Header />}
+        {session ? <PrimarySearchAppBar session={session} /> : <DrawerAppBar />}
 
         <Container maxWidth="xl">
           <Box
@@ -39,6 +44,7 @@ export default function Layout(props: LayoutProps): JSX.Element {
           >
             {children}
           </Box>
+          <Footer />
         </Container>
       </>
     </RequireAuth>

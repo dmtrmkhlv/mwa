@@ -13,7 +13,11 @@ export const api = {
     });
     await localStorage.setItem("token", resp.data.access_token);
     const resptwo = await apifetch.get(`api/v1/auth/profile`);
-    const data = { username: resptwo.data.username, session: true };
+    const data = {
+      username: resptwo.data.username,
+      session: true,
+      userId: resptwo.data.userId,
+    };
 
     return data;
   },
