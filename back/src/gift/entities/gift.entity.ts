@@ -1,4 +1,3 @@
-import { User } from 'src/users/entities/user.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Event } from '../../event/entities/event.entity';
 
@@ -24,12 +23,6 @@ export class Gift {
 
   @Column('varchar')
   description: string;
-
-  // @ManyToOne(() => Event, (event) => event.gifts)
-  // event: Event;
-
-  // @ManyToOne(() => User, (user) => user.gifts)
-  // user: User;
 
   @ManyToOne((type) => Event, (event) => event.gifts)
   event: Event;

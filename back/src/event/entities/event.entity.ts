@@ -18,7 +18,7 @@ export class Event {
   userCreatorId: string;
 
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
-  date: string;
+  dateCreate: string;
 
   @Column('varchar')
   title: string;
@@ -26,11 +26,8 @@ export class Event {
   @Column('varchar')
   description: string;
 
-  // @OneToMany(() => Gift, (gift) => gift.event)
-  // gifts: Gift[];
-
-  // @ManyToOne(() => User, (user) => user.events)
-  // user: User;
+  @Column({ type: 'boolean', default: () => true })
+  isActive: boolean;
 
   @ManyToOne((type) => User, (user) => user.events)
   user: User;

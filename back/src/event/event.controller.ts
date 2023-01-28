@@ -32,7 +32,7 @@ export class EventController {
   @UseGuards(JwtAuthGuard)
   @Get()
   findAll(@Request() req) {
-    return this.eventService.findAll(req);
+    return this.eventService.findAll(req.user.userId);
   }
 
   @Get(':id')

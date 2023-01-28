@@ -1,4 +1,3 @@
-import { Gift } from 'src/gift/entities/gift.entity';
 import {
   Column,
   Entity,
@@ -18,12 +17,6 @@ export class User {
 
   @Column('varchar')
   password: string;
-
-  // @OneToMany(() => Event, (event) => event.user)
-  // events: Event[];
-
-  // @OneToMany(() => Gift, (gift) => gift.user)
-  // gifts: Gift[];
 
   @OneToMany((type) => Event, (event) => event.user, { eager: true })
   @JoinColumn()

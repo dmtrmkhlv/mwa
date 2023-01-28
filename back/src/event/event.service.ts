@@ -1,4 +1,4 @@
-import { Injectable, Request } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ServerResponse } from 'src/dto/server-response.dto';
 import { User } from 'src/users/entities/user.entity';
@@ -15,10 +15,6 @@ export class EventService {
   ) {}
 
   async create(userId: string, createEventDto: CreateEventDto) {
-    // const newEvent = this.eventsRepository.create(createEventDto);
-    // newEvent.gifts = [];
-    // return await this.eventsRepository.save(newEvent);
-
     const newEventCreate = this.eventsRepository.create(createEventDto);
     newEventCreate.gifts = [];
 
@@ -35,13 +31,13 @@ export class EventService {
     return newEvent;
   }
 
-  async findAll(@Request() req) {
+  async findAll(userId: string) {
     const events = this.eventsRepository.find({
       relations: {
         gifts: true,
       },
       where: {
-        userCreatorId: req.user.userId,
+        userCreatorId: userId,
       },
     });
     return await events;

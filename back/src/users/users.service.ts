@@ -17,25 +17,27 @@ export class UsersService {
     return this.usersRepository.save(newUser);
   }
 
-  async findAll() {
-    const user = this.usersRepository.find({
-      relations: {
-        events: true,
-      },
-    });
+  async findAll(): Promise<User[] | undefined> {
+    // const user = this.usersRepository.find({
+    //   relations: {
+    //     events: true,
+    //   },
+    // });
 
-    return await user;
+    // return await user;
+    return await this.usersRepository.find();
   }
 
-  async findOneById(id: string) {
-    const user = this.usersRepository.find({
-      relations: {
-        events: true,
-      },
-      where: {
-        id: id,
-      },
-    });
+  async findOneById(id: string): Promise<User | undefined> {
+    // const user = this.usersRepository.find({
+    //   relations: {
+    //     events: true,
+    //   },
+    //   where: {
+    //     id: id,
+    //   },
+    // });
+    const user = this.usersRepository.findOneBy({ id });
     return await user;
   }
 
