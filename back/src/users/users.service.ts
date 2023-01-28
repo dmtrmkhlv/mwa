@@ -18,25 +18,10 @@ export class UsersService {
   }
 
   async findAll(): Promise<User[] | undefined> {
-    // const user = this.usersRepository.find({
-    //   relations: {
-    //     events: true,
-    //   },
-    // });
-
-    // return await user;
     return await this.usersRepository.find();
   }
 
   async findOneById(id: string): Promise<User | undefined> {
-    // const user = this.usersRepository.find({
-    //   relations: {
-    //     events: true,
-    //   },
-    //   where: {
-    //     id: id,
-    //   },
-    // });
     const user = this.usersRepository.findOneBy({ id });
     return await user;
   }

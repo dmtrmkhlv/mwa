@@ -14,9 +14,6 @@ export class GiftService {
     @InjectRepository(Event) private eventsRepository: Repository<Event>,
   ) {}
   async create(eventId: string, createGiftDto: CreateGiftDto): Promise<Gift> {
-    // const newGift = this.giftRepository.create(createGiftDto);
-    // return await this.giftRepository.save(newGift);
-
     const newGiftCreate = this.giftRepository.create(createGiftDto);
     const newGift = await this.giftRepository.save(newGiftCreate);
 
@@ -43,6 +40,26 @@ export class GiftService {
 
   findOne(id: string): Promise<Gift | undefined> {
     return this.giftRepository.findOneBy({ id: id });
+  }
+
+  async update(
+    userId: string,
+    id: string,
+    updateGiftDto: UpdateGiftDto,
+  ): Promise<Gift | undefined> {
+    const gift = await this.findOne(id);
+    if (gift.userCreatorId === userId) {
+      return this.giftRepository.save({ ...gift, ...updateGiftDto });
+    }
+    // return { statusCode: 403, message: 'Запрещено обновлять чужие Gift' };
+  }
+
+  async remove(userId: string, id: string): Promise<Gift | undefined> {
+    const gift = await this.findOne(id);
+    if (gift.userCreatorId === userId) {
+      return this.giftRepository.remove(gift);
+    }
+    // return { statusCode: 403, message: 'Запрещено удалять чужие Gift' };
   }
 
   async book(
@@ -86,18 +103,5 @@ export class GiftService {
           'Вы не можете отменить бронь подарка, забронированного другим человеком',
       };
     }
-  }
-
-  async update(
-    id: string,
-    updateGiftDto: UpdateGiftDto,
-  ): Promise<Gift | undefined> {
-    const gift = await this.findOne(id);
-    return this.giftRepository.save({ ...gift, ...updateGiftDto });
-  }
-
-  async remove(id: string): Promise<Gift | undefined> {
-    const gift = await this.findOne(id);
-    return this.giftRepository.remove(gift);
   }
 }

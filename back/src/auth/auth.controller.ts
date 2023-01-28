@@ -12,12 +12,22 @@ import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { AuthDto } from './dto/auth.dto';
 import { ALREADY_REGISTERED_ERROR } from './auth.constants';
-import { ApiBearerAuth, ApiBody } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiOperation,
+  ApiResponse,
+} from '@nestjs/swagger';
 
 @Controller('api/v1/auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  @ApiOperation({ summary: 'Login user' })
+  @ApiResponse({
+    status: 200,
+    description: 'The user has been successfully logged.',
+  })
   @UseGuards(LocalAuthGuard)
   @HttpCode(200)
   @ApiBody({ type: AuthDto })
@@ -26,6 +36,11 @@ export class AuthController {
     return this.authService.login(req.user);
   }
 
+  @ApiOperation({ summary: 'Register user' })
+  @ApiResponse({
+    status: 200,
+    description: 'The user has been successfully registered.',
+  })
   @ApiBody({ type: AuthDto })
   @Post('register')
   async register(@Request() req) {
@@ -37,6 +52,8 @@ export class AuthController {
     return await this.authService.register(req.body);
   }
 
+  @ApiOperation({ summary: 'Get user`s profile' })
+  @ApiResponse({ status: 200, description: 'Return user`s profile.' })
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Get('profile')

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ServerResponse } from 'src/dto/server-response.dto';
+import { Gift } from 'src/gift/entities/gift.entity';
 import { User } from 'src/users/entities/user.entity';
 import { Repository } from 'typeorm';
 import { CreateEventDto } from './dto/create-event.dto';
@@ -12,22 +13,19 @@ export class EventService {
   constructor(
     @InjectRepository(Event) private eventsRepository: Repository<Event>,
     @InjectRepository(User) private usersRepository: Repository<User>,
+    @InjectRepository(Gift) private giftRepository: Repository<Gift>,
   ) {}
 
   async create(userId: string, createEventDto: CreateEventDto) {
     const newEventCreate = this.eventsRepository.create(createEventDto);
     newEventCreate.gifts = [];
-
     const newEvent = await this.eventsRepository.save(newEventCreate);
-
     const user = await this.usersRepository.findOne({
       where: { id: userId },
       relations: ['events'],
     });
     user.events.push(newEventCreate);
-
     await this.usersRepository.save(user);
-
     return newEvent;
   }
 
@@ -74,6 +72,9 @@ export class EventService {
   async remove(userId: string, id: string): Promise<Event | ServerResponse> {
     const event = await this.findOneById(id);
     if (event.userCreatorId === userId) {
+      await this.giftRepository.delete({
+        eventId: id,
+      });
       return this.eventsRepository.remove(event);
     }
     return { statusCode: 403, message: 'Запрещено удалять чужие Event' };
