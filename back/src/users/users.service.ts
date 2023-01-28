@@ -9,27 +9,44 @@ import { User } from './entities/user.entity';
 export class UsersService {
   constructor(
     @InjectRepository(User) private usersRepository: Repository<User>,
+    @InjectRepository(Event) private eventsRepository: Repository<Event>,
   ) {}
-  create(createUserDto: CreateUserDto) {
+  async create(createUserDto: CreateUserDto) {
     const newUser = this.usersRepository.create(createUserDto);
+    newUser.events = [];
     return this.usersRepository.save(newUser);
   }
 
-  findAll() {
-    return this.usersRepository.find();
+  async findAll(): Promise<User[] | undefined> {
+    return await this.usersRepository.find();
   }
 
-  findOne(id: number) {
-    return this.usersRepository.findOneBy({ id });
+  async findOneById(id: string): Promise<User | undefined> {
+    const user = this.usersRepository.findOneBy({ id });
+    return await user;
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto) {
-    const user = await this.findOne(id);
-    return this.usersRepository.save({ ...user, ...updateUserDto });
+  async findOne(username: string): Promise<User | undefined> {
+    return this.usersRepository.findOneBy({ username });
   }
 
-  async remove(id: number) {
-    const user = await this.findOne(id);
-    return this.usersRepository.remove(user);
+  /**
+   * Update, remove работают не корректно
+   */
+
+  async update(userId: string, id: string, updateUserDto: UpdateUserDto) {
+    if (userId === id) {
+      const user = await this.findOneById(id);
+      return this.usersRepository.save({ ...user, ...updateUserDto });
+    }
+    return { statusCode: 403, message: 'Запрещено обновлять чужой Аккаунт' };
+  }
+
+  async remove(userId: string, id: string) {
+    if (userId === id) {
+      const user = await this.findOne(id);
+      return this.usersRepository.remove(user);
+    }
+    return { statusCode: 403, message: 'Запрещено удалять чужой Аккаунт' };
   }
 }
