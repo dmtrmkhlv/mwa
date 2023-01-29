@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -39,7 +39,13 @@ export class UsersService {
       const user = await this.findOneById(id);
       return this.usersRepository.save({ ...user, ...updateUserDto });
     }
-    return { statusCode: 403, message: 'Запрещено обновлять чужой Аккаунт' };
+    throw new HttpException(
+      {
+        status: HttpStatus.FORBIDDEN,
+        error: 'Запрещено обновлять чужой Аккаунт',
+      },
+      403,
+    );
   }
 
   async remove(userId: string, id: string) {
@@ -47,6 +53,12 @@ export class UsersService {
       const user = await this.findOne(id);
       return this.usersRepository.remove(user);
     }
-    return { statusCode: 403, message: 'Запрещено удалять чужой Аккаунт' };
+    throw new HttpException(
+      {
+        status: HttpStatus.FORBIDDEN,
+        error: 'Запрещено удалять чужой Аккаунт',
+      },
+      403,
+    );
   }
 }

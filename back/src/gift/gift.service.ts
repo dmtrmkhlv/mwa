@@ -1,5 +1,4 @@
-import { ServerResponse } from './../dto/server-response.dto';
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateGiftDto } from './dto/create-gift.dto';
@@ -51,7 +50,13 @@ export class GiftService {
     if (gift.userCreatorId === userId) {
       return this.giftRepository.save({ ...gift, ...updateGiftDto });
     }
-    // return { statusCode: 403, message: 'Запрещено обновлять чужие Gift' };
+    throw new HttpException(
+      {
+        status: HttpStatus.FORBIDDEN,
+        error: 'Запрещено обновлять чужие Gift',
+      },
+      403,
+    );
   }
 
   async remove(userId: string, id: string): Promise<Gift | undefined> {
@@ -59,49 +64,58 @@ export class GiftService {
     if (gift.userCreatorId === userId) {
       return this.giftRepository.remove(gift);
     }
-    // return { statusCode: 403, message: 'Запрещено удалять чужие Gift' };
+    throw new HttpException(
+      {
+        status: HttpStatus.FORBIDDEN,
+        error: 'Запрещено удалять чужие Gift',
+      },
+      403,
+    );
   }
 
-  async book(
-    userId: string,
-    id: string,
-  ): Promise<Gift | undefined | ServerResponse> {
+  async book(userId: string, id: string): Promise<Gift | undefined> {
     const gift = await this.findOne(id);
     console.log(gift.userCreatorId);
 
     if (gift.userBookId.length > 0) {
-      return {
-        statusCode: 403,
-        message: 'Подарок уже забронирован',
-      };
+      throw new HttpException(
+        {
+          status: HttpStatus.FORBIDDEN,
+          error: 'Подарок уже забронирован',
+        },
+        403,
+      );
     }
 
     if (userId !== gift.userCreatorId) {
       gift.userBookId = userId;
       return this.giftRepository.save({ ...gift });
     } else {
-      return {
-        statusCode: 403,
-        message: 'Вы не можете бронировать подарок из своего списка',
-      };
+      throw new HttpException(
+        {
+          status: HttpStatus.FORBIDDEN,
+          error: 'Вы не можете бронировать подарок из своего списка',
+        },
+        403,
+      );
     }
   }
 
-  async unBook(
-    userId: string,
-    id: string,
-  ): Promise<Gift | undefined | ServerResponse> {
+  async unBook(userId: string, id: string): Promise<Gift | undefined> {
     const gift = await this.findOne(id);
 
     if (userId === gift.userBookId) {
       gift.userBookId = '';
       return this.giftRepository.save({ ...gift });
     } else {
-      return {
-        statusCode: 403,
-        message:
-          'Вы не можете отменить бронь подарка, забронированного другим человеком',
-      };
+      throw new HttpException(
+        {
+          status: HttpStatus.FORBIDDEN,
+          error:
+            'Вы не можете отменить бронь подарка, забронированного другим человеком',
+        },
+        403,
+      );
     }
   }
 }

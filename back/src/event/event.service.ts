@@ -1,6 +1,5 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ServerResponse } from 'src/dto/server-response.dto';
 import { Gift } from 'src/gift/entities/gift.entity';
 import { User } from 'src/users/entities/user.entity';
 import { Repository } from 'typeorm';
@@ -61,15 +60,21 @@ export class EventService {
     userId: string,
     id: string,
     updateEventDto: UpdateEventDto,
-  ): Promise<Event | ServerResponse> {
+  ): Promise<Event> {
     const event = await this.findOneById(id);
     if (event.userCreatorId === userId) {
       return this.eventsRepository.save({ ...event, ...updateEventDto });
     }
-    return { statusCode: 403, message: 'Запрещено обновлять чужие Event' };
+    throw new HttpException(
+      {
+        status: HttpStatus.FORBIDDEN,
+        error: 'Запрещено обновлять чужие Event',
+      },
+      403,
+    );
   }
 
-  async remove(userId: string, id: string): Promise<Event | ServerResponse> {
+  async remove(userId: string, id: string): Promise<Event> {
     const event = await this.findOneById(id);
     if (event.userCreatorId === userId) {
       await this.giftRepository.delete({
@@ -77,6 +82,12 @@ export class EventService {
       });
       return this.eventsRepository.remove(event);
     }
-    return { statusCode: 403, message: 'Запрещено удалять чужие Event' };
+    throw new HttpException(
+      {
+        status: HttpStatus.FORBIDDEN,
+        error: 'Запрещено удалять чужие Event',
+      },
+      403,
+    );
   }
 }
