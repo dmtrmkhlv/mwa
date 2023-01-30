@@ -20,7 +20,7 @@ import {
 } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
-@Controller('event')
+@Controller('api/v1/event')
 export class EventController {
   constructor(private readonly eventService: EventService) {}
 
