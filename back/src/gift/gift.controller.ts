@@ -15,7 +15,7 @@ import { UpdateGiftDto } from './dto/update-gift.dto';
 import { ApiBearerAuth, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
-@Controller('gift')
+@Controller('api/v1/gift')
 export class GiftController {
   constructor(private readonly giftService: GiftService) {}
 
