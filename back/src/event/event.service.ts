@@ -17,7 +17,9 @@ export class EventService {
 
   async create(userId: string, createEventDto: CreateEventDto) {
     const newEventCreate = this.eventsRepository.create(createEventDto);
+    newEventCreate.userCreatorId = userId;
     newEventCreate.gifts = [];
+
     const newEvent = await this.eventsRepository.save(newEventCreate);
     const user = await this.usersRepository.findOne({
       where: { id: userId },

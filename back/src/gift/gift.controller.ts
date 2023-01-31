@@ -21,7 +21,7 @@ export class GiftController {
 
   @ApiOperation({ summary: 'Create gift' })
   @ApiResponse({
-    status: 200,
+    status: 201,
     description: 'The gift has been successfully created.',
   })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
