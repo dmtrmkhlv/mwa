@@ -26,7 +26,7 @@ export class EventController {
 
   @ApiOperation({ summary: 'Create event' })
   @ApiResponse({
-    status: 200,
+    status: 201,
     description: 'The event has been successfully created.',
   })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
@@ -35,7 +35,6 @@ export class EventController {
   @UseGuards(JwtAuthGuard)
   @Post()
   create(@Request() req, @Body() createEventDto: CreateEventDto) {
-    createEventDto.userCreatorId = req.user.userId;
     return this.eventService.create(req.user.userId, createEventDto);
   }
 

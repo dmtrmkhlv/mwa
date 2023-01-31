@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { Allow, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateGiftDto {
   @ApiProperty()
@@ -13,13 +13,15 @@ export class CreateGiftDto {
 
   @ApiProperty()
   @IsString()
+  @IsNotEmpty()
   description: string;
 
-  @IsString()
-  @IsNotEmpty()
+  @Allow()
   eventId: string;
 
-  @IsString()
-  @IsNotEmpty()
+  @Allow()
   userCreatorId: string;
+
+  @Allow()
+  userBookId: string;
 }
