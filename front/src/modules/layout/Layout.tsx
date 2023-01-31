@@ -33,7 +33,7 @@ export default function Layout(props: LayoutProps): JSX.Element {
         {session ? <PrimarySearchAppBar session={session} /> : <DrawerAppBar />}
 
         <Container maxWidth="xl">
-          <Box
+          <Box className="mainBox"
             sx={{
               mt: 2,
               display: "flex",
@@ -44,8 +44,9 @@ export default function Layout(props: LayoutProps): JSX.Element {
           >
             {children}
           </Box>
-          <Footer />
+          
         </Container>
+        <Footer />
       </>
     </RequireAuth>
   );
