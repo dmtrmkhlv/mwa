@@ -92,4 +92,34 @@ export class EventService {
       403,
     );
   }
+
+  async active(userId: string, id: string): Promise<Event | undefined> {
+    const event = await this.findOneById(id);
+    event.isActive = true;
+    if (event.userCreatorId === userId) {
+      return this.eventsRepository.save({ ...event });
+    }
+    throw new HttpException(
+      {
+        status: HttpStatus.FORBIDDEN,
+        error: 'Запрещено обновлять чужие Event',
+      },
+      403,
+    );
+  }
+
+  async deactivate(userId: string, id: string): Promise<Event | undefined> {
+    const event = await this.findOneById(id);
+    event.isActive = false;
+    if (event.userCreatorId === userId) {
+      return this.eventsRepository.save({ ...event });
+    }
+    throw new HttpException(
+      {
+        status: HttpStatus.FORBIDDEN,
+        error: 'Запрещено обновлять чужие Event',
+      },
+      403,
+    );
+  }
 }
