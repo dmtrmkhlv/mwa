@@ -83,4 +83,30 @@ export class EventController {
   remove(@Request() req, @Param('id') id: string) {
     return this.eventService.remove(req.user.userId, id);
   }
+
+  @ApiOperation({ summary: 'Activate event' })
+  @ApiResponse({
+    status: 200,
+    description: 'The event activated.',
+  })
+  @ApiResponse({ status: 403, description: 'Forbidden.' })
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  @Post('active/:id')
+  activate(@Request() req, @Param('id') id: string) {
+    return this.eventService.active(req.user.userId, id);
+  }
+
+  @ApiOperation({ summary: 'Deactivate event' })
+  @ApiResponse({
+    status: 200,
+    description: 'The event deactivated.',
+  })
+  @ApiResponse({ status: 403, description: 'Forbidden.' })
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  @Delete('active/:id')
+  deactivate(@Request() req, @Param('id') id: string) {
+    return this.eventService.deactivate(req.user.userId, id);
+  }
 }
