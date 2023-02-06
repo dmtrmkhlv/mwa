@@ -1,5 +1,6 @@
 import { useNavigate, Link } from "react-router-dom";
 import { Box, Button } from "@mui/material";
+import { WhiteBgBtn } from "../WhiteBgBtn/WhiteBgBtn"
 import "./MainPage.scss";
 import wish_list_pen from "../images/wish_list_pen.jpg";
 import brown_lady from "../images/brown_lady.jpg";
@@ -7,6 +8,7 @@ import happy_brthd from "../images/happy_brthd.jpg";
 import annyversary from "../images/annyversary.jpg";
 import valentines from "../images/valentines.jpg";
 import christmas from "../images/christmas.jpg";
+import { SliderElement } from "../SliderElement";
 
 export const MainMaxim = () => {
   const navigate = useNavigate();
@@ -41,9 +43,7 @@ export const MainMaxim = () => {
               дарителями. Они увидят список ваших желаний и смогут договориться,
               кто что будет дарить!
             </p>
-            <Button className="learn_more" href={"/more"}>
-              Подробнее
-            </Button>
+            <WhiteBgBtn />
           </div>
         </div>
       </Box>
@@ -54,53 +54,20 @@ export const MainMaxim = () => {
 
           <img src={'./images/left-chev.png'} width='50' alt='Slider previous'/>
           <Box className='occasions-cont__inner'>
-            <div className='occasions-cont-item'>
-              <img src='./images/happy_brthd.jpg' alt='Ко Дню рожденья'/>
-              <div>
-              <p>Ко Дню рожденья</p>
-              <a className='occasions-cont-more' href='/brthd' title=''>Узнать&nbsp;больше&nbsp;›</a>
-              </div>
-            </div>
+            
+            <SliderElement id={0} src={'./images/happy_brthd.jpg'} name={'Ко Дню рожденья'} href={'brthd'} text={'Узнать больше ›'} />
 
-            <div className='occasions-cont-item'>
-              <img src='./images/annyversary.jpg' alt='К юбилею'/>
-              <div>
-              <p>К юбилею</p>
-              <a className='occasions-cont-more' href='/annyversary' title=''>Узнать&nbsp;больше&nbsp;›</a>
-              </div>
-            </div>
+            <SliderElement id={1} src={'./images/annyversary.jpg'} name={'К юбилею'} href={'annyversary'} text={'Узнать больше ›'} />
 
-            <div className='occasions-cont-item'>
-              <img src='./images/valentines.jpg' alt='Ко Дню святого Валентина'/>
-              <div>
-              <p>Ко Дню святого Валентина</p>
-              <a className='occasions-cont-more' href='/valentines' title=''>Узнать&nbsp;больше&nbsp;›</a>
-              </div>
-            </div>
+            <SliderElement id={2} src={'./images/valentines.jpg'} name={'Ко Дню святого Валентина'} href={'valentines'} text={'Узнать больше ›'} />
 
-            <div className='occasions-cont-item'>
-              <img src='./images/christmas.jpg' alt='На Рождество'/>
-              <div>
-              <p>На Рождество</p>
-              <a className='occasions-cont-more' href='/christmas' title=''>Узнать&nbsp;больше&nbsp;›</a>
-              </div>
-            </div>
+            <SliderElement id={3} src={'./images/christmas.jpg'} name={'На Рождество'} href={'christmas'} text={'Узнать больше ›'} />
 
-            <div className='occasions-cont-item'>
-              <img src='./images/valentines.jpg' alt='Ко Дню святого Валентина'/>
-              <div>
-              <p>Ко Дню святого Валентина</p>
-              <a className='occasions-cont-more' href='/valentines' title=''>Узнать&nbsp;больше&nbsp;›</a>
-              </div>
-            </div>
+            <SliderElement id={4} src={'./images/valentines.jpg'} name={'Ко Дню святого Валентина'} href={'valentines'} text={'Узнать больше ›'} />
+            
+            <SliderElement id={5} src={'./images/christmas.jpg'} name={'На Рождество'} href={'christmas'} text={'Узнать больше ›'} />
 
-            <div className='occasions-cont-item'>
-              <img src='./images/christmas.jpg' alt='На Рождество'/>
-              <div>
-              <p>На Рождество</p>
-              <a className='occasions-cont-more' href='/christmas' title=''>Узнать&nbsp;больше&nbsp;›</a>
-              </div>
-            </div>
+            
           </Box>
           <img src={'./images/right-chev.png'} width='50' alt='Slider next'/>
 
@@ -137,12 +104,12 @@ export const MainMaxim = () => {
             <Box>
               <h3>Особенности создания wishlist подарков</h3>
               <p>Опытные составители листов желаний советуют заполнять его не накануне дня рождения, а в течение всего года...</p>
-              <a href={'/other/:id'}>Узнать&nbsp;больше&nbsp;›</a>
+              <a href={'/other/:id'}>Узнать больше ›</a>
             </Box>
             <Box>
               <h3>К каким праздникам составляют wishlist</h3>
               <p>Списки желаний можно подготовить к любому мероприятию или праздничной дате. Можно порадовать молодоженов или сделать подборку для семьи на новоселье...</p>
-              <a href={'/other/:id'}>Узнать&nbsp;больше&nbsp;›</a>
+              <a href={'/other/:id'}>Узнать больше ›</a>
             </Box>
           </Box>
         </Box>

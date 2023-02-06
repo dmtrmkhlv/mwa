@@ -134,6 +134,7 @@
   max-width: 270px;
   left: 0;
   transition: 0.3s ease;
+  cursor: pointer;
 }
 @media (max-width: 768px) {
   .mainFrame .main_cont-occasions .occasions-cont .occasions-cont-item {
@@ -153,7 +154,7 @@
           hyphens: auto;
   margin-top: 0;
 }
-.mainFrame .main_cont-occasions .occasions-cont .occasions-cont-item > div > a {
+.mainFrame .main_cont-occasions .occasions-cont .occasions-cont-item > div > .occasions-cont-more {
   font-weight: 400;
   font-size: 14px;
   line-height: 19px;
