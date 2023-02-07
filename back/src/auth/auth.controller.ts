@@ -6,6 +6,7 @@ import {
   UseGuards,
   HttpCode,
   BadRequestException,
+  Body,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
@@ -18,6 +19,7 @@ import {
   ApiOperation,
   ApiResponse,
 } from '@nestjs/swagger';
+import { UserDto } from 'src/users/dto/user.dto';
 
 @Controller('api/v1/auth')
 export class AuthController {
@@ -28,12 +30,11 @@ export class AuthController {
     status: 200,
     description: 'The user has been successfully logged.',
   })
-  @UseGuards(LocalAuthGuard)
   @HttpCode(200)
   @ApiBody({ type: AuthDto })
   @Post('login')
-  async login(@Request() req) {
-    return this.authService.login(req.user);
+  async login(@Body() body: AuthDto) {
+    return this.authService.login(body);
   }
 
   @ApiOperation({ summary: 'Register user' })
