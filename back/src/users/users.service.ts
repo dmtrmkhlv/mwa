@@ -12,6 +12,17 @@ export class UsersService {
     @InjectRepository(Event) private eventsRepository: Repository<Event>,
   ) {}
   async create(createUserDto: CreateUserDto) {
+    const userByUsername = await this.findOneByUsername(createUserDto.username);
+
+    if (userByUsername) {
+      throw new HttpException(
+        {
+          status: HttpStatus.FORBIDDEN,
+          error: `Пользователь с username:${createUserDto.username} уже существует`,
+        },
+        403,
+      );
+    }
     const newUser = this.usersRepository.create(createUserDto);
     newUser.events = [];
     return this.usersRepository.save(newUser);
@@ -26,7 +37,7 @@ export class UsersService {
     return await user;
   }
 
-  async findOne(username: string): Promise<User | undefined> {
+  async findOneByUsername(username: string): Promise<User | undefined> {
     return this.usersRepository.findOneBy({ username });
   }
 
@@ -37,6 +48,20 @@ export class UsersService {
   async update(userId: string, id: string, updateUserDto: UpdateUserDto) {
     if (userId === id) {
       const user = await this.findOneById(id);
+      if (updateUserDto.username !== user.username) {
+        const findUserByUserName = await this.findOneByUsername(
+          updateUserDto.username,
+        );
+        if (findUserByUserName) {
+          throw new HttpException(
+            {
+              status: HttpStatus.FORBIDDEN,
+              error: `Пользователь с username:${updateUserDto.username} уже существует`,
+            },
+            403,
+          );
+        }
+      }
       return this.usersRepository.save({ ...user, ...updateUserDto });
     }
     throw new HttpException(
@@ -50,7 +75,7 @@ export class UsersService {
 
   async remove(userId: string, id: string) {
     if (userId === id) {
-      const user = await this.findOne(id);
+      const user = await this.findOneById(id);
       return this.usersRepository.remove(user);
     }
     throw new HttpException(
