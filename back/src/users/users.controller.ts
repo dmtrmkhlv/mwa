@@ -65,11 +65,10 @@ export class UsersController {
     status: 200,
     description: 'The user has been successfully deleted.',
   })
-  @ApiResponse({ status: 403, description: 'Forbidden.' })
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
-  remove(@Request() req, @Param('id') id: string) {
-    return this.usersService.remove(req.user.userId, id);
+  remove(@Request() req) {
+    return this.usersService.remove(req.user.userId);
   }
 }

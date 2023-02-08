@@ -1,18 +1,21 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Gift } from 'src/gift/entities/gift.entity';
-import { User } from 'src/users/entities/user.entity';
+import { GiftEntity } from 'src/gift/entities/gift.entity';
+import { UserEntity } from 'src/users/entities/user.entity';
 import { Repository } from 'typeorm';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
-import { Event } from './entities/event.entity';
+import { EventEntity } from './entities/event.entity';
 
 @Injectable()
 export class EventService {
   constructor(
-    @InjectRepository(Event) private eventsRepository: Repository<Event>,
-    @InjectRepository(User) private usersRepository: Repository<User>,
-    @InjectRepository(Gift) private giftRepository: Repository<Gift>,
+    @InjectRepository(EventEntity)
+    private eventsRepository: Repository<EventEntity>,
+    @InjectRepository(UserEntity)
+    private usersRepository: Repository<UserEntity>,
+    @InjectRepository(GiftEntity)
+    private giftRepository: Repository<GiftEntity>,
   ) {}
 
   async create(userId: string, createEventDto: CreateEventDto) {
@@ -42,7 +45,7 @@ export class EventService {
     return await events;
   }
 
-  findOneById(id: string): Promise<Event | undefined> {
+  findOneById(id: string): Promise<EventEntity | undefined> {
     return this.eventsRepository.findOneBy({ id: id });
   }
 
@@ -62,7 +65,7 @@ export class EventService {
     userId: string,
     id: string,
     updateEventDto: UpdateEventDto,
-  ): Promise<Event> {
+  ): Promise<EventEntity> {
     const event = await this.findOneById(id);
     if (event.userCreatorId === userId) {
       return this.eventsRepository.save({ ...event, ...updateEventDto });
@@ -76,7 +79,7 @@ export class EventService {
     );
   }
 
-  async remove(userId: string, id: string): Promise<Event> {
+  async remove(userId: string, id: string): Promise<EventEntity> {
     const event = await this.findOneById(id);
     if (event.userCreatorId === userId) {
       await this.giftRepository.delete({
@@ -93,7 +96,7 @@ export class EventService {
     );
   }
 
-  async active(userId: string, id: string): Promise<Event | undefined> {
+  async active(userId: string, id: string): Promise<EventEntity | undefined> {
     const event = await this.findOneById(id);
     event.isActive = true;
     if (event.userCreatorId === userId) {
@@ -108,7 +111,10 @@ export class EventService {
     );
   }
 
-  async deactivate(userId: string, id: string): Promise<Event | undefined> {
+  async deactivate(
+    userId: string,
+    id: string,
+  ): Promise<EventEntity | undefined> {
     const event = await this.findOneById(id);
     event.isActive = false;
     if (event.userCreatorId === userId) {
