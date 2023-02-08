@@ -5,10 +5,10 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Event } from '../../event/entities/event.entity';
+import { EventEntity } from '../../event/entities/event.entity';
 
 @Entity('user')
-export class User {
+export class UserEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -18,7 +18,7 @@ export class User {
   @Column('varchar')
   password: string;
 
-  @OneToMany((type) => Event, (event) => event.user, { eager: true })
+  @OneToMany((type) => EventEntity, (event) => event.user, { eager: true })
   @JoinColumn()
-  events: Event[];
+  events: EventEntity[];
 }

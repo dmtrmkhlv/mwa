@@ -3,16 +3,21 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateGiftDto } from './dto/create-gift.dto';
 import { UpdateGiftDto } from './dto/update-gift.dto';
-import { Gift } from './entities/gift.entity';
-import { Event } from 'src/event/entities/event.entity';
+import { GiftEntity } from './entities/gift.entity';
+import { EventEntity } from 'src/event/entities/event.entity';
 
 @Injectable()
 export class GiftService {
   constructor(
-    @InjectRepository(Gift) private giftRepository: Repository<Gift>,
-    @InjectRepository(Event) private eventsRepository: Repository<Event>,
+    @InjectRepository(GiftEntity)
+    private giftRepository: Repository<GiftEntity>,
+    @InjectRepository(EventEntity)
+    private eventsRepository: Repository<EventEntity>,
   ) {}
-  async create(eventId: string, createGiftDto: CreateGiftDto): Promise<Gift> {
+  async create(
+    eventId: string,
+    createGiftDto: CreateGiftDto,
+  ): Promise<GiftEntity> {
     const newGiftCreate = this.giftRepository.create(createGiftDto);
     const newGift = await this.giftRepository.save(newGiftCreate);
 
@@ -28,7 +33,7 @@ export class GiftService {
     return newGift;
   }
 
-  async findAll(userId: string): Promise<Gift[] | undefined> {
+  async findAll(userId: string): Promise<GiftEntity[] | undefined> {
     const gifts = this.giftRepository.find({
       where: {
         userCreatorId: userId,
@@ -37,7 +42,7 @@ export class GiftService {
     return await gifts;
   }
 
-  findOne(id: string): Promise<Gift | undefined> {
+  findOne(id: string): Promise<GiftEntity | undefined> {
     return this.giftRepository.findOneBy({ id: id });
   }
 
@@ -45,7 +50,7 @@ export class GiftService {
     userId: string,
     id: string,
     updateGiftDto: UpdateGiftDto,
-  ): Promise<Gift | undefined> {
+  ): Promise<GiftEntity | undefined> {
     const gift = await this.findOne(id);
     if (gift.userCreatorId === userId) {
       return this.giftRepository.save({ ...gift, ...updateGiftDto });
@@ -59,7 +64,7 @@ export class GiftService {
     );
   }
 
-  async remove(userId: string, id: string): Promise<Gift | undefined> {
+  async remove(userId: string, id: string): Promise<GiftEntity | undefined> {
     const gift = await this.findOne(id);
     if (gift.userCreatorId === userId) {
       return this.giftRepository.remove(gift);
@@ -73,7 +78,7 @@ export class GiftService {
     );
   }
 
-  async book(userId: string, id: string): Promise<Gift | undefined> {
+  async book(userId: string, id: string): Promise<GiftEntity | undefined> {
     const gift = await this.findOne(id);
     console.log(gift.userCreatorId);
 
@@ -101,7 +106,7 @@ export class GiftService {
     }
   }
 
-  async unBook(userId: string, id: string): Promise<Gift | undefined> {
+  async unBook(userId: string, id: string): Promise<GiftEntity | undefined> {
     const gift = await this.findOne(id);
 
     if (userId === gift.userBookId) {

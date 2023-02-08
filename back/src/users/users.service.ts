@@ -3,15 +3,24 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { User } from './entities/user.entity';
+import { UserEntity } from './entities/user.entity';
+import { EventService } from 'src/event/event.service';
+import { GiftEntity } from 'src/gift/entities/gift.entity';
+import { GiftService } from 'src/gift/gift.service';
 
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(User) private usersRepository: Repository<User>,
-    @InjectRepository(Event) private eventsRepository: Repository<Event>,
+    @InjectRepository(UserEntity)
+    private usersRepository: Repository<UserEntity>,
+    @InjectRepository(GiftEntity)
+    private giftRepository: Repository<GiftEntity>,
+    private readonly eventService: EventService,
+    private readonly giftService: GiftService,
   ) {}
-  async create(createUserDto: CreateUserDto) {
+  async create(
+    createUserDto: CreateUserDto,
+  ): Promise<UserEntity | HttpException> {
     const userByUsername = await this.findOneByUsername(createUserDto.username);
 
     if (userByUsername) {
@@ -28,24 +37,23 @@ export class UsersService {
     return this.usersRepository.save(newUser);
   }
 
-  async findAll(): Promise<User[] | undefined> {
+  async findAll(): Promise<UserEntity[] | undefined> {
     return await this.usersRepository.find();
   }
 
-  async findOneById(id: string): Promise<User | undefined> {
-    const user = this.usersRepository.findOneBy({ id });
-    return await user;
+  async findOneById(id: string): Promise<UserEntity | undefined> {
+    return await this.usersRepository.findOneBy({ id });
   }
 
-  async findOneByUsername(username: string): Promise<User | undefined> {
+  async findOneByUsername(username: string): Promise<UserEntity | undefined> {
     return this.usersRepository.findOneBy({ username });
   }
 
-  /**
-   * Update, remove работают не корректно
-   */
-
-  async update(userId: string, id: string, updateUserDto: UpdateUserDto) {
+  async update(
+    userId: string,
+    id: string,
+    updateUserDto: UpdateUserDto,
+  ): Promise<UserEntity | HttpException> {
     if (userId === id) {
       const user = await this.findOneById(id);
       if (updateUserDto.username !== user.username) {
@@ -73,17 +81,23 @@ export class UsersService {
     );
   }
 
-  async remove(userId: string, id: string) {
-    if (userId === id) {
-      const user = await this.findOneById(id);
-      return this.usersRepository.remove(user);
-    }
-    throw new HttpException(
-      {
-        status: HttpStatus.FORBIDDEN,
-        error: 'Запрещено удалять чужой Аккаунт',
+  async remove(userId: string): Promise<UserEntity | undefined> {
+    const giftBookedByUser = await this.giftRepository.find({
+      where: {
+        userBookId: userId,
       },
-      403,
-    );
+    });
+    if (giftBookedByUser.length > 0) {
+      for (const gift of giftBookedByUser) {
+        await this.giftService.unBook(userId, gift.id);
+      }
+    }
+    const user = await this.findOneById(userId);
+    if (user.events.length > 0) {
+      for (const event of user.events) {
+        await this.eventService.remove(userId, event.id);
+      }
+    }
+    return await this.usersRepository.remove(user);
   }
 }

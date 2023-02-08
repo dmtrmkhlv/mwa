@@ -6,11 +6,11 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Gift } from 'src/gift/entities/gift.entity';
-import { User } from '../../users/entities/user.entity';
+import { GiftEntity } from 'src/gift/entities/gift.entity';
+import { UserEntity } from '../../users/entities/user.entity';
 
 @Entity('event')
-export class Event {
+export class EventEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -29,10 +29,10 @@ export class Event {
   @Column({ type: 'boolean', default: () => true })
   isActive: boolean;
 
-  @ManyToOne((type) => User, (user) => user.events)
-  user: User;
+  @ManyToOne((type) => UserEntity, (user) => user.events)
+  user: UserEntity;
 
-  @OneToMany((type) => Gift, (gift) => gift.event, { eager: true })
+  @OneToMany((type) => GiftEntity, (gift) => gift.event, { eager: true })
   @JoinColumn()
-  gifts: Gift[];
+  gifts: GiftEntity[];
 }
