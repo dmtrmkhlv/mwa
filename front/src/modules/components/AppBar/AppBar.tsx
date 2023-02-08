@@ -104,7 +104,7 @@ export function DrawerAppBar(props: PropsBar) {
         <AppBar
           component="nav"
           color="transparent"
-          sx={{ borderBottomStyle: 0 }}
+          sx={{ borderBottomStyle: 0, backdropFilter: 'blur(4px)' }}
         >
           <Toolbar
             sx={{

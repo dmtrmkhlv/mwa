@@ -39,7 +39,6 @@
   .mainBox .mainFrame .main_cont-sides .create_wish {
     margin: 0 auto 30px;
     display: block;
-    width: -webkit-max-content;
     width: -moz-max-content;
     width: max-content;
   }
@@ -137,7 +136,6 @@
   font-size: 20px;
   line-height: 24px;
   -webkit-hyphens: auto;
-      -ms-hyphens: auto;
           hyphens: auto;
   margin-top: 0;
 }
