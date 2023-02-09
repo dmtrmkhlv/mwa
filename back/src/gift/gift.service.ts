@@ -80,7 +80,6 @@ export class GiftService {
 
   async book(userId: string, id: string): Promise<GiftEntity | undefined> {
     const gift = await this.findOne(id);
-    console.log(gift.userCreatorId);
 
     if (gift.userBookId.length > 0) {
       throw new HttpException(

@@ -19,6 +19,16 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  @Get('generateFakeUsers')
+  async generate() {
+    return await this.usersService.generateFakeUsers();
+  }
+
+  @Get('deleteAllUsers')
+  async deleteAllUsers() {
+    return await this.usersService.deleteAllUsers();
+  }
+
   @ApiOperation({ summary: 'Create user' })
   @ApiResponse({
     status: 200,
