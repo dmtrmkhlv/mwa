@@ -1,14 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { DataState, IUser } from "../../../interfaces";
+import { DataState, IUserSession } from "../../../interfaces";
 import { loginAccount } from "../ThunkCreator";
 
-const mokUser: IUser = {
+const mokUser: IUserSession = {
   username: "",
+  userId: null,
   session: false,
 };
 
-export const initialState: DataState<IUser> = {
-  // value: [],
+export const initialState: DataState<IUserSession> = {
   value: mokUser,
   loading: false,
   error: "",
@@ -32,6 +32,7 @@ export const UserSlice = createSlice({
       state.value = {
         username: action.payload.username,
         session: action.payload.session,
+        userId: action.payload.userId,
       };
     });
     builder.addCase(loginAccount.rejected, (state, action) => {
@@ -41,4 +42,4 @@ export const UserSlice = createSlice({
   },
 });
 
-export default UserSlice.reducer;
+export const UserReducer = UserSlice.reducer;
