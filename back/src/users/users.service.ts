@@ -8,6 +8,7 @@ import { UserEntity } from './entities/user.entity';
 import { EventService } from 'src/event/event.service';
 import { GiftEntity } from 'src/gift/entities/gift.entity';
 import { GiftService } from 'src/gift/gift.service';
+import { MailService } from 'src/mail/mail.service';
 // const nodeFetch = fetch as typeof fetch;
 
 @Injectable()
@@ -19,6 +20,7 @@ export class UsersService {
     private giftRepository: Repository<GiftEntity>,
     private readonly eventService: EventService,
     private readonly giftService: GiftService,
+    private mailService: MailService,
   ) {}
 
   async generateFakeUsers() {
@@ -168,6 +170,10 @@ export class UsersService {
       await this.remove(user.id);
     }
     return await this.findAll();
+  }
+
+  async test() {
+    return await this.mailService.sendMail('mywishlistapp@mail.ru', 'name');
   }
 
   async create(

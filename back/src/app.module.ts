@@ -6,10 +6,14 @@ import { AuthModule } from './auth/auth.module';
 import { EventModule } from './event/event.module';
 import { GiftModule } from './gift/gift.module';
 import { MailModule } from './mail/mail.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(dataSourceOptions),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     UsersModule,
     AuthModule,
     EventModule,

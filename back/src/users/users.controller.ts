@@ -24,6 +24,11 @@ export class UsersController {
     return await this.usersService.generateFakeUsers();
   }
 
+  @Get('test')
+  async test() {
+    return await this.usersService.test();
+  }
+
   @Get('deleteAllUsers')
   async deleteAllUsers() {
     return await this.usersService.deleteAllUsers();

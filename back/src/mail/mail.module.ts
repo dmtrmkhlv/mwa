@@ -1,28 +1,33 @@
-import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { MailService } from './mail.service';
 import { MailerModule } from '@nestjs-modules/mailer';
-import { join } from 'path';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
-import { MailController } from './mail.controller';
+import { Global, Module } from '@nestjs/common';
+import { MailService } from './mail.service';
+import { resolve } from 'path';
+import { ConfigService } from '@nestjs/config';
+
+@Global()
 @Module({
   imports: [
     MailerModule.forRootAsync({
-      imports: [ConfigModule],
       useFactory: async (config: ConfigService) => ({
-        transport: {
-          host: config.get('EMAIL_HOST'),
-          secure: false,
-          auth: {
-            user: config.get('EMAIL_USER'),
-            pass: config.get('EMAIL_PASSWORD'),
-          },
-        },
+        transport: `smtps://${config.get('MAIL_USER')}:${config.get(
+          'MAIL_PASSWORD',
+        )}@smtp.mail.ru`,
+        // transport: {
+        //   service: 'gmail',
+        //   host: config.get('MAIL_HOST'),
+        //   port: 465,
+        //   secure: true,
+        //   auth: {
+        //     user: config.get('MAIL_USER'),
+        //     pass: config.get('MAIL_PASSWORD'),
+        //   },
+        // },
         defaults: {
-          from: config.get('EMAIL_USER'),
+          from: `"No Reply" <${config.get('MAIL_FROM')}>`,
         },
         template: {
-          dir: join(__dirname, './templates'),
+          dir: resolve(__dirname, '..', '..', 'mail/templates'),
           adapter: new HandlebarsAdapter(),
           options: {
             strict: true,
@@ -31,9 +36,8 @@ import { MailController } from './mail.controller';
       }),
       inject: [ConfigService],
     }),
-    ConfigModule.forRoot(),
   ],
-  controllers: [MailController],
   providers: [MailService],
+  exports: [MailService],
 })
 export class MailModule {}
