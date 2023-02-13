@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { Route, routing } from "./modules";
 import {
-  MainMaximPage,
+  MainPage,
   LoginPage,
   SignUpPage,
   TestPage,
@@ -13,7 +13,7 @@ import {
 } from "./page";
 
 const route = routing();
-route.create(MainMaximPage, "/", "public", "Главная");
+route.create(MainPage, "/", "public", "Главная");
 route.create(LoginPage, "/login", "public", "Авторизация");
 route.create(SignUpPage, "/signup", "public", "Регистрация");
 route.create(TestPage, "/test", "public", "Тестовая");

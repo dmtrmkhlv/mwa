@@ -1,6 +1,6 @@
 import { Box, Button } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import "./Footer.css";
+import "./Footer.scss";
 import logo from "../images/logo_orange_little.png";
 import vk from "../images/vk.png";
 import pinterest from "../images/pinterest.png";

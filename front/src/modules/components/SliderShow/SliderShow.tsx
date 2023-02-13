@@ -1,10 +1,11 @@
 import { Slide } from "react-slideshow-image";
 import { MultiActionAreaCard } from "../Card";
-import "./SliderShow.css";
+import "./SliderShow.scss";
 import happy_brthd from "../images/happy_brthd.jpg";
 import annyversary from "../images/annyversary.jpg";
 import valentines from "../images/valentines.jpg";
 import christmas from "../images/christmas.jpg";
+import { Box, Container } from "@mui/material";
 
 const spanStyle = {
   padding: "20px",
@@ -40,26 +41,37 @@ const Card = () => {
 
 export const Slideshow = () => {
   return (
-    <div className="slide-container">
-      <Slide>
-        <div
-          key={0}
-          style={{ display: "flex", justifyContent: "space-around" }}
-        >
-          <MultiActionAreaCard images={happy_brthd} />
-          <MultiActionAreaCard images={annyversary} />
-          <MultiActionAreaCard images={valentines} />
-          <MultiActionAreaCard images={christmas} />
-        </div>
-        <div
-          key={1}
-          style={{ display: "flex", justifyContent: "space-around" }}
-        >
-          <MultiActionAreaCard images={happy_brthd} />
-          <MultiActionAreaCard images={happy_brthd} />
-        </div>
-      </Slide>
-    </div>
+    <>
+      <Box className="main_cont-occasions">
+        <h2 className="occasions-center">Подарки на все случаи</h2>
+        <p className="occasions-center">
+          Попробуйте приложение и найдите подарки на все случаи жизни!
+        </p>
+
+        <Container>
+          <div className="slide-container">
+            <Slide>
+              <div
+                key={0}
+                style={{ display: "flex", justifyContent: "space-around" }}
+              >
+                <MultiActionAreaCard images={happy_brthd} />
+                <MultiActionAreaCard images={annyversary} />
+                <MultiActionAreaCard images={valentines} />
+                <MultiActionAreaCard images={christmas} />
+              </div>
+              <div
+                key={1}
+                style={{ display: "flex", justifyContent: "space-around" }}
+              >
+                <MultiActionAreaCard images={happy_brthd} />
+                <MultiActionAreaCard images={happy_brthd} />
+              </div>
+            </Slide>
+          </div>
+        </Container>
+      </Box>
+    </>
   );
 };
 
