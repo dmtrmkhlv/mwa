@@ -9,6 +9,7 @@ import { EventService } from 'src/event/event.service';
 import { GiftEntity } from 'src/gift/entities/gift.entity';
 import { GiftService } from 'src/gift/gift.service';
 import { MailService } from 'src/mail/mail.service';
+import { CreateMailDto } from 'src/mail/dto/create-mail.dto';
 // const nodeFetch = fetch as typeof fetch;
 
 @Injectable()
@@ -172,8 +173,8 @@ export class UsersService {
     return await this.findAll();
   }
 
-  async test() {
-    return await this.mailService.sendMail('mywishlistapp@mail.ru', 'name');
+  async test(createMail: CreateMailDto) {
+    return await this.mailService.sendMail(createMail);
   }
 
   async create(

@@ -9,22 +9,24 @@ import { ConfigService } from '@nestjs/config';
 @Module({
   imports: [
     MailerModule.forRootAsync({
+      /**
+       *
+       * @param config Нужно создать файл .env в корне с данными для SMTP
+       */
       useFactory: async (config: ConfigService) => ({
-        transport: `smtps://${config.get('MAIL_USER')}:${config.get(
-          'MAIL_PASSWORD',
-        )}@smtp.mail.ru`,
-        // transport: {
-        //   service: 'gmail',
-        //   host: config.get('MAIL_HOST'),
-        //   port: 465,
-        //   secure: true,
-        //   auth: {
-        //     user: config.get('MAIL_USER'),
-        //     pass: config.get('MAIL_PASSWORD'),
-        //   },
-        // },
+        transport: {
+          host: config.get('EMAIL_HOST'),
+          port: config.get('EMAIL_PORT'),
+          // ignoreTLS: true,
+          secure: true,
+          auth: {
+            user: config.get('EMAIL_USER'),
+            pass: config.get('EMAIL_PASSWORD'),
+          },
+          tls: { rejectUnauthorized: false },
+        },
         defaults: {
-          from: `"No Reply" <${config.get('MAIL_FROM')}>`,
+          from: `"No Reply" <${config.get('EMAIL_FROM')}>`,
         },
         template: {
           dir: resolve(__dirname, '..', '..', 'mail/templates'),

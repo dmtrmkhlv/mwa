@@ -95,7 +95,7 @@ export class GiftService {
 
     if (userId !== gift.userCreatorId) {
       gift.userBookId = userId;
-      await this.mailService.sendMail(userId, userId);
+      // await this.mailService.sendMail(userId, userId, 'email');
       return this.giftRepository.save({ ...gift });
     } else {
       throw new HttpException(
