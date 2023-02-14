@@ -14,6 +14,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBearerAuth, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { CreateMailDto } from 'src/mail/dto/create-mail.dto';
 
 @Controller('api/v1/users')
 export class UsersController {
@@ -22,6 +23,11 @@ export class UsersController {
   @Get('generateFakeUsers')
   async generate() {
     return await this.usersService.generateFakeUsers();
+  }
+
+  @Post('test')
+  async test(@Body() createMail: CreateMailDto) {
+    return await this.usersService.test(createMail);
   }
 
   @Get('deleteAllUsers')

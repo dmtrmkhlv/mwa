@@ -5,6 +5,7 @@ import { CreateGiftDto } from './dto/create-gift.dto';
 import { UpdateGiftDto } from './dto/update-gift.dto';
 import { GiftEntity } from './entities/gift.entity';
 import { EventEntity } from 'src/event/entities/event.entity';
+import { MailService } from 'src/mail/mail.service';
 
 @Injectable()
 export class GiftService {
@@ -13,6 +14,7 @@ export class GiftService {
     private giftRepository: Repository<GiftEntity>,
     @InjectRepository(EventEntity)
     private eventsRepository: Repository<EventEntity>,
+    private mailService: MailService,
   ) {}
   async create(
     eventId: string,
@@ -93,6 +95,7 @@ export class GiftService {
 
     if (userId !== gift.userCreatorId) {
       gift.userBookId = userId;
+      // await this.mailService.sendMail(userId, userId, 'email');
       return this.giftRepository.save({ ...gift });
     } else {
       throw new HttpException(
