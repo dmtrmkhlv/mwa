@@ -95,7 +95,17 @@ export class GiftService {
 
     if (userId !== gift.userCreatorId) {
       gift.userBookId = userId;
-      // await this.mailService.sendMail(userId, userId, 'email');
+      const mailInfo = {
+        emailTo: 'mywishlistapp@mail.ru',
+        subject: 'A gift from your Event has been reserved!',
+        templateName: 'bookGift',
+        context: {
+          name: 'User Name',
+          giftTitle: gift.title,
+          eventId: gift.eventId,
+        },
+      };
+      await this.mailService.sendMail(mailInfo);
       return this.giftRepository.save({ ...gift });
     } else {
       throw new HttpException(

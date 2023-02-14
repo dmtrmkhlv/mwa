@@ -9,9 +9,9 @@ export class MailService {
   async sendMail(createMail: CreateMailDto) {
     return await this.mailerService
       .sendMail({
-        from: createMail.emailFrom
-          ? `${createMail.senderName || 'No Reply'} <${createMail.emailFrom}>`
-          : undefined,
+        // from: createMail.emailFrom
+        //   ? `${createMail.senderName || 'No Reply'} <${createMail.emailFrom}>`
+        //   : undefined,
         to: createMail.emailTo,
         subject: createMail.subject,
         template: `./${createMail.templateName}`,
