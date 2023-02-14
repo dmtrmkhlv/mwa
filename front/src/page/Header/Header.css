@@ -7,16 +7,16 @@
   margin: 0 auto;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 100px auto 200px;
-      grid-template-columns: 100px auto 200px;
+  -ms-grid-columns: 100px auto 200px 20px;
+  grid-template-columns: 100px auto 200px 20px;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .header_wrap .header_wrap__inner .signup {
-  border: 2px solid #F7941E;
-  color: #F7941E;
+  border: 2px solid #f7941e;
+  color: #f7941e;
   text-transform: uppercase;
   border-radius: 5px;
   font-weight: 500;
@@ -32,7 +32,7 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
-  color: rgba(0, 0, 0, 0.9);
+  /* color: rgba(0, 0, 0, 0.9); */
   text-decoration: none;
   margin: 0 24px;
 }

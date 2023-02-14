@@ -2,11 +2,11 @@
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr 1fr;
-      grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  background-color: #F1F1F2;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #bbbbbe;
 }
 
 .MuiBox-root .main_cont-sides h1 {
@@ -14,15 +14,16 @@
   font-size: 48px;
   line-height: 59px;
   padding: 0 20%;
+  color: inherit;
 }
 
 .MuiBox-root .main_cont-sides .create_wish {
-  background: #F7941E;
+  background: #f7941e;
   border-radius: 5px;
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
-  color: #fff;
+  color: #ffff;
   padding: 19px 13px;
   margin: auto 22.4%;
 }
@@ -31,7 +32,7 @@
   width: 100%;
   height: auto;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   display: block;
 }
 
@@ -39,7 +40,7 @@
   font-weight: 500;
   font-size: 32px;
   line-height: 1.4;
-  color: rgba(0, 0, 0, 0.8);
+  color: inherit;
 }
 
 .MuiBox-root .main_cont-sides p {
@@ -54,9 +55,9 @@
 }
 
 .MuiBox-root .main_cont-sides .learn_more {
-  border: 2px solid #F7941E;
+  border: 2px solid #f7941e;
   border-radius: 5px;
-  color: #F7941E;
+  color: #f7941e;
   padding: 18px 37px;
 }
 
@@ -75,11 +76,17 @@
   margin: 0 15px;
 }
 
-.MuiBox-root .main_cont-occasions .occasions-cont .occasions-cont-item:first-child {
+.MuiBox-root
+  .main_cont-occasions
+  .occasions-cont
+  .occasions-cont-item:first-child {
   margin-left: 0;
 }
 
-.MuiBox-root .main_cont-occasions .occasions-cont .occasions-cont-item:last-child {
+.MuiBox-root
+  .main_cont-occasions
+  .occasions-cont
+  .occasions-cont-item:last-child {
   margin-right: 0;
 }
 /*# sourceMappingURL=MainPage.css.map */

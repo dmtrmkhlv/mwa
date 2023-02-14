@@ -1,11 +1,11 @@
 import * as React from "react";
-import { useState } from "react";
-import { styled } from "@mui/material/styles";
+// import { useState } from "react";
+// import { styled } from "@mui/material/styles";
+// import Paper from "@mui/material/Paper";
+// import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
 import { LayoutProps } from "./LayoutProps";
-import { Breadcrumbs, PrimarySearchAppBar } from "../components";
+import { Breadcrumbs } from "../components"; //PrimarySearchAppBar
 import { Container } from "@mui/material";
 import { RequireAuth } from "../requireAuth/RequireAuth";
 import { useRequireAuth } from "../requireAuth/useRequireAuth";
@@ -24,11 +24,10 @@ export default function Layout(props: LayoutProps): JSX.Element {
   return (
     <RequireAuth isAuth={session} isRequire={getRequireBoolean()}>
       <>
-        <PrimarySearchAppBar session={session} />
+        {/* <PrimarySearchAppBar session={session} /> */}
 
         <Container maxWidth="xl">
           <Breadcrumbs />
-
           <Box
             sx={{
               mt: 2,
@@ -36,8 +35,7 @@ export default function Layout(props: LayoutProps): JSX.Element {
               flexWrap: "wrap",
               alignContent: "center",
               flexDirection: "column",
-            }}
-          >
+            }}>
             {children}
           </Box>
         </Container>

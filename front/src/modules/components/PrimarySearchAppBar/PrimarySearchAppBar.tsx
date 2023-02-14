@@ -9,14 +9,14 @@ import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
+// import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { BasicMenu } from "../Menu/Menu";
-import { PageProps } from "../../../interfaces";
+// import { PageProps } from "../../../interfaces";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../hooks";
@@ -116,8 +116,7 @@ export function PrimarySearchAppBar(props: AppBarProps) {
         horizontal: "right",
       }}
       open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
+      onClose={handleMenuClose}>
       <MenuItem onClick={handleMenuClose}>Профиль</MenuItem>
       <MenuItem onClick={handleMenuClose}>Мой аккаунт</MenuItem>
       <MenuItem onClick={handleOut}>Выход</MenuItem>
@@ -141,8 +140,7 @@ export function PrimarySearchAppBar(props: AppBarProps) {
         horizontal: "right",
       }}
       open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
+      onClose={handleMobileMenuClose}>
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="error">
@@ -155,8 +153,7 @@ export function PrimarySearchAppBar(props: AppBarProps) {
         <IconButton
           size="large"
           aria-label="show 17 new notifications"
-          color="inherit"
-        >
+          color="inherit">
           <Badge badgeContent={17} color="error">
             <NotificationsIcon />
           </Badge>
@@ -169,8 +166,7 @@ export function PrimarySearchAppBar(props: AppBarProps) {
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
-          color="inherit"
-        >
+          color="inherit">
           <AccountCircle />
         </IconButton>
         <p>Profile</p>
@@ -188,8 +184,7 @@ export function PrimarySearchAppBar(props: AppBarProps) {
             variant="h6"
             noWrap
             component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
-          >
+            sx={{ display: { xs: "none", sm: "block" } }}>
             Список подарков
           </Typography>
           {session ? (
@@ -213,8 +208,7 @@ export function PrimarySearchAppBar(props: AppBarProps) {
                 <IconButton
                   size="large"
                   aria-label="show 4 new mails"
-                  color="inherit"
-                >
+                  color="inherit">
                   <Badge badgeContent={4} color="error">
                     <MailIcon />
                   </Badge>
@@ -222,8 +216,7 @@ export function PrimarySearchAppBar(props: AppBarProps) {
                 <IconButton
                   size="large"
                   aria-label="show 17 new notifications"
-                  color="inherit"
-                >
+                  color="inherit">
                   <Badge badgeContent={17} color="error">
                     <NotificationsIcon />
                   </Badge>
@@ -235,8 +228,7 @@ export function PrimarySearchAppBar(props: AppBarProps) {
                   aria-controls={menuId}
                   aria-haspopup="true"
                   onClick={handleProfileMenuOpen}
-                  color="inherit"
-                >
+                  color="inherit">
                   <AccountCircle />
                 </IconButton>
               </>
@@ -251,8 +243,7 @@ export function PrimarySearchAppBar(props: AppBarProps) {
               aria-controls={mobileMenuId}
               aria-haspopup="true"
               onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
+              color="inherit">
               <MoreIcon />
             </IconButton>
           </Box>
