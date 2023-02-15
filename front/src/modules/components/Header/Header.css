@@ -71,7 +71,6 @@
 @media (max-width: 768px) {
   .header_wrap .header_wrap__inner .signup {
     display: block;
-    width: -webkit-max-content;
     width: -moz-max-content;
     width: max-content;
     margin: auto;
