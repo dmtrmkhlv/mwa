@@ -41,13 +41,20 @@
       }
   }
 
-  .footer_nav_soc {
-      &>div {
-          display: flex;
-          gap: 25px;
-          justify-content: center;
-      }
-  }
+
+    .footer_nav_soc {
+        &>div {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+
+            @media(max-width:460px) {
+                gap: unset;
+                justify-content: space-around;
+            }
+        }
+    }
+
 
   .footer__copy {
       font-weight: 400;

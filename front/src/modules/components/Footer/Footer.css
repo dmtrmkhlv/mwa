@@ -41,6 +41,12 @@
   gap: 25px;
   justify-content: center;
 }
+@media (max-width: 460px) {
+  .footer__outer .footer_nav_soc > div {
+    gap: unset;
+    justify-content: space-around;
+  }
+}
 .footer__outer .footer__copy {
   font-weight: 400;
   font-size: 14px;

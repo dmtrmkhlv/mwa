@@ -12,6 +12,15 @@
   position: relative;
   cursor: pointer;
 }
+@media (max-width: 1024px) {
+  .auth-wrapper .rememberLogin {
+    padding-bottom: 3em;
+  }
+}
+.auth-wrapper .rememberLogin .decolored {
+  text-decoration: none;
+  color: #444;
+}
 .auth-wrapper .rememberLogin.true:after {
   content: url(../images/check.svg);
   right: 10px;

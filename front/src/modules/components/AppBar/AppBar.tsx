@@ -71,7 +71,7 @@ export function DrawerAppBar(props: PropsBar) {
   };
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center", width: '100%' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
         Меню
       </Typography>
@@ -99,16 +99,19 @@ export function DrawerAppBar(props: PropsBar) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <>
+    <Box sx={{ boxSizing: 'border-box' }}>
       <HideOnScroll {...props}>
         <AppBar
           component="nav"
           color="transparent"
-          sx={{ borderBottomStyle: 0 }}
+          sx={{ borderBottomStyle: 0, backdropFilter: 'blur(4px)', boxSizing: 'border-box' }}
+
         >
           <Toolbar
             sx={{
               display: "flex",
+              width: "100%",
+              boxSizing: 'border-box',
               justifyContent: { xs: "end", sm: "center" },
               flexGrow: 1,
               height: 128,
@@ -162,8 +165,8 @@ export function DrawerAppBar(props: PropsBar) {
           </Toolbar>
         </AppBar>
       </HideOnScroll>
-      <Toolbar />
-      <Box component="nav">
+      <Toolbar sx={{ boxSizing: 'border-box' }} />
+      <Box component="nav" sx={{ width: 'unset' }}>
         <Drawer
           anchor="right"
           container={container}
@@ -174,6 +177,7 @@ export function DrawerAppBar(props: PropsBar) {
             keepMounted: true,
           }}
           sx={{
+            
             display: { xs: "block", sm: "none" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
@@ -186,8 +190,8 @@ export function DrawerAppBar(props: PropsBar) {
       </Box>
 
       <Box component="main" sx={{ p: 3 }}>
-        <Toolbar />
+        <Toolbar sx={{ boxSizing: 'border-box' }} />
       </Box>
-    </>
+    </Box>
   );
 }

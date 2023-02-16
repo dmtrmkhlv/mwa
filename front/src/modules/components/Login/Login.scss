@@ -1,4 +1,5 @@
 .auth-wrapper {
+
   .decolored {
       text-decoration: none;
       color:#444;
@@ -12,6 +13,16 @@
       align-items: center;
       position: relative;
       cursor: pointer;
+
+    @media(max-width:1024px) {
+        padding-bottom: 3em;
+    }
+    .decolored {
+        text-decoration: none;
+        color:#444;
+    }
+    
+
 
       &.true:after {
           content: url(../images/check.svg);
@@ -51,5 +62,6 @@
               left: 50px;
           }
       }
+      
   }
 }
