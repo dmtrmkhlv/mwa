@@ -38,11 +38,12 @@ export const Login = () => {
   const handleClickRemember = () => setRememberLogin((yes) => !yes);
 
   return (
-    <>
+    <Container>
       <Box
         sx={{
           width: 600,
           margin: "auto",
+          maxWidth: "100%",
         }}
       >
         <Grid
@@ -51,12 +52,12 @@ export const Login = () => {
             alignItems: "center",
           }}
         >
-          <Grid item xs={8}>
+          <Grid item sm={8} xs={7}>
             <Box className="auth-header" component="h1">
               Войти
             </Box>
           </Grid>
-          <Grid item xs={4} sx={{ textAlign: "right" }}>
+          <Grid item sm={4} xs={5} sx={{ textAlign: "right" }}>
             <Button
               component={Link}
               to={"/signup"}
@@ -78,13 +79,14 @@ export const Login = () => {
         className="auth-wrapper"
         sx={{
           width: 600,
-          height: 600,
+          mb: 10,
           margin: "auto",
+          maxWidth: "100%",
         }}
       >
         <Box
           sx={{
-            "& .MuiTextField-root": { mb: 1, width: 600 },
+            "& .MuiTextField-root": { mb: 1, width: 600, maxWidth: "100%" },
           }}
           display="flex"
           flexDirection={"column"}
@@ -149,7 +151,7 @@ export const Login = () => {
             <Check /> Войти
           </Button>
           <Grid container sx={{ mt: 2, alignItems: "center" }}>
-            <Grid item xs={2}>
+            <Grid item sm={2} xs={6}>
               <div
                 className={`rememberLogin ${rememberLogin}`}
                 onClick={handleClickRemember}
@@ -157,10 +159,15 @@ export const Login = () => {
                 <span></span>
               </div>
             </Grid>
-            <Grid item xs={4}>
+            <Grid item sm={4} xs={6}>
               Запомнить меня
             </Grid>
-            <Grid item sx={{ textAlign: "right" }} xs={6}>
+            <Grid
+              item
+              sx={{ textAlign: { sm: "right", xs: "center" } }}
+              sm={6}
+              xs={12}
+            >
               <Link className="decolored" to={"/forget"}>
                 Забыли пароль?
               </Link>
@@ -179,6 +186,6 @@ export const Login = () => {
       ) : (
         <></>
       )}
-    </>
+    </Container>
   );
 };
