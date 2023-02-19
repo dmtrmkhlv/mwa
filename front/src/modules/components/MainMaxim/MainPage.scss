@@ -3,73 +3,252 @@
     .mainFrame {
     
 
-        .main_cont-sides {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-            background-color: #F1F1F2;
-    
+    .main_cont-sides {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        background-color: #F1F1F2;
+  
+        @media(max-width:768px) {
+            grid-template-columns: 100%;
+        }
+  
+        h1 {
+            font-weight: 600;
+            font-size: 48px;
+            line-height: 59px;
+            padding: 0 20%;
+  
             @media(max-width:768px) {
-                grid-template-columns: 100%;
+                font-size: 30px;
+                line-height: 46px;
+                padding: 0 10%;
             }
-    
-            h1 {
-                font-weight: 600;
-                font-size: 48px;
-                line-height: 59px;
-                padding: 0 20%;
-    
-                @media(max-width:768px) {
-                    font-size: 30px;
-                    line-height: 46px;
-                    padding: 0 10%;
+        }
+  
+        .create_wish {
+            background: #F7941E;
+            border-radius: 5px;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 22px;
+            color: #fff;
+            padding: 19px 13px;
+            margin: auto 22.4%;
+  
+            @media(max-width:768px) {
+                margin: 0 auto 30px;
+                display: block;
+                width: max-content;
+            }
+        }
+  
+        img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            display: block;
+        }
+  
+        h2 {
+            font-weight: 500;
+            font-size: 32px;
+            line-height: 1.4;
+            color: rgba(0, 0, 0, 0.8);
+        }
+  
+        p {
+            font-weight: 300;
+            font-size: 20px;
+            line-height: 1.4;
+            color: rgba(0, 0, 0, 0.9);
+        }
+  
+        .main_cont-sides-pad {
+            padding: 0 20%;
+        }
+  
+        .learn_more {
+            border: 2px solid #F7941E;
+            border-radius: 5px;
+            color: #F7941E;
+            padding: 18px 37px;
+  
+            @media(max-width:768px) {
+                margin-bottom: 30px;
+            }
+        }
+    }
+  
+    .main_cont-occasions {
+        flex: 0 0 100%;
+        padding-bottom: 107px;
+  
+        .occasions-center {
+            text-align: center;
+        }
+  
+        h2 {
+            font-weight: 400;
+            font-size: 32px;
+            line-height: 39px;
+            text-align: center;
+            margin-top: 96px;
+            margin-bottom: 22px;
+        }
+  
+        &>p {
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 1.4;
+            margin: 0 0 64px;
+        }
+
+        .react-slideshow-container {
+            display: grid;
+            grid-template-columns: 70px auto 70px;
+        }
+  
+        .occasions-cont {
+            display: grid;
+            grid-template-columns: 100%;
+            align-items: center;
+            height: 396px;
+            justify-content: center;
+  
+            @media(max-width: 768px) {
+                overflow: hidden;
+            }
+  
+            &>img {
+                cursor: pointer;
+                margin: auto;
+            }
+  
+            .occasions-cont__inner {
+                width: calc(270px * 4 + 120px);
+                margin: auto;
+                overflow-x: hidden;
+                padding-bottom: 30px;
+                display: flex;
+                flex-wrap: nowrap;
+                position: relative;
+  
+                @media(max-width: 768px) {
+                    flex-wrap: wrap;
+                    width: 100%;
                 }
             }
-    
-            .create_wish {
-                background: #F7941E;
-                border-radius: 5px;
-                font-weight: 400;
-                font-size: 18px;
-                line-height: 22px;
-                color: #fff;
-                padding: 19px 13px;
-                margin: auto 22.4%;
-    
-                @media(max-width:768px) {
-                    margin: 0 auto 30px;
+  
+            .occasions-cont-item {
+                display: inline-block;
+                margin: 0 15px;
+                box-shadow: 10px 10px 15px rgba(0, 0, 0, 5%);
+                background-color: #FAFAFA;
+                max-width: 270px;
+                left: 0;
+                transition: .3s ease;
+                cursor:pointer;
+  
+                @media(max-width: 768px) {
+                    margin: 0 0 25px;
+                    width: 100%;
+                }
+  
+                &>div {
+                    padding: 24px;
+  
+                    &>p {
+                        font-weight: 400;
+                        font-size: 20px;
+                        line-height: 24px;
+                        hyphens: auto;
+                        margin-top: 0;
+                    }
+  
+                    &>.occasions-cont-more {
+                        font-weight: 400;
+                        font-size: 14px;
+                        line-height: 19px;
+                        text-decoration: none;
+                        color: #000000
+                    }
+                }
+  
+                &>img {
                     display: block;
                     width: max-content;
                 }
             }
-    
-            img {
+  
+  
+        }
+    }
+  
+    .begin:before {
+        position: absolute;
+        left: 0;
+        width: calc((100% - 1488px) / 2);
+        height: 100%;
+        background-color: #F7941E;
+    }
+  
+    .begin:after {
+        position: absolute;
+        right: 0;
+        width: calc((100% - 1488px) / 2);
+        height: 100%;
+        background-color: #F7941E;
+    }
+  
+    .begin {
+        background-color: #F7941E;
+        width: 100%;
+        position: relative;
+        height: 240px;
+  
+        @media(max-width: 768px) {
+            height: auto;
+            padding: 30px;
+        }
+  
+  
+        .begin__inner {
+            display: flex;
+            max-width: 780px;
+            width: 100%;
+            align-items: center;
+            margin: auto;
+            height: 100%;
+            gap: 30px;
+  
+            @media(max-width: 768px) {
+                flex-wrap: wrap;
+            }
+  
+            .begin__reg {
                 width: 100%;
-                height: auto;
-                object-fit: cover;
-                display: block;
+  
+                h2 {
+                    font-weight: 700;
+                    font-size: 32px;
+                    line-height: 1.4;
+                    margin: 0;
+                }
+  
+                a {
+                    margin-top: 0;
+                    display: block;
+                    font-weight: 300;
+                    font-size: 22px;
+                    line-height: 1.4;
+                    color: #000;
+                    text-decoration: none;
+                }
             }
-    
-            h2 {
-                font-weight: 500;
-                font-size: 32px;
-                line-height: 1.4;
-                color: rgba(0, 0, 0, 0.8);
-            }
-    
-            p {
-                font-weight: 300;
-                font-size: 20px;
-                line-height: 1.4;
-                color: rgba(0, 0, 0, 0.9);
-            }
-    
-            .main_cont-sides-pad {
-                padding: 0 20%;
-            }
-    
-            .learn_more {
-                border: 2px solid #F7941E;
+  
+            .reg {
+                background: rgba(35, 31, 32, 0.8);
                 border-radius: 5px;
                 color: #F7941E;
                 padding: 18px 37px;
@@ -78,17 +257,21 @@
                     margin-bottom: 30px;
                 }
             }
-        }
-    
-        .main_cont-occasions {
-            flex: 0 0 100%;
-            padding-bottom: 107px;
-            width: 100%;
-    
-            .occasions-center {
+  
+            .why {
+                background: transparent;
+                border-radius: 5px;
+                font-size: 18px;
+                line-height: 22px;
+                display: flex;
+                align-items: center;
                 text-align: center;
             }
-    
+        }
+    }
+  
+    .histories {
+        .histories__inner {
             h2 {
                 font-weight: 400;
                 font-size: 32px;
@@ -97,42 +280,25 @@
                 margin-top: 96px;
                 margin-bottom: 22px;
             }
-    
+  
             &>p {
                 font-weight: 400;
                 font-size: 18px;
                 line-height: 1.4;
                 margin: 0 0 64px;
             }
-    
-            .occasions-cont {
-    
+  
+            .histories__block {
+                display: flex;
+                align-items: center;
+  
                 @media(max-width: 768px) {
                     overflow: hidden;
                 }
-    
-                &>img {
-                    cursor: pointer;
-                    margin: auto;
-                }
-    
-                .occasions-cont__inner {
-                    text-align: center;
-                }
-                
-    
-                .occasions-cont-item {
-                    display: inline-block;
-                    margin: 0 15px;
-                    box-shadow: 10px 10px 15px rgba(0, 0, 0, 5%);
-                    background-color: #FAFAFA;
-                    max-width: 270px;
-                    left: 0;
-                    transition: .3s ease;
-                    cursor:pointer;
-                    vertical-align: top;
-                    text-align: initial;
-    
+  
+                img {
+                    display: block;
+  
                     @media(max-width: 768px) {
                         margin: 0 0 25px;
                         width: 100%;
@@ -162,60 +328,24 @@
                         display: block;
                     }
                 }
-    
-    
-            }
-        }
-    
-        .begin:before {
-            position: absolute;
-            left: 0;
-            width: calc((100% - 1488px) / 2);
-            height: 100%;
-            background-color: #F7941E;
-        }
-    
-        .begin:after {
-            position: absolute;
-            right: 0;
-            width: calc((100% - 1488px) / 2);
-            height: 100%;
-            background-color: #F7941E;
-        }
-    
-        .begin {
-            background-color: #F7941E;
-            width: 100%;
-            position: relative;
-            height: 240px;
-    
-            @media(max-width: 768px) {
-                height: auto;
-                padding: 30px;
-            }
-    
-    
-            .begin__inner {
-                display: flex;
-                max-width: 780px;
-                width: 100%;
-                align-items: center;
-                margin: auto;
-                height: 100%;
-                gap: 30px;
-    
-                @media(max-width: 768px) {
-                    flex-wrap: wrap;
-                }
-    
-                .begin__reg {
-                    width: 100%;
-    
-                    h2 {
-                        font-weight: 700;
-                        font-size: 32px;
-                        line-height: 1.4;
-                        margin: 0;
+  
+                .readmore_text {
+                    background-color: #231F20;
+                    font-weight: 400;
+                    font-size: 32px;
+                    line-height: 39px;
+                    color: #FFFFFF;
+                    height: 100%;
+                    padding: 48px 48px 0 78px;
+                    padding: 48px 48px 0 78px;
+                    height: 370px;
+                    box-sizing: border-box;
+  
+                    @media(max-width: 768px) {
+                        height: auto;
+                        padding: 30px;
+                        font-size: 24px;
+                        line-height: 34px;
                     }
     
                     a {
@@ -228,10 +358,8 @@
                         text-decoration: none;
                     }
                 }
-    
-                .reg {
-                    background: rgba(35, 31, 32, 0.8);
-                    border-radius: 5px;
+  
+                a {
                     font-weight: 400;
                     font-size: 18px;
                     line-height: 22px;
@@ -260,79 +388,41 @@
                     border: 1px solid #000000;
                 }
             }
-        }
-    
-        .histories {
-            .histories__inner {
-                h2 {
-                    font-weight: 400;
-                    font-size: 32px;
-                    line-height: 39px;
-                    text-align: center;
-                    margin-top: 88px;
-                    margin-bottom: 22px;
+  
+            .other__histories {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                align-items: flex-start;
+                gap: 30px;
+                margin-top: 40px;
+                margin-bottom: 40px;
+  
+                @media(max-width: 768px) {
+                    grid-template-columns: 1fr;
                 }
-    
-                &>p {
-                    margin-bottom: 71px;
-                    text-align: center;
-                }
-    
-                .histories__block {
-                    display: flex;
-                    align-items: center;
-    
+  
+                &>div {
+                    background: #FFFFFF;
+                    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
+                    padding: 54px 47px;
+                    height: 330px;
+                    box-sizing: border-box;
+  
                     @media(max-width: 768px) {
                         flex-wrap: wrap;
                     }
-    
-                    img {
-                        display: block;
-    
-                        @media(max-width: 768px) {
-                            width: 100%;
-                        }
+  
+                    h3 {
+                        font-weight: 700;
+                        font-size: 24px;
+                        line-height: 1.4;
                     }
-    
-                    .readmore_text {
-                        background-color: #231F20;
+  
+                    p {
                         font-weight: 400;
-                        font-size: 32px;
-                        line-height: 39px;
-                        color: #FFFFFF;
-                        height: 100%;
-                        padding: 48px 48px 0 78px;
-                        padding: 48px 48px 0 78px;
-                        height: 370px;
-                        box-sizing: border-box;
-
-                        @media(max-width: 1184px) {
-                            padding: 30px;
-                            font-size: 24px;
-                            line-height: 34px;
-                        }
-
-                        @media(max-width: 890px) {
-                            font-size: 18px;
-                        }
-    
-                        @media(max-width: 768px) {
-                            height: auto;
-                            padding: 30px;
-                            font-size: 24px;
-                            line-height: 34px;
-                        }
-
-                        &>p {
-
-                            margin:0;
-                            
-                            @media(max-width: 890px) {
-                                font-size: 18px;
-                            }
-                        }
+                        font-size: 18px;
                     }
-    
+  
                     a {
                         font-weight: 400;
                         font-size: 18px;
@@ -388,4 +478,4 @@
             }
         }
     }
-}
+  }

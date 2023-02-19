@@ -1,55 +1,67 @@
 .auth-wrapper {
+
+  .decolored {
+      text-decoration: none;
+      color:#444;
+  }
+  .rememberLogin {
+      width: 83px;
+      height: 37px;
+      border: 1px solid #EAEBF0;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      cursor: pointer;
+
+    @media(max-width:1024px) {
+        padding-bottom: 3em;
+    }
     .decolored {
         text-decoration: none;
         color:#444;
     }
-    .rememberLogin {
-        width: 83px;
-        height: 37px;
-        border: 1px solid #EAEBF0;
-        border-radius: 20px;
-        display: flex;
-        align-items: center;
-        position: relative;
-        cursor: pointer;
+    
 
-        &.true:after {
-            content: url(../images/check.svg);
-            right: 10px;
-            position: absolute;
-            top: 10px;
-        }
 
-        &.true:before {
-            content: '';
-        }
+      &.true:after {
+          content: url(../images/check.svg);
+          right: 10px;
+          position: absolute;
+          top: 10px;
+      }
 
-        &.false:before {
-            content: url(../images/cross.svg);
-            position: absolute;
-            left: 10px;
-            top: 10px;
-        }
+      &.true:before {
+          content: '';
+      }
 
-        &.false:after {
-            content: '';
-        }
+      &.false:before {
+          content: url(../images/cross.svg);
+          position: absolute;
+          left: 10px;
+          top: 10px;
+      }
 
-        span {
-            display: block;
-            width: 29px;
-            height: 29px;
-            background: #d9d9d9;
-            border-radius: 50%;
-            left: 5px;
-            position: absolute;
-            transition: .3s;
-        }
+      &.false:after {
+          content: '';
+      }
 
-        &.false {
-            span {
-                left: 50px;
-            }
-        }
-    }
+      span {
+          display: block;
+          width: 29px;
+          height: 29px;
+          background: #d9d9d9;
+          border-radius: 50%;
+          left: 5px;
+          position: absolute;
+          transition: .3s;
+      }
+
+      &.false {
+          span {
+              left: 50px;
+          }
+      }
+      
+  }
 }

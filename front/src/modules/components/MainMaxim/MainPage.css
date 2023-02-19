@@ -98,6 +98,17 @@
   line-height: 1.4;
   margin: 0 0 64px;
 }
+.mainFrame .main_cont-occasions .react-slideshow-container {
+  display: grid;
+  grid-template-columns: 70px auto 70px;
+}
+.mainFrame .main_cont-occasions .occasions-cont {
+  display: grid;
+  grid-template-columns: 100%;
+  align-items: center;
+  height: 396px;
+  justify-content: center;
+}
 @media (max-width: 768px) {
   .mainBox .mainFrame .main_cont-occasions .occasions-cont {
     overflow: hidden;

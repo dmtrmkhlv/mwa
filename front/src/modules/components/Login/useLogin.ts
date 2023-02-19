@@ -11,6 +11,7 @@ import { loginAccount } from "../../store/ThunkCreator";
 
 interface OutLogin {
   username: string;
+  email?: string
   password: string;
   error: string;
   handlerForm: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -26,6 +27,7 @@ export const useLogin: useLoginFunc = () => {
   let location = useLocation();
   const [form, setForm] = useState({
     username: "",
+    email: "",
     password: "",
   });
   let from = location.state?.from?.pathname || "/";
@@ -49,6 +51,7 @@ export const useLogin: useLoginFunc = () => {
   }, [user.session]);
   return {
     username: form.username,
+    email: form.email,
     password: form.password,
     error: error,
     handlerForm: handleForm,

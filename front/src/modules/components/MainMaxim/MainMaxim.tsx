@@ -1,5 +1,5 @@
 import { useNavigate, Link } from "react-router-dom";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Slider } from "@mui/material";
 import { WhiteBgBtn } from "../WhiteBgBtn/WhiteBgBtn"
 import "./MainPage.scss";
 import wish_list_pen from "../images/wish_list_pen.jpg";
@@ -9,7 +9,6 @@ import annyversary from "../images/annyversary.jpg";
 import valentines from "../images/valentines.jpg";
 import christmas from "../images/christmas.jpg";
 import { SliderElement } from "../SliderElement";
-import 'react-slideshow-image/dist/styles.css';
 import { Slide } from 'react-slideshow-image';
 
 
@@ -18,6 +17,29 @@ export const MainMaxim = () => {
   const navigateCreate = () => {
     setTimeout(() => navigate("/create", { replace: true }), 500);
   };
+  const responsiveSettings = [
+    {
+        breakpoint: 800,
+        settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1
+        }
+    },
+    {
+      breakpoint: 400,
+      settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1
+      }
+    },
+    {
+        breakpoint: 200,
+        settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+        }
+    }
+  ];
   return (
     <>
     <Box className="mainFrame">
@@ -57,19 +79,26 @@ export const MainMaxim = () => {
 
           {/* <img src={'./images/left-chev.png'} width='50' alt='Slider previous'/> */}
           <Box className='occasions-cont__inner'>
-            
-            <Slide>
+
               <Box className="slides-wrap">
-                <SliderElement id={0} src={'./images/happy_brthd.jpg'} name={'Ко Дню рожденья'} href={'brthd'} text={'Узнать больше ›'} />
-                <SliderElement id={1} src={'./images/annyversary.jpg'} name={'К юбилею'} href={'annyversary'} text={'Узнать больше ›'} />
-                <SliderElement id={2} src={'./images/valentines.jpg'} name={'Ко Дню святого Валентина'} href={'valentines'} text={'Узнать больше ›'} />
-                <SliderElement id={3} src={'./images/christmas.jpg'} name={'На Рождество'} href={'christmas'} text={'Узнать больше ›'} />
-              </Box>
-              <Box className="slides-wrap">
-                <SliderElement id={4} src={'./images/valentines.jpg'} name={'Ко Дню святого Валентина'} href={'valentines'} text={'Узнать больше ›'} />
-                <SliderElement id={5} src={'./images/christmas.jpg'} name={'На Рождество'} href={'christmas'} text={'Узнать больше ›'} />  
-              </Box>             
-            </Slide>
+                
+                <Slide slidesToScroll={1} slidesToShow={4} responsive={responsiveSettings}>
+
+
+                  <SliderElement id={0} src={'../images/happy_brthd.jpg'} name={'Ко Дню рожденья'} href={'brthd'} text={'Узнать больше ›'} />
+                  
+                  <SliderElement id={1} src={'../images/annyversary.jpg'} name={'К юбилею'} href={'annyversary'} text={'Узнать больше ›'} />
+                  
+                  <SliderElement id={2} src={'../images/valentines.jpg'} name={'Ко Дню святого Валентина'} href={'valentines'} text={'Узнать больше ›'} />
+                  
+                  <SliderElement id={3} src={'../images/christmas.jpg'} name={'На Рождество'} href={'christmas'} text={'Узнать больше ›'} />
+                  
+                  <SliderElement id={4} src={'../images/valentines.jpg'} name={'Ко Дню святого Валентина'} href={'valentines'} text={'Узнать больше ›'} />
+                  
+                  <SliderElement id={5} src={'../images/christmas.jpg'} name={'На Рождество'} href={'christmas'} text={'Узнать больше ›'} />  
+                </Slide>
+              </Box>  
+
 
             
           </Box>

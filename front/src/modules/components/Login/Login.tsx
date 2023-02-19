@@ -39,7 +39,8 @@ export const Login = () => {
       <Box
         sx={{
           width: 600,
-          margin: 'auto'
+          margin: 'auto',
+          maxWidth: '100%'
         }}>
         <Grid 
           container
@@ -48,7 +49,8 @@ export const Login = () => {
           }}>
           <Grid 
             item
-            xs={8}>
+            sm={8}
+            xs={7}>
             <Box 
               className="auth-header" 
               component="h1">
@@ -57,7 +59,8 @@ export const Login = () => {
           </Grid>
           <Grid 
             item
-            xs={4}
+            sm={4}
+            xs={5}
             sx={{ textAlign: 'right' }}>
             <Button  
               component={Link} 
@@ -78,12 +81,13 @@ export const Login = () => {
       <Box className="auth-wrapper" 
       sx={{
         width: 600,
-        height: 600,
-        margin: 'auto'
+        mb: 10,
+        margin: 'auto',
+        maxWidth: '100%'
       }}>
         <Box
           sx={{
-            "& .MuiTextField-root": { mb: 1, width: 600 },
+            "& .MuiTextField-root": { mb: 1, width: 600, maxWidth: '100%' },
           }}
           display="flex"
           flexDirection={"column"}
@@ -151,7 +155,8 @@ export const Login = () => {
             container
             sx={{ mt: 2, alignItems: 'center'}}>
             <Grid item 
-            xs={2}
+            sm={2}
+            xs={6}
             >
               <div className={ `rememberLogin ${rememberLogin}` } 
               onClick={handleClickRemember}>
@@ -159,13 +164,15 @@ export const Login = () => {
               </div>
             </Grid>
             <Grid item 
-            xs={4}
+            sm={4}
+            xs={6}
             >
               Запомнить меня
             </Grid>
             <Grid item 
-            sx={{ textAlign: 'right' }}
-            xs={6}
+            sx={{ textAlign: {sm: 'right', xs: 'center'} }}
+            sm={6}
+            xs={12}
             >
               <Link 
                 className="decolored"
