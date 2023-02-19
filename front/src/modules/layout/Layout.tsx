@@ -1,16 +1,13 @@
 import * as React from "react";
-import { useState } from "react";
-import { styled } from "@mui/material/styles";
+// import { useState } from "react";
+// import { styled } from "@mui/material/styles";
+// import Paper from "@mui/material/Paper";
+// import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
 import { LayoutProps } from "./LayoutProps";
-import {
-  Breadcrumbs,
-  DrawerAppBar,
-  Footer,
-  PrimarySearchAppBar,
-} from "../components";
+import { DrawerAppBar, Footer, PrimarySearchAppBar } from "../components";
+import { Breadcrumbs } from "../components";
+//PrimarySearchAppBar
 import { Container } from "@mui/material";
 import { RequireAuth } from "../requireAuth/RequireAuth";
 import { useRequireAuth } from "../requireAuth/useRequireAuth";
