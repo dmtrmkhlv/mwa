@@ -180,19 +180,27 @@ export function PrimarySearchAppBar(props: AppBarProps) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
+      <AppBar position="static" color="transparent">
+        <Toolbar
+          sx={{
+            display: "flex",
+            justifyContent: { xs: "end", sm: "center" },
+            flexGrow: 1,
+            height: 128,
+          }}
+        >
           {session ? <BasicMenu /> : <></>}
 
           <Typography
             variant="h6"
             noWrap
             component="div"
+            color="black"
             sx={{ display: { xs: "none", sm: "block" } }}
           >
             Список подарков
           </Typography>
-          {session ? (
+          {/* {session ? (
             <Search>
               <SearchIconWrapper>
                 <SearchIcon />
@@ -204,7 +212,7 @@ export function PrimarySearchAppBar(props: AppBarProps) {
             </Search>
           ) : (
             <></>
-          )}
+          )} */}
 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
@@ -213,7 +221,7 @@ export function PrimarySearchAppBar(props: AppBarProps) {
                 <IconButton
                   size="large"
                   aria-label="show 4 new mails"
-                  color="inherit"
+                  color="default"
                 >
                   <Badge badgeContent={4} color="error">
                     <MailIcon />
@@ -222,7 +230,7 @@ export function PrimarySearchAppBar(props: AppBarProps) {
                 <IconButton
                   size="large"
                   aria-label="show 17 new notifications"
-                  color="inherit"
+                  color="default"
                 >
                   <Badge badgeContent={17} color="error">
                     <NotificationsIcon />
@@ -235,7 +243,7 @@ export function PrimarySearchAppBar(props: AppBarProps) {
                   aria-controls={menuId}
                   aria-haspopup="true"
                   onClick={handleProfileMenuOpen}
-                  color="inherit"
+                  color="default"
                 >
                   <AccountCircle />
                 </IconButton>

@@ -1,0 +1,13 @@
+.header_wrap-main-nav {
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 22px;
+                color: rgba(0, 0, 0, 0.9);
+                text-decoration: none;
+                margin: 0 24px;
+
+                @media (max-width: 768px) {
+                    margin: 7px 24px;
+                    text-align: center;
+                }
+            }

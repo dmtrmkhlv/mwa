@@ -1,29 +1,23 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { apifetch } from "..";
+import {
+  IListCreator,
+  IReqUser,
+  IUserSession,
+  ListEvent,
+} from "../../interfaces";
+import { api, Api } from "../api";
+import { thunks } from "./helper";
 
-type CreateUserResponse = {
-  access_token: string;
-};
+export const loginAccount = thunks<IUserSession, IReqUser>(
+  Api.loginAccount,
+  "user/setUser"
+);
 
-export const loginAccount = createAsyncThunk<any, any>(
-  "user/setUser ",
-  async (value, { rejectWithValue }) => {
-    const user = { username: value.username, password: value.password };
+export const getListEvent = thunks<IListCreator[], any>(
+  Api.getListEvent,
+  "event/getEvent"
+);
 
-    try {
-      const resp = await apifetch.post<CreateUserResponse>(
-        `/api/v1/auth/login`,
-        {
-          ...user,
-        }
-      );
-      await localStorage.setItem("token", resp.data.access_token);
-      const resptwo = await apifetch.get(`api/v1/auth/profile`);
-      const data = { username: resptwo.data.username, session: true };
-
-      return data;
-    } catch (error) {
-      return rejectWithValue("something went wrong");
-    }
-  }
+export const getAllEvents = thunks<ListEvent[], any>(
+  api.getAllEvents,
+  "event/getEvent"
 );
