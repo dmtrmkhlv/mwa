@@ -1,9 +1,14 @@
-import { Gift } from 'src/gift/entities/gift.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Event } from '../../event/entities/event.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { EventEntity } from '../../event/entities/event.entity';
 
 @Entity('user')
-export class User {
+export class UserEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -13,9 +18,7 @@ export class User {
   @Column('varchar')
   password: string;
 
-  @OneToMany(() => Event, (event) => event.user)
-  events: Event[];
-
-  @OneToMany(() => Gift, (gift) => gift.user)
-  gifts: Gift[];
+  @OneToMany((type) => EventEntity, (event) => event.user, { eager: true })
+  @JoinColumn()
+  events: EventEntity[];
 }

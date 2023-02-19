@@ -1,9 +1,7 @@
+import Layout from "../modules/layout/Layout";
 import { FC } from "react";
 import { PageProps } from "../interfaces";
-import { Main } from "../modules";
-import Layout from "../modules/layout/Layout";
-import { Header } from "../modules/components/Header/Header";
-import '../modules/components/MainMaxim/MainPage.css'
+import { Main } from "../modules/components";
 
 export const MainPage: FC<PageProps> = ({ isRequire }) => {
   return (

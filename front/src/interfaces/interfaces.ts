@@ -61,10 +61,33 @@ export interface IGiftGiver {
   session: false;
 }
 export interface IListCreator {
-  username: "";
-  session: false;
+  id: string;
+  userCreatorId: string;
+  title: string;
+  description: string;
+  gifts: any[];
 }
 export interface IListGiver {
   username: "";
   session: false;
+}
+
+export interface ListGiftFromEvent {
+  id: string;
+  eventId: string;
+  userCreatorId: string;
+  userBookId: string;
+  title: string;
+  link: string;
+  description: string;
+}
+
+export interface ListEvent {
+  id: string;
+  userCreatorId: string;
+  dateCreate: string;
+  title: string;
+  description: string;
+  isActive: true;
+  gifts: ListGiftFromEvent[];
 }

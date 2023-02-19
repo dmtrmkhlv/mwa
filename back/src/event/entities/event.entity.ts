@@ -1,15 +1,16 @@
 import {
   Column,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Gift } from 'src/gift/entities/gift.entity';
-import { User } from '../../users/entities/user.entity';
+import { GiftEntity } from 'src/gift/entities/gift.entity';
+import { UserEntity } from '../../users/entities/user.entity';
 
 @Entity('event')
-export class Event {
+export class EventEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -17,7 +18,7 @@ export class Event {
   userCreatorId: string;
 
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
-  date: string;
+  dateCreate: string;
 
   @Column('varchar')
   title: string;
@@ -25,9 +26,13 @@ export class Event {
   @Column('varchar')
   description: string;
 
-  @OneToMany(() => Gift, (gift) => gift.event)
-  gifts: Gift[];
+  @Column({ type: 'boolean', default: () => true })
+  isActive: boolean;
 
-  @ManyToOne(() => User, (user) => user.events)
-  user: User;
+  @ManyToOne((type) => UserEntity, (user) => user.events)
+  user: UserEntity;
+
+  @OneToMany((type) => GiftEntity, (gift) => gift.event, { eager: true })
+  @JoinColumn()
+  gifts: GiftEntity[];
 }

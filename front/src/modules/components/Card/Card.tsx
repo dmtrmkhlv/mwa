@@ -9,7 +9,10 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../..";
 import { useRole } from "../../requireAuth";
 
-export function MultiActionAreaCard() {
+import christmas from "../images/christmas.jpg";
+
+export function MultiActionAreaCard(props: any) {
+  const { images } = props;
   const { value: user } = useSelector(selectUser);
   const role = useRole(user.userId, 2);
   const navigate = useNavigate();
@@ -17,23 +20,22 @@ export function MultiActionAreaCard() {
     setTimeout(() => navigate("/", { replace: true }), 500);
   };
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <h1>{role}</h1>
+    <Card sx={{ width: 270 }}>
       <CardActionArea>
         <CardMedia
           component="img"
           height="140"
-          image="/static/images/cards/contemplative-reptile.jpg"
+          image={images}
           alt="green iguana"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             Lizard
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          {/* <Typography variant="body2" color="text.secondary">
             Lizards are a widespread group of squamate reptiles, with over 6,000
             species, ranging across all continents except Antarctica
-          </Typography>
+          </Typography> */}
         </CardContent>
       </CardActionArea>
       <CardActions>

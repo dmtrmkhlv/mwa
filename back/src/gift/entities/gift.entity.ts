@@ -1,9 +1,8 @@
-import { User } from 'src/users/entities/user.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Event } from '../../event/entities/event.entity';
+import { EventEntity } from '../../event/entities/event.entity';
 
 @Entity('gift')
-export class Gift {
+export class GiftEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -13,7 +12,7 @@ export class Gift {
   @Column('varchar')
   userCreatorId: string;
 
-  @Column('varchar')
+  @Column({ default: '' })
   userBookId: string;
 
   @Column('varchar')
@@ -25,9 +24,6 @@ export class Gift {
   @Column('varchar')
   description: string;
 
-  @ManyToOne(() => Event, (event) => event.gifts)
-  event: Event;
-
-  @ManyToOne(() => User, (user) => user.gifts)
-  user: User;
+  @ManyToOne((type) => EventEntity, (event) => event.gifts)
+  event: EventEntity;
 }

@@ -42,4 +42,4 @@ export const UserSlice = createSlice({
   },
 });
 
-export default UserSlice.reducer;
+export const UserReducer = UserSlice.reducer;

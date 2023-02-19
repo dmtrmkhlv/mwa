@@ -16,7 +16,7 @@ import { Entry } from "../Button";
 import { Container } from "@mui/system";
 import { NavLink } from "react-router-dom";
 import logo from "../images/logo_orange_little.png";
-import "./AppBar.scss";
+import "./AppBar.css";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import Slide from "@mui/material/Slide";
 
@@ -104,7 +104,7 @@ export function DrawerAppBar(props: PropsBar) {
         <AppBar
           component="nav"
           color="transparent"
-          sx={{ borderBottomStyle: 0 }}
+          sx={{ borderBottomStyle: 0, backdropFilter: "blur(4px)" }}
         >
           <Toolbar
             sx={{

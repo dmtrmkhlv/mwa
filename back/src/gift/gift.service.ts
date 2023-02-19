@@ -1,23 +1,41 @@
-import { ServerResponse } from './../dto/server-response.dto';
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateGiftDto } from './dto/create-gift.dto';
 import { UpdateGiftDto } from './dto/update-gift.dto';
-import { Gift } from './entities/gift.entity';
+import { GiftEntity } from './entities/gift.entity';
+import { EventEntity } from 'src/event/entities/event.entity';
+import { MailService } from 'src/mail/mail.service';
 
 @Injectable()
 export class GiftService {
   constructor(
-    @InjectRepository(Gift) private giftRepository: Repository<Gift>,
+    @InjectRepository(GiftEntity)
+    private giftRepository: Repository<GiftEntity>,
+    @InjectRepository(EventEntity)
+    private eventsRepository: Repository<EventEntity>,
+    private mailService: MailService,
   ) {}
-  async create(createGiftDto: CreateGiftDto): Promise<Gift> {
-    const newGift = this.giftRepository.create(createGiftDto);
-    newGift.userBookId = '';
-    return await this.giftRepository.save(newGift);
+  async create(
+    eventId: string,
+    createGiftDto: CreateGiftDto,
+  ): Promise<GiftEntity> {
+    const newGiftCreate = this.giftRepository.create(createGiftDto);
+    const newGift = await this.giftRepository.save(newGiftCreate);
+
+    const getEvent = await this.eventsRepository.findOne({
+      where: { id: eventId },
+      relations: ['gifts'],
+    });
+
+    getEvent.gifts.push(newGiftCreate);
+
+    await this.eventsRepository.save(getEvent);
+
+    return newGift;
   }
 
-  async findAll(userId: string): Promise<Gift[] | undefined> {
+  async findAll(userId: string): Promise<GiftEntity[] | undefined> {
     const gifts = this.giftRepository.find({
       where: {
         userCreatorId: userId,
@@ -26,63 +44,95 @@ export class GiftService {
     return await gifts;
   }
 
-  findOne(id: string): Promise<Gift | undefined> {
+  findOne(id: string): Promise<GiftEntity | undefined> {
     return this.giftRepository.findOneBy({ id: id });
   }
 
-  async book(
+  async update(
     userId: string,
     id: string,
-  ): Promise<Gift | undefined | ServerResponse> {
+    updateGiftDto: UpdateGiftDto,
+  ): Promise<GiftEntity | undefined> {
     const gift = await this.findOne(id);
-    console.log(gift.userCreatorId);
+    if (gift.userCreatorId === userId) {
+      return this.giftRepository.save({ ...gift, ...updateGiftDto });
+    }
+    throw new HttpException(
+      {
+        status: HttpStatus.FORBIDDEN,
+        error: 'Запрещено обновлять чужие Gift',
+      },
+      403,
+    );
+  }
+
+  async remove(userId: string, id: string): Promise<GiftEntity | undefined> {
+    const gift = await this.findOne(id);
+    if (gift.userCreatorId === userId) {
+      return this.giftRepository.remove(gift);
+    }
+    throw new HttpException(
+      {
+        status: HttpStatus.FORBIDDEN,
+        error: 'Запрещено удалять чужие Gift',
+      },
+      403,
+    );
+  }
+
+  async book(userId: string, id: string): Promise<GiftEntity | undefined> {
+    const gift = await this.findOne(id);
 
     if (gift.userBookId.length > 0) {
-      return {
-        statusCode: 403,
-        message: 'Подарок уже забронирован',
-      };
+      throw new HttpException(
+        {
+          status: HttpStatus.FORBIDDEN,
+          error: 'Подарок уже забронирован',
+        },
+        403,
+      );
     }
 
     if (userId !== gift.userCreatorId) {
       gift.userBookId = userId;
+      const mailInfo = {
+        emailTo: 'mywishlistapp@mail.ru',
+        subject: 'A gift from your Event has been reserved!',
+        templateName: 'bookGift',
+        context: {
+          name: 'User Name',
+          giftTitle: gift.title,
+          eventId: gift.eventId,
+        },
+      };
+      await this.mailService.sendMail(mailInfo);
       return this.giftRepository.save({ ...gift });
     } else {
-      return {
-        statusCode: 403,
-        message: 'Вы не можете бронировать подарок из своего списка',
-      };
+      throw new HttpException(
+        {
+          status: HttpStatus.FORBIDDEN,
+          error: 'Вы не можете бронировать подарок из своего списка',
+        },
+        403,
+      );
     }
   }
 
-  async unBook(
-    userId: string,
-    id: string,
-  ): Promise<Gift | undefined | ServerResponse> {
+  async unBook(userId: string, id: string): Promise<GiftEntity | undefined> {
     const gift = await this.findOne(id);
 
     if (userId === gift.userBookId) {
       gift.userBookId = '';
       return this.giftRepository.save({ ...gift });
     } else {
-      return {
-        statusCode: 403,
-        message:
-          'Вы не можете отменить бронь подарка, забронированного другим человеком',
-      };
+      throw new HttpException(
+        {
+          status: HttpStatus.FORBIDDEN,
+          error:
+            'Вы не можете отменить бронь подарка, забронированного другим человеком',
+        },
+        403,
+      );
     }
-  }
-
-  async update(
-    id: string,
-    updateGiftDto: UpdateGiftDto,
-  ): Promise<Gift | undefined> {
-    const gift = await this.findOne(id);
-    return this.giftRepository.save({ ...gift, ...updateGiftDto });
-  }
-
-  async remove(id: string): Promise<Gift | undefined> {
-    const gift = await this.findOne(id);
-    return this.giftRepository.remove(gift);
   }
 }
