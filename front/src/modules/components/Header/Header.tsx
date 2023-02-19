@@ -6,6 +6,9 @@ import logo from "../images/logo_orange_little.png";
 import close from "../images/close.svg";
 import burgericon from "../images/burger.svg";
 import { Entry } from "../Button";
+import { ChakraProvider } from "@chakra-ui/react";
+import { Box as BoxSwitcher, useColorMode } from "@chakra-ui/react";
+import { ColorModeSwitcher } from "../Switcher/ColorModeSwitcher";
 
 type Burger = "active" | "noactive";
 
@@ -24,6 +27,7 @@ export const Header = () => {
       setBurger("active");
     }
   };
+  const { colorMode } = useColorMode();
   return (
     <Box sx={{ width: 1 }} className={`header_wrap ${burger}`}>
       <div className={`header_wrap__inner ${burger}`}>
@@ -54,6 +58,11 @@ export const Header = () => {
           </NavLink>
         </nav>
         <Entry />
+        <ChakraProvider>
+          <BoxSwitcher py={2} bg={colorMode === "dark" ? "gray.600" : "none"}>
+            <ColorModeSwitcher bg="none" />
+          </BoxSwitcher>
+        </ChakraProvider>
       </div>
     </Box>
   );
