@@ -20,10 +20,6 @@ import "./AppBar.css";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import Slide from "@mui/material/Slide";
 
-import { ChakraProvider } from "@chakra-ui/react";
-import { Box as BoxSwitcher, useColorMode } from "@chakra-ui/react";
-import { ColorModeSwitcher } from "../Switcher/ColorModeSwitcher";
-
 interface Props {
   /**
    * Injected by the documentation to work in an iframe.
@@ -74,8 +70,6 @@ export function DrawerAppBar(props: PropsBar) {
     setMobileOpen((prevState) => !prevState);
   };
 
-  const { colorMode } = useColorMode();
-
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
@@ -98,11 +92,6 @@ export function DrawerAppBar(props: PropsBar) {
         </ListItemButton>
       </ListItem>
       <Entry />
-      <ChakraProvider>
-        <BoxSwitcher py={2} bg={colorMode === "dark" ? "gray.600" : "none"}>
-          <ColorModeSwitcher bg="none" />
-        </BoxSwitcher>
-      </ChakraProvider>
     </Box>
   );
 
@@ -169,14 +158,6 @@ export function DrawerAppBar(props: PropsBar) {
               }}
             >
               <Entry />
-              <ChakraProvider>
-                <BoxSwitcher
-                  py={2}
-                  bg={colorMode === "dark" ? "gray.600" : "none"}
-                >
-                  <ColorModeSwitcher bg="none" />
-                </BoxSwitcher>
-              </ChakraProvider>
             </Box>
           </Toolbar>
         </AppBar>

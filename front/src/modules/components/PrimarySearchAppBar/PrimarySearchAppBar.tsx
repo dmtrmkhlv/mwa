@@ -9,14 +9,14 @@ import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-// import MenuIcon from "@mui/icons-material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { BasicMenu } from "../Menu/Menu";
-// import { PageProps } from "../../../interfaces";
+import { PageProps } from "../../../interfaces";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../hooks";
@@ -221,7 +221,7 @@ export function PrimarySearchAppBar(props: AppBarProps) {
                 <IconButton
                   size="large"
                   aria-label="show 4 new mails"
-                  color="inherit"
+                  color="default"
                 >
                   <Badge badgeContent={4} color="error">
                     <MailIcon />
@@ -230,7 +230,7 @@ export function PrimarySearchAppBar(props: AppBarProps) {
                 <IconButton
                   size="large"
                   aria-label="show 17 new notifications"
-                  color="inherit"
+                  color="default"
                 >
                   <Badge badgeContent={17} color="error">
                     <NotificationsIcon />
@@ -243,7 +243,7 @@ export function PrimarySearchAppBar(props: AppBarProps) {
                   aria-controls={menuId}
                   aria-haspopup="true"
                   onClick={handleProfileMenuOpen}
-                  color="inherit"
+                  color="default"
                 >
                   <AccountCircle />
                 </IconButton>

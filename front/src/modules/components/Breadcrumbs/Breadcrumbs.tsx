@@ -1,5 +1,5 @@
 import * as React from "react";
-// import Typography from "@mui/material/Typography";
+import Typography from "@mui/material/Typography";
 import { Breadcrumbs as MUIBreadcrumbs } from "@mui/material";
 import { Link } from "@mui/material";
 
@@ -22,9 +22,7 @@ export function Breadcrumbs() {
         >
           Подарки
         </Link>
-        <Link underline="hover" color="inherit">
-          Подарок
-        </Link>
+        <Typography color="text.primary">Подарок</Typography>
       </MUIBreadcrumbs>
     </div>
   );

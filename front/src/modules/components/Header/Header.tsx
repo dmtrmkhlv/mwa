@@ -1,19 +1,15 @@
-import { ChakraProvider } from "@chakra-ui/react";
-import { Box, Button } from "@mui/material";
+import { useState } from "react";
+import { Box, Button, Container } from "@mui/material";
 import { NavLink, useNavigate } from "react-router-dom";
-import { Box as BoxSwitcher, useColorMode } from "@chakra-ui/react";
-import "./Header.css";
+import "./Header.scss";
 import logo from "../images/logo_orange_little.png";
 import close from "../images/close.svg";
 import burgericon from "../images/burger.svg";
-import { ColorModeSwitcher } from "../Switcher/ColorModeSwitcher";
 import { Entry } from "../Button";
-import { useState } from "react";
 
 type Burger = "active" | "noactive";
 
 export const Header = () => {
-  const { colorMode } = useColorMode();
   const [burger, setBurger] = useState("active");
   const navigate = useNavigate();
   const handlerNav = () => {
@@ -28,7 +24,6 @@ export const Header = () => {
       setBurger("active");
     }
   };
-
   return (
     <Box sx={{ width: 1 }} className={`header_wrap ${burger}`}>
       <div className={`header_wrap__inner ${burger}`}>
@@ -59,11 +54,6 @@ export const Header = () => {
           </NavLink>
         </nav>
         <Entry />
-        <ChakraProvider>
-          <BoxSwitcher py={2} bg={colorMode === "dark" ? "gray.600" : "none"}>
-            <ColorModeSwitcher bg="none" />
-          </BoxSwitcher>
-        </ChakraProvider>
       </div>
     </Box>
   );

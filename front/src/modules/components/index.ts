@@ -12,4 +12,3 @@ export * from "./AppBar";
 export * from "./Stepper";
 export * from "./Card";
 export * from "./NavigationEvent";
-export * from "./Switcher";
