@@ -20,7 +20,7 @@ export const Footer = () => {
               О нас
             </NavLink>
           </Box>
-          <NavLink to={"/"} title="Home">
+          <NavLink to={"/"} title="Home" className="home_logo_link">
             <img src={logo} alt="Our Wishlist Logo" />
           </NavLink>
           <Box>

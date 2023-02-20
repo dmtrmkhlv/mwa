@@ -1,7 +1,7 @@
 .footer__outer {
-  background-color: #FAFAFA;
   padding-top: 96px;
   text-align: center;
+  background-color: #2b303c;
 }
 .footer__outer .footer__top {
   max-width: 930px;
@@ -30,16 +30,28 @@
   font-size: 14px;
   line-height: 1.4;
   text-decoration: none;
-  color: #000;
   margin-bottom: 30px;
+  color: #eee;
 }
 .footer__outer .footer__top .footer__nav a img {
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+@media (max-width: 768px) {
+  .footer__outer .footer__top .footer__nav .home_logo_link {
+    margin: auto;
+    display: block;
+  }
 }
 .footer__outer .footer_nav_soc > div {
   display: flex;
   gap: 25px;
   justify-content: center;
+}
+@media (max-width: 460px) {
+  .footer__outer .footer_nav_soc > div {
+    gap: unset;
+    justify-content: space-around;
+  }
 }
 .footer__outer .footer__copy {
   font-weight: 400;
@@ -53,10 +65,16 @@
 }
 .footer__outer .footer__copy .privacy {
   font-size: 14px;
-  color: #000;
   text-decoration: none;
   font-family: "Montserrat";
   line-height: 19px;
   font-variant: normal;
   text-transform: unset;
+}
+
+[data-theme=light] .footer__outer {
+  background-color: #FAFAFA;
+}
+[data-theme=light] .footer__outer .footer__top .footer__nav a {
+  color: rgba(0, 0, 0, 0.9);
 }/*# sourceMappingURL=Footer.css.map */

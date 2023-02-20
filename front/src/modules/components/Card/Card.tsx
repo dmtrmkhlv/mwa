@@ -20,7 +20,7 @@ export function MultiActionAreaCard(props: any) {
     setTimeout(() => navigate("/", { replace: true }), 500);
   };
   return (
-    <Card sx={{ width: 270 }}>
+    <Card sx={{ width: 270, ml: 'auto', mr: 'auto' }}>
       <CardActionArea>
         <CardMedia
           component="img"
