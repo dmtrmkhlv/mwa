@@ -32,10 +32,10 @@
 
             .readmore_text {
                 background-color: #231F20;
+                color: #eee;
                 font-weight: 400;
                 font-size: 32px;
                 line-height: 39px;
-                color: #FFFFFF;
                 height: 100%;
                 padding: 48px 48px 0 78px;
                 padding: 48px 48px 0 78px;
@@ -73,7 +73,6 @@
                 font-weight: 400;
                 font-size: 18px;
                 line-height: 1.4;
-                color: #FFFFFF;
                 text-decoration: none;
             }
         }
@@ -91,7 +90,6 @@
             }
 
             &>div {
-                background: #FFFFFF;
                 box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
                 padding: 54px 47px;
                 height: 330px;
@@ -117,9 +115,18 @@
                     font-weight: 400;
                     font-size: 14px;
                     text-decoration: none;
-                    color: #000;
                 }
             }
         }
     }
 }
+
+// [data-theme="light"] {
+//     .histories {
+//         .histories__inner {
+//             .readmore_text {
+//                 background-color: #d1b8be;
+//             }
+//         }
+//     }
+// }

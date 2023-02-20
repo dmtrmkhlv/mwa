@@ -1,0 +1,54 @@
+auth-wrapper .decolored {
+  text-decoration: none;
+  color: #444;
+}
+auth-wrapper .rememberLogin {
+  width: 83px;
+  height: 37px;
+  border: 1px solid #EAEBF0;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+@media (max-width: 1024px) {
+  auth-wrapper .rememberLogin {
+    padding-bottom: 3em;
+  }
+}
+auth-wrapper .rememberLogin .decolored {
+  text-decoration: none;
+  color: #444;
+}
+auth-wrapper .rememberLogin.true:after {
+  content: url(../images/check.svg);
+  right: 10px;
+  position: absolute;
+  top: 10px;
+}
+auth-wrapper .rememberLogin.true:before {
+  content: "";
+}
+auth-wrapper .rememberLogin.false:before {
+  content: url(../images/cross.svg);
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+auth-wrapper .rememberLogin.false:after {
+  content: "";
+}
+auth-wrapper .rememberLogin span {
+  display: block;
+  width: 29px;
+  height: 29px;
+  background: #d9d9d9;
+  border-radius: 50%;
+  left: 5px;
+  position: absolute;
+  transition: 0.3s;
+}
+auth-wrapper .rememberLogin.false span {
+  left: 50px;
+}/*# sourceMappingURL=Login.css.map */

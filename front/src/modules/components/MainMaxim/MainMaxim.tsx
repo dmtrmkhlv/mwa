@@ -1,6 +1,5 @@
 import { useNavigate, Link } from "react-router-dom";
 import { Box, Button, Slider } from "@mui/material";
-import { WhiteBgBtn } from "../WhiteBgBtn/WhiteBgBtn";
 import "./MainPage.scss";
 import wish_list_pen from "../images/wish_list_pen.jpg";
 import brown_lady from "../images/brown_lady.jpg";
@@ -67,7 +66,7 @@ export const MainMaxim = () => {
                 дарителями. Они увидят список ваших желаний и смогут
                 договориться, кто что будет дарить!
               </p>
-              <WhiteBgBtn />
+              <button>Подробнее</button>
             </div>
           </div>
         </Box>

@@ -41,6 +41,7 @@
 
         .begin__reg {
             width: 100%;
+            
 
             h2 {
                 font-weight: 700;
@@ -68,12 +69,16 @@
             line-height: 22px;
             display: flex;
             align-items: center;
-            text-align: center;
             text-transform: uppercase;
             color: #FFFFFF;
             height: 52px;
             flex: 0 0 220px;
             border: 1px solid rgba(35, 31, 32, 0.8);
+            justify-content: center;
+
+            @media(max-width:768px) {
+                margin: auto;
+            }
         }
 
         .why {
@@ -83,12 +88,16 @@
             line-height: 22px;
             display: flex;
             align-items: center;
-            text-align: center;
             text-transform: uppercase;
             color: #000;
             height: 52px;
             flex: 0 0 220px;
             border: 1px solid #000000;
+            justify-content: center;
+
+            @media(max-width:768px) {
+                margin: auto;
+            }
         }
     }
 }

@@ -1,5 +1,4 @@
 import { Box, Button } from "@mui/material";
-import { WhiteBgBtn } from "../WhiteBgBtn";
 import { useNavigate, Link } from "react-router-dom";
 import style from "./HeroSide.module.scss";
 
@@ -14,7 +13,7 @@ export const HeroSide = () => {
   return (
     <Box>
       <div className={style.sides}>
-        <div>
+        <div className={style.sides_pad}>
           <div>
             <h1>Расскажите родным и друзьям, о чём мечтаете!</h1>
           </div>
@@ -37,7 +36,7 @@ export const HeroSide = () => {
             дарителями. Они увидят список ваших желаний и смогут договориться,
             кто что будет дарить!
           </p>
-          <WhiteBgBtn />
+          <button className={style.white_bg}>Подробнее</button>
         </div>
       </div>
     </Box>
