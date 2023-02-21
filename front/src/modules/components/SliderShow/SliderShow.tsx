@@ -5,6 +5,8 @@ import happy_brthd from "../images/happy_brthd.jpg";
 import annyversary from "../images/annyversary.jpg";
 import valentines from "../images/valentines.jpg";
 import christmas from "../images/christmas.jpg";
+import wedding from "../images/wedding.jpg";
+import graduate from "../images/graduate.jpg";
 import { Box, Container } from "@mui/material";
 
 
@@ -58,12 +60,12 @@ export const Slideshow = () => {
           <div className="slide-container">
             <Slide responsive={responsiveSettings}>
               
-                <MultiActionAreaCard images={happy_brthd} />
-                <MultiActionAreaCard images={annyversary} />
-                <MultiActionAreaCard images={valentines} />
-                <MultiActionAreaCard images={christmas} />
-                <MultiActionAreaCard images={happy_brthd} />
-                <MultiActionAreaCard images={happy_brthd} />
+                <MultiActionAreaCard images={happy_brthd} name="С Днем рожденья!" />
+                <MultiActionAreaCard images={annyversary} name="С юбилеем!" />
+                <MultiActionAreaCard images={valentines} name="С днем Валентина!" />
+                <MultiActionAreaCard images={christmas} name="С Рождеством!" />
+                <MultiActionAreaCard images={wedding} name="На свадьбу" />
+                <MultiActionAreaCard images={graduate} name="На окончание" />
               
             </Slide>
           </div>

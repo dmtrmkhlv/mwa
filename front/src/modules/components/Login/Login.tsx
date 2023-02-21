@@ -38,12 +38,14 @@ export const Login = () => {
   const handleClickRemember = () => setRememberLogin((yes) => !yes);
 
   return (
-    <Container>
+    <Container
+      className="logCont"
+      sx={{ marginBottom: '3em' }}>
       <Box
         sx={{
           width: 600,
-          margin: "auto",
-          maxWidth: "100%",
+          margin: "0 auto",
+          maxWidth: "100%"
         }}
       >
         <Grid
@@ -53,7 +55,11 @@ export const Login = () => {
           }}
         >
           <Grid item sm={8} xs={7}>
-            <Box className="auth-header" component="h1">
+            <Box 
+              className="auth-header" 
+              component="h1" 
+              sx={{ fontSize: "48px",
+                fontWeight: 600 }}>
               Войти
             </Box>
           </Grid>
@@ -65,8 +71,8 @@ export const Login = () => {
                 m: 1,
                 textTransform: "uppercase",
                 fontWeight: "300",
-                border: "1px solid #444",
-                color: "#444",
+                border: "1px solid #e2e8f0",
+                color: "initial"
               }}
             >
               Регистрация
@@ -92,7 +98,7 @@ export const Login = () => {
           flexDirection={"column"}
         >
           <TextField
-            sx={{ width: 1 }}
+            sx={{ width: 1, color: 'initial' }}
             fullWidth
             id="outlined-basic"
             label="Обязательно"
@@ -100,8 +106,8 @@ export const Login = () => {
             defaultValue="Имя"
             InputProps={{
               startAdornment: (
-                <InputAdornment position="start">
-                  <AccountCircle />
+                <InputAdornment position="start" >
+                  <AccountCircle sx={{ fill: 'rgb(63 68 78)' }} />
                 </InputAdornment>
               ),
             }}
@@ -127,8 +133,9 @@ export const Login = () => {
                   onClick={handleClickShowPassword}
                   onMouseDown={handleMouseDownPassword}
                   edge="end"
+                  
                 >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                  {showPassword ? <VisibilityOff sx={{ fill: 'rgb(63 68 78)' }} /> : <Visibility sx={{ fill: 'rgb(63 68 78)' }} />}
                 </IconButton>
               </InputAdornment>
             }

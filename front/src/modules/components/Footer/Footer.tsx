@@ -9,7 +9,7 @@ import youtube from "../images/youtube.png";
 
 export const Footer = () => {
   return (
-    <Box sx={{ width: 1 }} className="footer__outer">
+    <Box sx={{ width: 1, mt: '3em' }} className="footer__outer">
       <Box className="footer__top">
         <nav className="footer__nav">
           <Box>
