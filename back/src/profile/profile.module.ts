@@ -3,10 +3,12 @@ import { ProfileService } from './profile.service';
 import { ProfileController } from './profile.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProfileEntity } from './entities/profile.entity';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [TypeOrmModule.forFeature([ProfileEntity])],
   controllers: [ProfileController],
-  providers: [ProfileService],
+  providers: [ProfileService, JwtService],
+  exports: [ProfileService],
 })
 export class ProfileModule {}

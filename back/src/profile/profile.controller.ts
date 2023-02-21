@@ -1,42 +1,27 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Post, Query, UseGuards, Param } from '@nestjs/common';
 import { ProfileService } from './profile.service';
-import { CreateProfileDto } from './dto/create-profile.dto';
-import { UpdateProfileDto } from './dto/update-profile.dto';
+import { ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Controller('profile')
 export class ProfileController {
   constructor(private readonly profileService: ProfileService) {}
 
-  // @Post()
-  // create(@Body() createProfileDto: CreateProfileDto) {
-  //   return this.profileService.create(createProfileDto);
-  // }
+  @ApiOperation({ summary: 'Send сonfirmation Email Link' })
+  @ApiResponse({
+    status: 200,
+    description: 'Link has been sent.',
+  })
+  @ApiResponse({ status: 403, description: 'Forbidden.' })
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  @Post('confirm-email/:email')
+  sendConfirmEmailLink(@Param('email') email: string) {
+    return this.profileService.sendConfirmEmailLink(email);
+  }
 
-  // @Get()
-  // findAll() {
-  //   return this.profileService.findAll();
-  // }
-
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.profileService.findOne(+id);
-  // }
-
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateProfileDto: UpdateProfileDto) {
-  //   return this.profileService.update(+id, updateProfileDto);
-  // }
-
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.profileService.remove(+id);
-  // }
+  @Get()
+  confirmEmail(@Query('token') token: string) {
+    return this.profileService.confirmEmail(token);
+  }
 }

@@ -9,6 +9,7 @@ import { GiftService } from 'src/gift/gift.service';
 import { GiftEntity } from 'src/gift/entities/gift.entity';
 import { ProfileService } from 'src/profile/profile.service';
 import { ProfileEntity } from 'src/profile/entities/profile.entity';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -20,7 +21,13 @@ import { ProfileEntity } from 'src/profile/entities/profile.entity';
     ]),
   ],
   controllers: [UsersController],
-  providers: [UsersService, EventService, GiftService, ProfileService],
+  providers: [
+    UsersService,
+    EventService,
+    GiftService,
+    ProfileService,
+    JwtService,
+  ],
   exports: [UsersService],
 })
 export class UsersModule {}
