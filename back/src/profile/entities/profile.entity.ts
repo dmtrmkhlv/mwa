@@ -24,6 +24,6 @@ export class ProfileEntity {
   @Column({ default: false })
   emailIsActive: boolean;
 
-  @OneToOne(() => UserEntity, (user) => user.profile)
+  @OneToOne(() => UserEntity, (user) => user.profile, { onDelete: 'CASCADE' })
   user: UserEntity;
 }

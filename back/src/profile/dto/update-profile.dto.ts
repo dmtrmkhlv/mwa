@@ -1,9 +1,19 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsOptional, IsEmail, Allow } from 'class-validator';
+import {
+  IsString,
+  IsOptional,
+  IsEmail,
+  Allow,
+  IsNotEmpty,
+} from 'class-validator';
+import { UserEntity } from 'src/users/entities/user.entity';
 import { CreateProfileDto } from './create-profile.dto';
 
 export class UpdateProfileDto extends PartialType(CreateProfileDto) {
+  @Allow()
+  id: string;
+
   @ApiProperty()
   @IsString()
   @IsOptional()
@@ -26,9 +36,12 @@ export class UpdateProfileDto extends PartialType(CreateProfileDto) {
 
   @ApiProperty()
   @IsEmail()
-  @IsOptional()
+  @IsNotEmpty()
   email: string;
 
   @Allow()
   emailIsActive: boolean;
+
+  @Allow()
+  user: UserEntity;
 }

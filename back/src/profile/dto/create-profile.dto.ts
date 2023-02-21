@@ -9,30 +9,30 @@ export class CreateProfileDto {
   @ApiProperty()
   @IsString()
   @IsOptional()
-  photo = '';
+  photo: string;
 
   @ApiProperty()
   @IsString()
   @IsOptional()
-  firstname = '';
+  firstname: string;
 
   @ApiProperty()
   @IsString()
   @IsOptional()
-  lastname = '';
+  lastname: string;
 
   @ApiProperty()
   @IsString()
   @IsOptional()
-  phone = '';
+  phone: string;
 
   @ApiProperty()
   @IsEmail()
   @IsOptional()
-  email = '';
+  email: string;
 
   @Allow()
-  emailIsActive = false;
+  emailIsActive: boolean;
 
   @Allow()
   user: UserEntity;

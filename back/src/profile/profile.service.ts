@@ -23,4 +23,11 @@ export class ProfileService {
   async remove(profile: CreateProfileDto): Promise<ProfileEntity | undefined> {
     return await this.profileRepository.remove(profile);
   }
+  async findProfileByEmail(email: string): Promise<ProfileEntity | undefined> {
+    return this.profileRepository.findOne({
+      where: {
+        email: email,
+      },
+    });
+  }
 }

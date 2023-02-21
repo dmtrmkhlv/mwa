@@ -12,6 +12,7 @@ import { GiftService } from 'src/gift/gift.service';
 import { MailService } from 'src/mail/mail.service';
 import { CreateMailDto } from 'src/mail/dto/create-mail.dto';
 import { ProfileService } from 'src/profile/profile.service';
+import { ProfileEntity } from 'src/profile/entities/profile.entity';
 
 @Injectable()
 export class UsersService {
@@ -23,8 +24,6 @@ export class UsersService {
     private readonly eventService: EventService,
     private readonly giftService: GiftService,
     private mailService: MailService,
-    // @InjectRepository(ProfileEntity)
-    // private profileRepository: Repository<ProfileEntity>,
     private profileRepository: ProfileService,
   ) {}
 
@@ -75,10 +74,13 @@ export class UsersService {
       const fakeUsername =
         fakeUser.username + (Math.random() * 1000).toFixed(0);
       try {
-        await this.create({
+        const newfakeUser = {
           username: fakeUsername,
           password: fakeUser.password,
-        });
+          profile: new ProfileEntity(),
+        };
+        newfakeUser.profile.emailIsActive = false;
+        await this.create(newfakeUser);
       } catch (error) {
         console.log(error);
       }
@@ -202,6 +204,7 @@ export class UsersService {
     user.username = createUserDto.username;
     user.password = createUserDto.password;
     user.profile = newProfile;
+    user.profile.emailIsActive = false;
     user.events = [];
     return await this.usersRepository.save(user);
   }
@@ -221,6 +224,21 @@ export class UsersService {
         profile: true,
       },
     });
+  }
+
+  async getUserProfileWithoutPassword(
+    id: string,
+  ): Promise<UserEntity | undefined> {
+    const userProfileWithoutPassword = await this.usersRepository.findOne({
+      where: {
+        id: id,
+      },
+      relations: {
+        profile: true,
+      },
+    });
+    delete userProfileWithoutPassword.password;
+    return userProfileWithoutPassword;
   }
 
   async findOneByUsername(username: string): Promise<UserEntity | undefined> {
@@ -255,17 +273,32 @@ export class UsersService {
           );
         }
       }
-
-      // console.log(user, updateUserDto);
-      if (updateUserDto.profile) {
-        await this.profileRepository.update({
-          ...user.profile,
-          ...updateUserDto.profile,
-        });
-        return this.findOneById(user.id);
+      if (
+        updateUserDto.profile.email &&
+        updateUserDto.profile.email !== user.profile.email
+      ) {
+        const findProfileByEmail =
+          await this.profileRepository.findProfileByEmail(
+            updateUserDto.profile.email,
+          );
+        if (findProfileByEmail) {
+          throw new HttpException(
+            {
+              status: HttpStatus.FORBIDDEN,
+              error: `Email:${updateUserDto.profile.email} уже существует`,
+            },
+            403,
+          );
+        } else {
+          updateUserDto.profile.emailIsActive = false;
+        }
       }
 
-      // return this.usersRepository.save({ ...user, ...updateUserDto });
+      return this.usersRepository.save({
+        ...user,
+        ...updateUserDto,
+        profile: { ...user.profile, ...updateUserDto.profile },
+      });
     }
     throw new HttpException(
       {
@@ -293,7 +326,9 @@ export class UsersService {
         await this.eventService.remove(userId, event.id);
       }
     }
+
     await this.profileRepository.remove(user.profile);
+
     return await this.usersRepository.remove(user);
   }
 }
