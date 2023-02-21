@@ -3,7 +3,7 @@ import { ProfileService } from './profile.service';
 import { ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
-@Controller('profile')
+@Controller('api/v1/auth/user-profile')
 export class ProfileController {
   constructor(private readonly profileService: ProfileService) {}
 

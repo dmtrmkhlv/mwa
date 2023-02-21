@@ -5,11 +5,19 @@ import {
   HttpCode,
   BadRequestException,
   Body,
+  Get,
+  UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthDto } from './dto/auth.dto';
 import { ALREADY_REGISTERED_ERROR } from './auth.constants';
-import { ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiOperation,
+  ApiResponse,
+} from '@nestjs/swagger';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
 
 @Controller('api/v1/auth')
 export class AuthController {
@@ -27,14 +35,16 @@ export class AuthController {
     return this.authService.login(body);
   }
 
- @ApiOperation({ summary: 'Get user`s profile' })
-   @ApiResponse({ status: 200, description: 'Return user`s profile.' })
-   @ApiBearerAuth()
-   @UseGuards(JwtAuthGuard)
-   @Get('profile')
-   getProfile(@Request() req) {
-     return req.user;
-   }
+
+  @ApiOperation({ summary: 'Get user`s profile' })
+  @ApiResponse({ status: 200, description: 'Return user`s profile.' })
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  @Get('profile')
+  getProfile(@Request() req) {
+    return req.user;
+  }
+
 
   @ApiOperation({ summary: 'Register user' })
   @ApiResponse({
