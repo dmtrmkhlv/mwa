@@ -1,17 +1,7 @@
 import { Routes, Route as RouteReact } from "react-router-dom";
-import React, { FC } from "react";
+import { FC } from "react";
 import { PageProps, Require } from "../../interfaces";
-
-interface RouteComponents {
-  components: FC<PageProps>;
-  path: string;
-  isRequire: Require;
-  describe: string;
-}
-
-interface RouteProps {
-  route: RouteComponents[];
-}
+import { RouteComponents, RouteProps } from "./RouteProps";
 
 export const routing = () => {
   let Arr: RouteComponents[] = [];

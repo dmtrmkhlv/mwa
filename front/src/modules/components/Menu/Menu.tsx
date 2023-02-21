@@ -21,15 +21,19 @@ export function BasicMenu() {
     setAnchorEl(null);
   };
   const handleTwo = () => {
-    navigate("/login");
+    navigate("/gifts");
     setAnchorEl(null);
   };
   const handleFour = () => {
-    navigate("/signup");
+    navigate("/event");
     setAnchorEl(null);
   };
   const handleThree = () => {
     navigate("/test");
+    setAnchorEl(null);
+  };
+  const handleFive = () => {
+    navigate("/create");
     setAnchorEl(null);
   };
 
@@ -56,9 +60,10 @@ export function BasicMenu() {
         }}
       >
         <MenuItem onClick={handleOne}>Главная</MenuItem>
-        {/* <MenuItem onClick={handleTwo}>Авторизация</MenuItem>
-        <MenuItem onClick={handleFour}>Регистрация</MenuItem> */}
+        <MenuItem onClick={handleTwo}>Подарки</MenuItem>
+        <MenuItem onClick={handleFour}>События</MenuItem>
         <MenuItem onClick={handleThree}>Подарок</MenuItem>
+        <MenuItem onClick={handleFive}>Создать</MenuItem>
       </Menu>
     </div>
   );

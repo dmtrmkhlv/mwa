@@ -1,0 +1,117 @@
+.header_wrap {
+    height: 117px;
+
+    @media (max-width: 768px) {
+        height: unset;
+        margin-bottom: 30px;
+
+        &.noactive + div {
+            margin-top: 60px;
+        }
+    }
+
+    .header_wrap__inner {
+        max-width: 1440px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 100px auto 200px;
+        align-items: center;
+
+        
+        .mobile_nav_buttons {
+
+            @media(min-width: 769px){
+                display: none;
+            }
+            
+            .nav_images {
+                left: calc(100% - 70px);
+                position: relative;
+                display: none;
+
+                @media (max-width: 768px) {
+                    &.active {
+                        display: block;
+                    }
+                    &.active + .nav_images {
+                        display: none;
+                    }
+                    &.noactive + .nav_images {
+                        display: block;
+                        left: calc(100% - 80px);
+                    }
+                }
+            }
+        }
+        
+        @media (max-width: 768px) {
+            grid-template-columns: 100%;
+            display: block; 
+        }
+
+        &.noactive {
+            position: absolute;
+            background: white;
+            width: 100%;
+            z-index: 100;
+            padding-bottom: 30px;
+            // box-shadow: 0 10px 10px rgb(0, 0, 0, 0.9);
+            box-sizing: border-box;
+            left: 0;
+        }
+
+        @media (max-width: 768px) {
+            .header_wrap__link-home {
+                display: none;
+            }
+        }
+        
+        .signup {
+            border: 2px solid #F7941E;
+            color: #F7941E;
+            text-transform: uppercase;
+            border-radius: 5px;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 22px;
+
+            @media (max-width: 768px) {
+                display: block;
+                width: max-content;
+                margin: auto;
+
+                &.active {
+                    display: none;
+                }
+            }
+        }
+
+        .header_wrap-nav {
+            margin: auto;
+
+            @media (max-width: 768px) {
+                display: grid;
+                margin-bottom: 30px;
+
+                &.active {
+                    display: none;
+                }
+            }
+
+            .header_wrap-main-nav {
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 22px;
+                color: rgba(0, 0, 0, 0.9);
+                text-decoration: none;
+                margin: 0 24px;
+
+
+                @media (max-width: 768px) {
+                    margin: 7px 24px;
+                    text-align: center;
+                }
+            }
+        }
+    }
+}
