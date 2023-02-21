@@ -27,6 +27,15 @@ export class AuthController {
     return this.authService.login(body);
   }
 
+ @ApiOperation({ summary: 'Get user`s profile' })
+   @ApiResponse({ status: 200, description: 'Return user`s profile.' })
+   @ApiBearerAuth()
+   @UseGuards(JwtAuthGuard)
+   @Get('profile')
+   getProfile(@Request() req) {
+     return req.user;
+   }
+
   @ApiOperation({ summary: 'Register user' })
   @ApiResponse({
     status: 200,
