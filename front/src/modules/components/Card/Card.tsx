@@ -20,7 +20,7 @@ export function MultiActionAreaCard(props: any) {
     setTimeout(() => navigate("/", { replace: true }), 500);
   };
   return (
-    <Card sx={{ width: 270 }}>
+    <Card sx={{ width: 270, ml: 'auto', mr: 'auto' }}>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -30,7 +30,7 @@ export function MultiActionAreaCard(props: any) {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            Lizard
+            {props.name}
           </Typography>
           {/* <Typography variant="body2" color="text.secondary">
             Lizards are a widespread group of squamate reptiles, with over 6,000
@@ -39,8 +39,16 @@ export function MultiActionAreaCard(props: any) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" onClick={navigateMain}>
-          Share
+        <Button 
+        sx={{ 
+          textTransform: 'unset', 
+          color: '#333', 
+          paddingLeft: '10px' 
+          }} 
+        size="small" 
+        color="primary" 
+        onClick={navigateMain}>
+        Узнать больше ›
         </Button>
       </CardActions>
     </Card>

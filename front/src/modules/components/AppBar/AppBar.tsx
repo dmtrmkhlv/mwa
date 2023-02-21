@@ -85,10 +85,10 @@ export function DrawerAppBar(props: PropsBar) {
       </Typography>
       <Divider />
       <List>
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item} />
+        {navItemsTwo.map((item) => (
+          <ListItem key={item.name} disablePadding>
+            <ListItemButton sx={{ textAlign: "center" }} href={item.link}>
+              <ListItemText primary={item.name} />
             </ListItemButton>
           </ListItem>
         ))}

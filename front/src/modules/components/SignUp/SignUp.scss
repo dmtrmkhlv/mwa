@@ -1,0 +1,17 @@
+.reg-wrapper {
+  fieldset {
+    border-color: inherit;
+
+    legend span{
+        color: inherit;
+    }
+  }
+  label {
+      color: inherit;
+  }
+  svg {
+      path {
+          fill: inherit;
+      }
+  }
+}

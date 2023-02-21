@@ -35,6 +35,7 @@ export class AuthController {
     return this.authService.login(body);
   }
 
+
   @ApiOperation({ summary: 'Get user`s profile' })
   @ApiResponse({ status: 200, description: 'Return user`s profile.' })
   @ApiBearerAuth()
@@ -43,6 +44,7 @@ export class AuthController {
   getProfile(@Request() req) {
     return req.user;
   }
+
 
   @ApiOperation({ summary: 'Register user' })
   @ApiResponse({
