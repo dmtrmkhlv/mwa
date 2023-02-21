@@ -1,0 +1,79 @@
+.create_wish {
+                background: #F7941E;
+                border-radius: 5px;
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 22px;
+                color: #fff;
+                padding: 19px 13px;
+                margin: auto 22.4%;
+    
+                @media(max-width:768px) {
+                    margin: 0 auto 30px;
+                    display: block;
+                    width: max-content;
+                }
+            }
+.sides {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            background-color: #F1F1F2;
+    
+            // @media(max-width:768px) {
+            //     grid-template-columns: 100%;
+            // }
+    
+            h1 {
+                font-weight: 600;
+                font-size: 48px;
+                line-height: 59px;
+                padding: 0 20%;
+    
+                @media(max-width:768px) {
+                    font-size: 30px;
+                    line-height: 46px;
+                    padding: 0 10%;
+                }
+            }
+    
+            
+    
+            img {
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+                display: block;
+            }
+    
+            h2 {
+                font-weight: 500;
+                font-size: 32px;
+                line-height: 1.4;
+                color: rgba(0, 0, 0, 0.8);
+            }
+    
+            p {
+                font-weight: 300;
+                font-size: 20px;
+                line-height: 1.4;
+                color: rgba(0, 0, 0, 0.9);
+            }
+    
+
+    
+            .learn_more {
+                border: 2px solid #F7941E;
+                border-radius: 5px;
+                color: #F7941E;
+                padding: 18px 37px;
+    
+                // @media(max-width:768px) {
+                //     margin-bottom: 30px;
+                // }
+            }
+        }
+.sides_pad {
+    padding: 0 20%;
+}
+
