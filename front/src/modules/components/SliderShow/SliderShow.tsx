@@ -5,41 +5,49 @@ import happy_brthd from "../images/happy_brthd.jpg";
 import annyversary from "../images/annyversary.jpg";
 import valentines from "../images/valentines.jpg";
 import christmas from "../images/christmas.jpg";
+import wedding from "../images/wedding.jpg";
+import graduate from "../images/graduate.jpg";
 import { Box, Container } from "@mui/material";
 
-const spanStyle = {
-  padding: "20px",
-  background: "#efefef",
-  color: "#000000",
-};
 
-const divStyle = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  backgroundSize: "cover",
-  height: "400px",
-};
-const slideImages = [
-  {
-    url: "https://images.unsplash.com/photo-1509721434272-b79147e0e708?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
-    caption: "Slide 1",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1506710507565-203b9f24669b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1536&q=80",
-    caption: "Slide 2",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1536987333706-fc9adfb10d91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
-    caption: "Slide 3",
-  },
-];
 
-const Card = () => {
-  return <></>;
-};
+
 
 export const Slideshow = () => {
+
+
+  const responsiveSettings = [
+    {
+      breakpoint: 1220,
+      settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1
+      }
+    },
+    {
+      breakpoint: 1020,
+      settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1
+      }
+    },
+    {
+        breakpoint: 600,
+        settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1
+        }
+    },
+    {
+        breakpoint: 280,
+        settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+        }
+    }
+];
+
+
   return (
     <>
       <Box className="main_cont-occasions">
@@ -50,23 +58,15 @@ export const Slideshow = () => {
 
         <Container>
           <div className="slide-container">
-            <Slide>
-              <div
-                key={0}
-                style={{ display: "flex", justifyContent: "space-around" }}
-              >
-                <MultiActionAreaCard images={happy_brthd} />
-                <MultiActionAreaCard images={annyversary} />
-                <MultiActionAreaCard images={valentines} />
-                <MultiActionAreaCard images={christmas} />
-              </div>
-              <div
-                key={1}
-                style={{ display: "flex", justifyContent: "space-around" }}
-              >
-                <MultiActionAreaCard images={happy_brthd} />
-                <MultiActionAreaCard images={happy_brthd} />
-              </div>
+            <Slide responsive={responsiveSettings}>
+              
+                <MultiActionAreaCard images={happy_brthd} name="С Днем рожденья!" />
+                <MultiActionAreaCard images={annyversary} name="С юбилеем!" />
+                <MultiActionAreaCard images={valentines} name="С днем Валентина!" />
+                <MultiActionAreaCard images={christmas} name="С Рождеством!" />
+                <MultiActionAreaCard images={wedding} name="На свадьбу" />
+                <MultiActionAreaCard images={graduate} name="На окончание" />
+              
             </Slide>
           </div>
         </Container>
@@ -75,12 +75,3 @@ export const Slideshow = () => {
   );
 };
 
-// {
-//   slideImages.map((slideImage, index) => (
-//     <div key={index}>
-//       <div style={{ ...divStyle, backgroundImage: `url(${slideImage.url})` }}>
-//         <span style={spanStyle}>{slideImage.caption}</span>
-//       </div>
-//     </div>
-//   ));
-// }
