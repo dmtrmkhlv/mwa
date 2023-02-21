@@ -16,6 +16,7 @@ import {
   TextField,
 } from "@mui/material";
 import { useLogin } from "../Login/useLogin";
+import "./SignUp.css";
 
 export const SignUp = () => {
   const { username, email, password, error, handlerForm, submitButton } =
@@ -37,8 +38,8 @@ export const SignUp = () => {
         className="auth-header"
         component="h1"
         sx={{
-          width: 600,
-          maxWidth: "100%",
+          width: "100%",
+          maxWidth: 600,
           margin: "auto",
           mb: 2,
         }}
@@ -49,8 +50,8 @@ export const SignUp = () => {
       <Box
         className="reg-wrapper"
         sx={{
-          width: 600,
-          maxWidth: "100%",
+          maxWidth: 600,
+          width: "100%",
           mr: "auto",
           ml: "auto",
           mb: 2,
@@ -58,7 +59,7 @@ export const SignUp = () => {
       >
         <Box
           sx={{
-            "& .MuiTextField-root": { mb: 1, width: 600, maxWidth: "100%" },
+            "& .MuiTextField-root": { mb: 1, maxWidth: 600, width: "100%" },
           }}
           display="flex"
           flexDirection={"column"}
@@ -72,7 +73,7 @@ export const SignUp = () => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <AccountCircle />
+                    <AccountCircle sx={{ fill: 'rgb(63 68 78)' }} />
                   </InputAdornment>
                 ),
               }}
@@ -91,7 +92,7 @@ export const SignUp = () => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <Email />
+                    <Email sx={{ fill: 'rgb(63 68 78)' }} />
                   </InputAdornment>
                 ),
               }}
@@ -114,7 +115,7 @@ export const SignUp = () => {
                     onMouseDown={handleMouseDownPassword}
                     edge="end"
                   >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                    {showPassword ? <VisibilityOff  sx={{ fill: 'rgb(63 68 78)' }} /> : <Visibility  sx={{ fill: 'rgb(63 68 78)' }} />}
                   </IconButton>
                 </InputAdornment>
               }

@@ -1,26 +1,36 @@
-auth-wrapper {
+.auth-wrapper {
+    fieldset {
+        border-color: inherit;
 
+        legend span{
+            color: inherit;
+        }
+    }
+    label {
+        color: inherit;
+    }
+    svg {
+        path {
+            fill: inherit;
+        }
+    }
     .decolored {
         text-decoration: none;
-        color:#444;
     }
     .rememberLogin {
         width: 83px;
         height: 37px;
-        border: 1px solid #EAEBF0;
+        border-width: 1px;
         border-radius: 20px;
         display: flex;
         align-items: center;
         position: relative;
         cursor: pointer;
   
-      @media(max-width:1024px) {
-          padding-bottom: 3em;
-      }
-      .decolored {
-          text-decoration: none;
-          color:#444;
-      }
+        
+        .decolored {
+            text-decoration: none;
+        }
   
   
   
@@ -28,7 +38,7 @@ auth-wrapper {
             content: url(../images/check.svg);
             right: 10px;
             position: absolute;
-            top: 10px;
+            top: 8px;
         }
   
         &.true:before {
@@ -39,7 +49,7 @@ auth-wrapper {
             content: url(../images/cross.svg);
             position: absolute;
             left: 10px;
-            top: 10px;
+            top: 8px;
         }
   
         &.false:after {
@@ -50,11 +60,12 @@ auth-wrapper {
             display: block;
             width: 29px;
             height: 29px;
-            background: #d9d9d9;
             border-radius: 50%;
             left: 5px;
             position: absolute;
             transition: .3s;
+            background-color: #3f444e;
+            z-index: 10;
         }
   
         &.false {
@@ -63,5 +74,13 @@ auth-wrapper {
             }
         }
   
+    }
+  }
+
+  [data-theme="dark"] {
+    .rememberLogin {
+        span {
+            background-color: #e2e8f0;
+        }
     }
   }
