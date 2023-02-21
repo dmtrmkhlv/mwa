@@ -3,6 +3,7 @@ import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { AuthDto } from './dto/auth.dto';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
+import { ProfileEntity } from 'src/profile/entities/profile.entity';
 
 @Injectable()
 export class AuthService {
@@ -45,6 +46,7 @@ export class AuthService {
     this.usersService.create({
       username: createUserDto.username,
       password: createUserDto.password,
+      profile: new ProfileEntity(),
     });
     return { statusCode: 200, message: 'Регистрация прошла успешно' };
   }

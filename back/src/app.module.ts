@@ -7,6 +7,7 @@ import { EventModule } from './event/event.module';
 import { GiftModule } from './gift/gift.module';
 import { MailModule } from './mail/mail.module';
 import { ConfigModule } from '@nestjs/config';
+import { ProfileModule } from './profile/profile.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { ConfigModule } from '@nestjs/config';
     EventModule,
     GiftModule,
     MailModule,
+    ProfileModule,
   ],
 })
 export class AppModule {}

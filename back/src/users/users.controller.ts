@@ -35,16 +35,6 @@ export class UsersController {
     return await this.usersService.deleteAllUsers();
   }
 
-  @ApiOperation({ summary: 'Create user' })
-  @ApiResponse({
-    status: 200,
-    description: 'The user has been successfully created.',
-  })
-  @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
-  }
-
   @ApiOperation({ summary: 'Get all users' })
   @ApiResponse({ status: 200, description: 'Return all users.' })
   @Get()
@@ -57,6 +47,25 @@ export class UsersController {
   @Get(':id')
   findOneById(@Param('id') id: string) {
     return this.usersService.findOneById(id);
+  }
+
+  @ApiOperation({ summary: 'Create user' })
+  @ApiResponse({
+    status: 200,
+    description: 'The user has been successfully created.',
+  })
+  @Post()
+  create(@Body() createUserDto: CreateUserDto) {
+    return this.usersService.create(createUserDto);
+  }
+
+  @ApiOperation({ summary: 'Get user`s profile' })
+  @ApiResponse({ status: 200, description: 'Return user`s profile.' })
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  @Post('profile')
+  getProfile(@Request() req) {
+    return this.usersService.getUserProfileWithoutPassword(req.user.userId);
   }
 
   @ApiOperation({ summary: 'Update user' })

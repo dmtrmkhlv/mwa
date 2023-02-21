@@ -1,3 +1,4 @@
+import { UserDto } from 'src/users/dto/user.dto';
 import fetch from 'node-fetch';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -10,7 +11,8 @@ import { GiftEntity } from 'src/gift/entities/gift.entity';
 import { GiftService } from 'src/gift/gift.service';
 import { MailService } from 'src/mail/mail.service';
 import { CreateMailDto } from 'src/mail/dto/create-mail.dto';
-// const nodeFetch = fetch as typeof fetch;
+import { ProfileService } from 'src/profile/profile.service';
+import { ProfileEntity } from 'src/profile/entities/profile.entity';
 
 @Injectable()
 export class UsersService {
@@ -22,6 +24,7 @@ export class UsersService {
     private readonly eventService: EventService,
     private readonly giftService: GiftService,
     private mailService: MailService,
+    private profileRepository: ProfileService,
   ) {}
 
   async generateFakeUsers() {
@@ -71,10 +74,13 @@ export class UsersService {
       const fakeUsername =
         fakeUser.username + (Math.random() * 1000).toFixed(0);
       try {
-        await this.create({
+        const newfakeUser = {
           username: fakeUsername,
           password: fakeUser.password,
-        });
+          profile: new ProfileEntity(),
+        };
+        newfakeUser.profile.emailIsActive = false;
+        await this.create(newfakeUser);
       } catch (error) {
         console.log(error);
       }
@@ -191,21 +197,59 @@ export class UsersService {
         403,
       );
     }
-    const newUser = this.usersRepository.create(createUserDto);
-    newUser.events = [];
-    return this.usersRepository.save(newUser);
+
+    const newProfile = await this.profileRepository.create();
+
+    const user = new UserEntity();
+    user.username = createUserDto.username;
+    user.password = createUserDto.password;
+    user.profile = newProfile;
+    user.profile.emailIsActive = false;
+    user.events = [];
+    return await this.usersRepository.save(user);
   }
 
   async findAll(): Promise<UserEntity[] | undefined> {
-    return await this.usersRepository.find();
+    return await this.usersRepository.find({
+      relations: ['profile'],
+    });
   }
 
   async findOneById(id: string): Promise<UserEntity | undefined> {
-    return await this.usersRepository.findOneBy({ id });
+    return await this.usersRepository.findOne({
+      where: {
+        id: id,
+      },
+      relations: {
+        profile: true,
+      },
+    });
+  }
+
+  async getUserProfileWithoutPassword(
+    id: string,
+  ): Promise<UserEntity | undefined> {
+    const userProfileWithoutPassword = await this.usersRepository.findOne({
+      where: {
+        id: id,
+      },
+      relations: {
+        profile: true,
+      },
+    });
+    delete userProfileWithoutPassword.password;
+    return userProfileWithoutPassword;
   }
 
   async findOneByUsername(username: string): Promise<UserEntity | undefined> {
-    return this.usersRepository.findOneBy({ username });
+    return this.usersRepository.findOne({
+      where: {
+        username: username,
+      },
+      relations: {
+        profile: true,
+      },
+    });
   }
 
   async update(
@@ -215,7 +259,7 @@ export class UsersService {
   ): Promise<UserEntity | HttpException> {
     if (userId === id) {
       const user = await this.findOneById(id);
-      if (updateUserDto.username !== user.username) {
+      if (updateUserDto.username && updateUserDto.username !== user.username) {
         const findUserByUserName = await this.findOneByUsername(
           updateUserDto.username,
         );
@@ -229,7 +273,32 @@ export class UsersService {
           );
         }
       }
-      return this.usersRepository.save({ ...user, ...updateUserDto });
+      if (
+        updateUserDto.profile.email &&
+        updateUserDto.profile.email !== user.profile.email
+      ) {
+        const findProfileByEmail =
+          await this.profileRepository.findProfileByEmail(
+            updateUserDto.profile.email,
+          );
+        if (findProfileByEmail) {
+          throw new HttpException(
+            {
+              status: HttpStatus.FORBIDDEN,
+              error: `Email:${updateUserDto.profile.email} уже существует`,
+            },
+            403,
+          );
+        } else {
+          updateUserDto.profile.emailIsActive = false;
+        }
+      }
+
+      return this.usersRepository.save({
+        ...user,
+        ...updateUserDto,
+        profile: { ...user.profile, ...updateUserDto.profile },
+      });
     }
     throw new HttpException(
       {
@@ -257,6 +326,9 @@ export class UsersService {
         await this.eventService.remove(userId, event.id);
       }
     }
+
+    await this.profileRepository.remove(user.profile);
+
     return await this.usersRepository.remove(user);
   }
 }
