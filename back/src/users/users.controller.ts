@@ -20,16 +20,19 @@ import { CreateMailDto } from 'src/mail/dto/create-mail.dto';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  @ApiOperation({ summary: 'Generate 10 fake Users' })
   @Get('generateFakeUsers')
   async generate() {
     return await this.usersService.generateFakeUsers();
   }
 
+  @ApiOperation({ summary: 'Send a test email' })
   @Post('test')
   async test(@Body() createMail: CreateMailDto) {
     return await this.usersService.test(createMail);
   }
 
+  @ApiOperation({ summary: 'Delete ALL!!! Users from DB' })
   @Get('deleteAllUsers')
   async deleteAllUsers() {
     return await this.usersService.deleteAllUsers();
