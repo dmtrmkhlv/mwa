@@ -8,6 +8,7 @@ import { jwtConstants } from 'src/auth/constants';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { MailService } from 'src/mail/mail.service';
+import { UserEntity } from 'src/users/entities/user.entity';
 
 @Injectable()
 export class ProfileService {
@@ -17,6 +18,8 @@ export class ProfileService {
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
     private readonly mailService: MailService,
+    @InjectRepository(UserEntity)
+    private usersRepository: Repository<UserEntity>,
   ) {}
   async create() {
     const newProfile = this.profileRepository.create();
@@ -38,7 +41,15 @@ export class ProfileService {
     });
   }
 
-  async sendConfirmEmailLink(email: string) {
+  async sendConfirmEmailLink(id: string, email: string) {
+    const user = await this.usersRepository.findOne({
+      where: {
+        id: id,
+      },
+      relations: {
+        profile: true,
+      },
+    });
     const payload = { email };
     const token = this.jwtService.sign(payload, {
       secret: jwtConstants.secret,
@@ -49,12 +60,17 @@ export class ProfileService {
       'EMAIL_CONFIRMATION_URL',
     )}?token=${token}`;
 
+    const name =
+      user.profile.firstname || user.profile.lastname
+        ? user.profile.firstname + ' ' + user.profile.lastname
+        : user.username;
+
     const mailInfo = {
       emailTo: email,
       subject: 'Email confirmation',
       templateName: 'emailConfirm',
       context: {
-        name: 'User Name',
+        name: name,
         url: url,
       },
     };
