@@ -1,4 +1,4 @@
-export * from "./api/axios";
+export * from "./api";
 export * from "./components";
 export * from "./hooks";
 export * from "./layout";

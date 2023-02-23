@@ -1,6 +1,5 @@
 import { apifetch } from "./axios";
 import { IListCreator, IReqUser, ListEvent } from "../../interfaces";
-import { errorHandle } from "./errorHandle";
 
 type CreateUserResponse = {
   access_token: string;
@@ -52,7 +51,6 @@ export class Api {
     return data;
   }
 
-  // @errorHandle()
   static async getListEvent(value: string) {
     const res = await apifetch.get(`api/v1/event`);
 

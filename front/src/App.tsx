@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { PageProps } from "./interfaces";
 import { Route, routing } from "./modules";
@@ -6,7 +6,6 @@ import {
   MainPage,
   LoginPage,
   SignUpPage,
-  TestPage,
   DevelopPage,
   CreatePage,
   GiftPage,
@@ -26,7 +25,6 @@ const route = routing();
 route.create(MainPage, "/", "public", "Главная");
 route.create(LoginPage, "/login", "public", "Авторизация");
 route.create(SignUpPage, "/signup", "public", "Регистрация");
-route.create(TestPage, "/test", "public", "Тестовая");
 route.create(AboutUsPage, "/aboutus", "public", "о нас");
 route.create(DevelopPage, "/services", "public", "услуги");
 route.create(SubRouteGift, "/gifts/*", "public", "подарки");

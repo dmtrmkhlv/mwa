@@ -1,4 +1,3 @@
-import { Box, Button } from "@mui/material";
 import "./Main.scss";
 import { Slideshow } from "../SliderShow/SliderShow";
 import { HeroSide } from "../HeroSide/HeroSide";
