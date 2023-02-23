@@ -11,10 +11,12 @@
   text-transform: uppercase;
   margin-top: 1em;
 }
+
 @media (max-width: 768px) {
   .create_wish {
     margin: 1em auto;
     display: block;
+    width: -webkit-max-content;
     width: -moz-max-content;
     width: max-content;
   }
@@ -32,31 +34,41 @@
   margin: 1em 0 0;
   text-transform: uppercase;
 }
+
 @media (max-width: 768px) {
   .white_bg {
     margin: 1em auto 30px;
     display: block;
+    width: -webkit-max-content;
     width: -moz-max-content;
     width: max-content;
   }
 }
 
 .sides {
+  display: -ms-grid;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   background-color: #F1F1F2;
 }
+
 @media (max-width: 768px) {
   .sides {
-    grid-template-columns: 100%;
+    -ms-grid-columns: 100%;
+        grid-template-columns: 100%;
   }
 }
+
 .sides h1 {
   font-weight: 600;
   font-size: 48px;
   line-height: 59px;
 }
+
 @media (max-width: 768px) {
   .sides h1 {
     font-size: 30px;
@@ -64,6 +76,7 @@
     padding: 0 10%;
   }
 }
+
 .sides img {
   width: 100%;
   height: auto;
@@ -71,22 +84,26 @@
      object-fit: cover;
   display: block;
 }
+
 .sides h2 {
   font-weight: 500;
   font-size: 32px;
   line-height: 1.4;
 }
+
 .sides p {
   font-weight: 300;
   font-size: 20px;
   line-height: 1.4;
 }
+
 .sides .learn_more {
   border: 2px solid #F7941E;
   border-radius: 5px;
   color: #F7941E;
   padding: 18px 37px;
 }
+
 @media (max-width: 768px) {
   .sides .learn_more {
     margin-bottom: 30px;
@@ -96,16 +113,23 @@
 .sides_pad {
   padding: 0 20%;
   height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
+
 @media (max-width: 768px) {
   .sides_pad {
     padding: 10%;
   }
 }
 
-[data-theme=dark] .sides_pad {
+[data-theme="dark"] .sides_pad {
   background-color: #2b303c;
-}/*# sourceMappingURL=HeroSide.module.css.map */
+}
+/*# sourceMappingURL=HeroSide.module.css.map */
