@@ -8,7 +8,12 @@ export const Route = (props: RouteProps) => {
   return (
     <Routes>
       {route.map((row, index) => {
-        const isRequire = row.isRequire;
+        let isRequire: Require;
+        if (row.isRequire !== undefined) {
+          isRequire = row.isRequire;
+        } else {
+          isRequire = "public";
+        }
 
         return (
           <RouteReact
@@ -24,7 +29,6 @@ export const Route = (props: RouteProps) => {
 
 export const routing = () => {
   let Arr: RouteComponents[] = [];
-  let SubArr: any;
   function createRoute(
     components: FC<PageProps>,
     path: string,
@@ -33,13 +37,9 @@ export const routing = () => {
   ) {
     Arr.push({ components, path, isRequire, describe });
   }
-  function createSubRoute(
-    components: FC<PageProps>,
-    path: string,
-    isRequire: Require,
-    describe: string
-  ) {
-    SubArr.push({ components, path, isRequire, describe });
+
+  function getArr() {
+    return Arr;
   }
-  return { get: Arr, create: createRoute, subcreate: createSubRoute };
+  return { get: getArr(), create: createRoute };
 };

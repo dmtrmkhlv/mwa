@@ -1,9 +1,12 @@
-export type Require = "protected" | "public";
+import { ReactElement } from "react";
+
+export type Require = "protected" | "public" | undefined;
 
 export type Role = "norequired" | "creator" | "giver";
 
 export interface PageProps {
-  isRequire: Require;
+  children?: ReactElement;
+  isRequire?: Require;
 }
 
 export interface DataState<T> {
