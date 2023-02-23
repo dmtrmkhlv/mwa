@@ -5,9 +5,11 @@
   text-decoration: none;
   margin: 0 24px;
 }
+
 @media (max-width: 768px) {
   .header_wrap-main-nav {
     margin: 7px 24px;
     text-align: center;
   }
-}/*# sourceMappingURL=AppBar.css.map */
+}
+/*# sourceMappingURL=AppBar.css.map */

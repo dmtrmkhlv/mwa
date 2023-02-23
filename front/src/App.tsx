@@ -10,6 +10,7 @@ import {
   CreatePage,
   GiftPage,
   EventPage,
+  AboutUsPage,
 } from "./page";
 
 const route = routing();
@@ -17,7 +18,7 @@ route.create(MainPage, "/", "public", "Главная");
 route.create(LoginPage, "/login", "public", "Авторизация");
 route.create(SignUpPage, "/signup", "public", "Регистрация");
 route.create(TestPage, "/test", "public", "Тестовая");
-route.create(DevelopPage, "/aboutus", "public", "о нас");
+route.create(AboutUsPage, "/aboutus", "public", "о нас");
 route.create(DevelopPage, "/services", "public", "услуги");
 route.create(GiftPage, "/gifts", "protected", "подарки");
 route.create(EventPage, "/event", "protected", "события");
@@ -36,3 +37,4 @@ export const App = () => {
     </BrowserRouter>
   );
 };
+
