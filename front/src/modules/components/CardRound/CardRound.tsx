@@ -1,17 +1,13 @@
-import * as React from "react";
-import Card from "@mui/material/Card";
-import { Box } from "@chakra-ui/react"
+import { Box } from "@chakra-ui/react";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Button, CardActionArea, CardActions } from "@mui/material";
+import { CardActionArea } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUser } from "../..";
 import { useRole } from "../../requireAuth";
-import './CardRound.css';
-
-
+import "./CardRound.css";
 
 export function CardRound(props: any) {
   const { images } = props;
@@ -22,7 +18,7 @@ export function CardRound(props: any) {
     setTimeout(() => navigate("/", { replace: true }), 500);
   };
   return (
-    <Box className="roundCard" boxShadow='md'>
+    <Box className="roundCard" boxShadow="md">
       <CardActionArea>
         <CardMedia
           className="cardMedia"

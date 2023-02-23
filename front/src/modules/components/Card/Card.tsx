@@ -1,4 +1,3 @@
-import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -9,8 +8,6 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../..";
 import { useRole } from "../../requireAuth";
 
-import christmas from "../images/christmas.jpg";
-
 export function MultiActionAreaCard(props: any) {
   const { images } = props;
   const { value: user } = useSelector(selectUser);
@@ -20,7 +17,7 @@ export function MultiActionAreaCard(props: any) {
     setTimeout(() => navigate("/", { replace: true }), 500);
   };
   return (
-    <Card sx={{ width: 270, ml: 'auto', mr: 'auto', mb: '1em' }}>
+    <Card sx={{ width: 270, ml: "auto", mr: "auto", mb: "1em" }}>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -32,23 +29,20 @@ export function MultiActionAreaCard(props: any) {
           <Typography gutterBottom variant="h5" component="div">
             {props.name}
           </Typography>
-          {/* <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography> */}
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button 
-        sx={{ 
-          textTransform: 'unset', 
-          color: '#333', 
-          paddingLeft: '10px' 
-          }} 
-        size="small" 
-        color="primary" 
-        onClick={navigateMain}>
-        Узнать больше ›
+        <Button
+          sx={{
+            textTransform: "unset",
+            color: "#333",
+            paddingLeft: "10px",
+          }}
+          size="small"
+          color="primary"
+          onClick={navigateMain}
+        >
+          Узнать больше ›
         </Button>
       </CardActions>
     </Card>
