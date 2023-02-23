@@ -7,3 +7,4 @@ export * from "./LoginPage";
 export * from "./CreatePage";
 export * from "./EventPage";
 export * from "./GiftPage";
+export * from "./AboutUsPage";

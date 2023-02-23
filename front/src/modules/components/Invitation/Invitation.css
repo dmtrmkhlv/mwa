@@ -20,35 +20,46 @@
   position: relative;
   height: 240px;
 }
+
 @media (max-width: 768px) {
   .begin {
     height: auto;
     padding: 30px;
   }
 }
+
 .begin .begin__inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   max-width: 780px;
   width: 100%;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin: auto;
   height: 100%;
   gap: 30px;
 }
+
 @media (max-width: 768px) {
   .begin .begin__inner {
-    flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
   }
 }
+
 .begin .begin__inner .begin__reg {
   width: 100%;
 }
+
 .begin .begin__inner .begin__reg h2 {
   font-weight: 700;
   font-size: 32px;
   line-height: 1.4;
   margin: 0;
 }
+
 .begin .begin__inner .begin__reg a {
   margin-top: 0;
   display: block;
@@ -58,42 +69,63 @@
   color: #000;
   text-decoration: none;
 }
+
 .begin .begin__inner .reg {
   background: rgba(35, 31, 32, 0.8);
   border-radius: 5px;
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   text-transform: uppercase;
   color: #FFFFFF;
   height: 52px;
-  flex: 0 0 220px;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 220px;
+          flex: 0 0 220px;
   border: 1px solid rgba(35, 31, 32, 0.8);
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
+
 @media (max-width: 768px) {
   .begin .begin__inner .reg {
     margin: auto;
   }
 }
+
 .begin .begin__inner .why {
   background: transparent;
   border-radius: 5px;
   font-size: 18px;
   line-height: 22px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   text-transform: uppercase;
   color: #000;
   height: 52px;
-  flex: 0 0 220px;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 220px;
+          flex: 0 0 220px;
   border: 1px solid #000000;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
+
 @media (max-width: 768px) {
   .begin .begin__inner .why {
     margin: auto;
   }
-}/*# sourceMappingURL=Invitation.css.map */
+}
+/*# sourceMappingURL=Invitation.css.map */
