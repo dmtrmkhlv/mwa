@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, ReactElement } from "react";
 import { PageProps, Require } from "../../interfaces";
 
 export interface RouteComponents {
