@@ -55,10 +55,10 @@ export class ProfileService {
       secret: jwtConstants.secret,
       expiresIn: `${this.configService.get('EXPIRESIN') || 60}s`,
     });
-
-    const url = `${this.configService.get(
-      'EMAIL_CONFIRMATION_URL',
-    )}?token=${token}`;
+    const rootURL = '/api/v1/auth/user-profile';
+    const url = `${
+      this.configService.get('EMAIL_CONFIRMATION_URL') || rootURL
+    }?token=${token}`;
 
     const name =
       user.profile.firstname || user.profile.lastname
@@ -67,7 +67,7 @@ export class ProfileService {
 
     const mailInfo = {
       emailTo: email,
-      subject: 'Email confirmation',
+      subject: 'Подтверждение адреса почты',
       templateName: 'emailConfirm',
       context: {
         name: name,
