@@ -94,3 +94,13 @@ export interface ListEvent {
   isActive: true;
   gifts: ListGiftFromEvent[];
 }
+
+export interface ListGift {
+  id: string;
+  eventId: string;
+  userCreatorId: string;
+  userBookId: string;
+  title: string;
+  link: string;
+  description: string;
+}

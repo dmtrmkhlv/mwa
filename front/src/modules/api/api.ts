@@ -23,19 +23,25 @@ interface IGiftData {
   link: string;
   description: string;
 }
-interface IData {
+export interface IData {
   data: {
     title: string;
     description: string;
-    isActive: boolean;
+    isActive?: boolean;
   };
 }
 type GetUsersRequests = {
   data: {};
 };
 
+type RegisterUserResponse = {
+  statusCode: number;
+  message: string;
+  error?: string;
+};
+
 export class Api {
-  static async loginAccount(val: IReqUser) {
+  async loginAccount(val: IReqUser) {
     const user = { username: val.username, password: val.password };
     const resp = await apifetch.post<CreateUserResponse>(`/api/v1/auth/login`, {
       ...user,
@@ -50,21 +56,53 @@ export class Api {
 
     return data;
   }
-
-  static async getListEvent(value: string) {
-    const res = await apifetch.get(`api/v1/event`);
-
-    const data = res.data.map((resp: IListCreator) => {
-      return {
-        id: resp.id,
-        userCreatorId: resp.userCreatorId,
-        title: resp.title,
-        description: resp.description,
-        gifts: resp.gifts,
+  async getAllEvents(value: any) {
+    try {
+      const resp = await apifetch.get<ListEvent>(`/api/v1/event`);
+      return resp.data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  async getGifts(value: any) {
+    try {
+      const resp = await apifetch.get<GetUsersRequests>(`/api/v1/gift`);
+      return resp.data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  async createEvent(value: IData) {
+    try {
+      const data = {
+        title: value.data.title,
+        description: value.data.description,
       };
-    });
 
-    return data;
+      const resp = await apifetch.post<CreateUserResponse>(`/api/v1/event`, {
+        ...data,
+      });
+      return resp.data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  static async registerAccount(value: IReqUser) {
+    const user = { username: value.username, password: value.password };
+    try {
+      const resp = await apifetch.post<RegisterUserResponse>(
+        `/api/v1/auth/register`,
+        {
+          ...user,
+        }
+      );
+
+      return resp.data;
+    } catch (error) {
+      return {
+        statusCode: 400,
+      };
+    }
   }
 }
 

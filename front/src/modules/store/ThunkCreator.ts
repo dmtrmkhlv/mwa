@@ -3,21 +3,27 @@ import {
   IReqUser,
   IUserSession,
   ListEvent,
+  ListGift,
 } from "../../interfaces";
 import { api, Api } from "../api";
 import { thunks } from "./helper";
 
+const thunkapi = new Api();
+
 export const loginAccount = thunks<IUserSession, IReqUser>(
-  Api.loginAccount,
+  thunkapi.loginAccount,
   "user/setUser"
 );
 
-export const getListEvent = thunks<IListCreator[], any>(
-  Api.getListEvent,
+export const getAllEvents = thunks<ListEvent[], any>(
+  thunkapi.getAllEvents,
   "event/getEvent"
 );
-
-export const getAllEvents = thunks<ListEvent[], any>(
-  api.getAllEvents,
-  "event/getEvent"
+export const getGifts = thunks<ListGift[], any>(
+  thunkapi.getGifts,
+  "gift/getGift"
+);
+export const createEvent = thunks<ListEvent, any>(
+  thunkapi.createEvent,
+  "gift/getGift"
 );

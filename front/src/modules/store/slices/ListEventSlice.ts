@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { DataState, IListCreator, ListEvent } from "../../../interfaces";
-import { getAllEvents } from "../ThunkCreator";
+import { DataState, ListEvent } from "../../../interfaces";
+import { createEvent, getAllEvents } from "../ThunkCreator";
 
 export const initialState: DataState<ListEvent[]> = {
   value: [],
@@ -22,6 +22,18 @@ export const ListEventSlice = createSlice({
       state.value = action.payload;
     });
     builder.addCase(getAllEvents.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message ?? "";
+    });
+    builder.addCase(createEvent.pending, (state) => {
+      state.loading = true;
+      state.error = "";
+    });
+    builder.addCase(createEvent.fulfilled, (state, action) => {
+      state.loading = false;
+      state.value = [...state.value, action.payload];
+    });
+    builder.addCase(createEvent.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? "";
     });

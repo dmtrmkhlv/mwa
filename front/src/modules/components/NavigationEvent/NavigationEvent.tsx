@@ -10,7 +10,10 @@ import {
   ListItemText,
   Avatar,
   Button,
+  ListItemButton,
+  IconButton,
 } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 import RestoreIcon from "@mui/icons-material/Restore";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ArchiveIcon from "@mui/icons-material/Archive";
@@ -19,6 +22,8 @@ import { useSelector } from "react-redux";
 import { selectListEvent } from "../../store";
 import { useAppDispatch } from "../../hooks";
 import { getAllEvents } from "../../store/ThunkCreator";
+import { NavLink, useNavigate } from "react-router-dom";
+import { CreateEvent } from "../CreateEvent/CreateEvent";
 
 export function NavigationEvent() {
   const { value: events } = useSelector(selectListEvent);
@@ -28,6 +33,7 @@ export function NavigationEvent() {
   }, []);
   const [value, setValue] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
   // const [messages, setMessages] = useState(messageExamples);
 
   // useEffect(() => {
@@ -40,25 +46,29 @@ export function NavigationEvent() {
   return (
     <Box sx={{ pb: 7 }} ref={ref}>
       <CssBaseline />
-
-      {/* <List> */}
-      <ul>
+      <List sx={{ width: 500 }}>
         {events.map((event, index) => (
-          <li key={event.id}>{event.title}</li>
-          // <ListItem button key={index + event.title}>
-          //   <ListItemAvatar>
-          //     <Avatar alt="Profile Picture" src={"person"} />
-          //   </ListItemAvatar>
-          //   <ListItemText primary={event.title} secondary={event.description} />
-          // </ListItem>
+          <ListItem
+            disablePadding
+            secondaryAction={
+              <IconButton edge="end" aria-label="delete">
+                <DeleteIcon />
+              </IconButton>
+            }
+          >
+            <ListItemButton onClick={() => navigate(`/gifts/${event.id}`)}>
+              <ListItemText primary={event.title} />
+            </ListItemButton>
+          </ListItem>
         ))}
-      </ul>
-      {/* </List> */}
-      <input></input>
-      <input></input>
-      <Button onClick={handler} variant="contained">
-        Создать еще список
-      </Button>
+      </List>
+      {/* secondaryAction=
+      {
+        <IconButton aria-label="comment">
+          <DeleteIcon />
+        </IconButton>
+      } */}
+      <CreateEvent />
       <Paper
         sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
         elevation={3}

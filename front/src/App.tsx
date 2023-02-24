@@ -14,8 +14,8 @@ import {
 } from "./page";
 
 const subroute = routing();
-subroute.create(GiftPage, "/gifts", "public", "подарки");
-subroute.create(GiftPage, "*", "public", "подарки");
+subroute.create(GiftPage, ":slug", "public", "подарки");
+subroute.create(GiftPage, "", "public", "подарки");
 
 const SubRouteGift: FC<PageProps> = () => {
   return <Route route={subroute.get} />;
