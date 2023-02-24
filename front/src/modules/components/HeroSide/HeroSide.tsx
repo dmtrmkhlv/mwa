@@ -10,6 +10,9 @@ export const HeroSide = () => {
   const navigateCreate = () => {
     setTimeout(() => navigate("/create", { replace: true }), 500);
   };
+  const navigateHowItWorks = () => {
+    setTimeout(() => navigate("/howitworks", { replace: true }), 500);
+  };
   return (
     <Box>
       <div className={style.sides}>
@@ -36,7 +39,9 @@ export const HeroSide = () => {
             дарителями. Они увидят список ваших желаний и смогут договориться,
             кто что будет дарить!
           </p>
-          <button className={style.white_bg}>Подробнее</button>
+          <button className={style.white_bg} onClick={navigateHowItWorks}>
+            Подробнее
+          </button>
         </div>
       </div>
     </Box>
