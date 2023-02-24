@@ -37,13 +37,7 @@ export const useLogin: useLoginFunc = () => {
     }));
   };
   const submitButton = () => {
-    // dispatch(loginAccount(form));
-    dispatch(
-      loginAccount({
-        username: "mor_2314954",
-        password: "83r5^_",
-      })
-    );
+    dispatch(loginAccount(form));
     console.log(error);
     console.log(from);
   };
