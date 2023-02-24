@@ -6,11 +6,14 @@ import {
   MainPage,
   LoginPage,
   SignUpPage,
-  DevelopPage,
   CreatePage,
   GiftPage,
   EventPage,
   AboutUsPage,
+  ServicesPage,
+  MorePage,
+  PrivacyPage,
+  HowItWorksPage,
 } from "./page";
 
 const subroute = routing();
@@ -26,16 +29,17 @@ route.create(MainPage, "/", "public", "Главная");
 route.create(LoginPage, "/login", "public", "Авторизация");
 route.create(SignUpPage, "/signup", "public", "Регистрация");
 route.create(AboutUsPage, "/aboutus", "public", "о нас");
-route.create(DevelopPage, "/services", "public", "услуги");
+route.create(HowItWorksPage, "/howitworks", "public", "Как это работает?");
+route.create(ServicesPage, "/services", "public", "услуги");
 route.create(SubRouteGift, "/gifts/*", "public", "подарки");
 route.create(EventPage, "/event", "public", "события");
 route.create(CreatePage, "/create", "public", "создание");
-route.create(DevelopPage, "/more", "public", "подробнее");
-route.create(DevelopPage, "/brthd", "public", "ко дню рождения");
-route.create(DevelopPage, "/annyversary", "public", "подробнее");
-route.create(DevelopPage, "/valentines", "public", "ко дню святого валентина");
-route.create(DevelopPage, "/christmas", "public", "на рождество");
-route.create(DevelopPage, "/privacy", "public", "политики");
+route.create(MorePage, "/more", "public", "подробнее");
+route.create(MainPage, "/brthd", "public", "ко дню рождения");
+route.create(MainPage, "/annyversary", "public", "подробнее");
+route.create(MainPage, "/valentines", "public", "ко дню святого валентина");
+route.create(MainPage, "/christmas", "public", "на рождество");
+route.create(PrivacyPage, "/privacy", "public", "политики");
 
 export const App = () => {
   return (
