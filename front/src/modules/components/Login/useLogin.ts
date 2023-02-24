@@ -27,7 +27,6 @@ export const useLogin: useLoginFunc = () => {
   let location = useLocation();
   const [form, setForm] = useState({
     username: "",
-    email: "",
     password: "",
   });
   let from = location.state?.from?.pathname || "/";
@@ -38,7 +37,13 @@ export const useLogin: useLoginFunc = () => {
     }));
   };
   const submitButton = () => {
-    dispatch(loginAccount(form));
+    // dispatch(loginAccount(form));
+    dispatch(
+      loginAccount({
+        username: "mor_2314954",
+        password: "83r5^_",
+      })
+    );
     console.log(error);
     console.log(from);
   };
@@ -51,7 +56,6 @@ export const useLogin: useLoginFunc = () => {
   }, [user.session]);
   return {
     username: form.username,
-    email: form.email,
     password: form.password,
     error: error,
     handlerForm: handleForm,

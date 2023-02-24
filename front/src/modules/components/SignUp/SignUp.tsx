@@ -5,7 +5,7 @@ import {
   Visibility,
   VisibilityOff,
 } from "@mui/icons-material";
-import React from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -17,11 +17,11 @@ import {
 } from "@mui/material";
 import { useLogin } from "../Login/useLogin";
 import "./SignUp.css";
+import { IReqUser } from "../../../interfaces";
+import { useNavigate } from "react-router-dom";
+import { Api } from "../../api";
 
 export const SignUp = () => {
-  const { username, email, password, error, handlerForm, submitButton } =
-    useLogin();
-
   const [showPassword, setShowPassword] = React.useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -31,6 +31,34 @@ export const SignUp = () => {
   ) => {
     event.preventDefault();
   };
+  const [form, setForm] = useState<IReqUser>({
+    username: "",
+    password: "",
+  });
+  const [access, setAccess] = useState<string>("");
+  let navigate = useNavigate();
+
+  let handlerForm = (e: ChangeEvent<HTMLInputElement>) => {
+    setForm((formProps) => ({
+      ...formProps,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  let handlerSignUp = async () => {
+    const resp = await Api.registerAccount(form);
+
+    if (resp.statusCode === 200) {
+      setAccess("Успешно");
+    } else {
+      setAccess("Произошла ошибка");
+    }
+  };
+  useEffect(() => {
+    if (access === "Успешно") {
+      setTimeout(() => navigate("/login"), 500);
+    }
+  }, [access]);
 
   return (
     <Box sx={{ mb: 10 }}>
@@ -73,17 +101,17 @@ export const SignUp = () => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <AccountCircle sx={{ fill: 'rgb(63 68 78)' }} />
+                    <AccountCircle sx={{ fill: "rgb(63 68 78)" }} />
                   </InputAdornment>
                 ),
               }}
               type="text"
               name="username"
-              value={username}
+              value={form.username}
               onChange={handlerForm}
               required
             />
-            <TextField
+            {/* <TextField
               sx={{ width: 1 }}
               id="outlined-email-input"
               label="E-mail"
@@ -92,20 +120,20 @@ export const SignUp = () => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <Email sx={{ fill: 'rgb(63 68 78)' }} />
+                    <Email sx={{ fill: "rgb(63 68 78)" }} />
                   </InputAdornment>
                 ),
               }}
               name="email"
               value={email}
               onChange={handlerForm}
-            />
+            /> */}
             <OutlinedInput
               sx={{ mb: 1 }}
               id="outlined-password-input"
               label="Пароль"
               name="password"
-              value={password}
+              value={form.password}
               type={showPassword ? "text" : "password"}
               endAdornment={
                 <InputAdornment position="end">
@@ -115,7 +143,11 @@ export const SignUp = () => {
                     onMouseDown={handleMouseDownPassword}
                     edge="end"
                   >
-                    {showPassword ? <VisibilityOff  sx={{ fill: 'rgb(63 68 78)' }} /> : <Visibility  sx={{ fill: 'rgb(63 68 78)' }} />}
+                    {showPassword ? (
+                      <VisibilityOff sx={{ fill: "rgb(63 68 78)" }} />
+                    ) : (
+                      <Visibility sx={{ fill: "rgb(63 68 78)" }} />
+                    )}
                   </IconButton>
                 </InputAdornment>
               }
@@ -133,11 +165,12 @@ export const SignUp = () => {
                   color: "#F7941E",
                 },
               }}
-              onClick={submitButton}
+              onClick={handlerSignUp}
             >
               <Check /> Регистрироваться
             </Button>
           </FormGroup>
+          <h1>{access}</h1>
         </Box>
       </Box>
     </Box>

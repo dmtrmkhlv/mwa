@@ -29,7 +29,7 @@ export function BasicMenu() {
     setAnchorEl(null);
   };
   const handleThree = () => {
-    navigate("/test");
+    navigate("/event");
     setAnchorEl(null);
   };
   const handleFive = () => {

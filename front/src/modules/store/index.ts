@@ -5,6 +5,7 @@ import ListGiverReducer from "./slices/ListGiverSlice";
 import GiftCreatorReducer from "./slices/GiftCreatorSlice";
 import GiftGiverReducer from "./slices/GiftGiverSlice";
 import { ListEventReducer } from "./slices/ListEventSlice";
+import { ListGiftReducer } from "./slices/ListGiftSlice";
 
 const rootReducer = combineReducers({
   UserReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   GiftCreatorReducer,
   GiftGiverReducer,
   ListEventReducer,
+  ListGiftReducer,
 });
 
 export function setupStore() {
@@ -27,3 +29,4 @@ export type AppDispatch = AppStore["dispatch"];
 
 export const selectUser = (state: RootState) => state.UserReducer;
 export const selectListEvent = (state: RootState) => state.ListEventReducer;
+export const selectListGift = (state: RootState) => state.ListGiftReducer;
