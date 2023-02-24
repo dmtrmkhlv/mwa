@@ -17,7 +17,7 @@ export class ProfileController {
 
   @ApiOperation({ summary: 'Send сonfirmation Email Link' })
   @ApiResponse({
-    status: 200,
+    status: 201,
     description: 'Link has been sent.',
   })
   @ApiResponse({ status: 403, description: 'Forbidden.' })

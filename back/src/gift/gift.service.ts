@@ -6,6 +6,7 @@ import { UpdateGiftDto } from './dto/update-gift.dto';
 import { GiftEntity } from './entities/gift.entity';
 import { EventEntity } from 'src/event/entities/event.entity';
 import { MailService } from 'src/mail/mail.service';
+import { UserEntity } from 'src/users/entities/user.entity';
 
 @Injectable()
 export class GiftService {
@@ -15,6 +16,8 @@ export class GiftService {
     @InjectRepository(EventEntity)
     private eventsRepository: Repository<EventEntity>,
     private mailService: MailService,
+    @InjectRepository(UserEntity)
+    private usersRepository: Repository<UserEntity>,
   ) {}
   async create(
     eventId: string,
@@ -94,18 +97,32 @@ export class GiftService {
     }
 
     if (userId !== gift.userCreatorId) {
-      gift.userBookId = userId;
-      const mailInfo = {
-        emailTo: 'mywishlistapp@mail.ru',
-        subject: 'A gift from your Event has been reserved!',
-        templateName: 'bookGift',
-        context: {
-          name: 'User Name',
-          giftTitle: gift.title,
-          eventId: gift.eventId,
+      const user = await this.usersRepository.findOne({
+        where: {
+          id: gift.userCreatorId,
         },
-      };
-      await this.mailService.sendMail(mailInfo);
+        relations: {
+          profile: true,
+        },
+      });
+      if (user.profile.emailIsActive) {
+        const name =
+          user.profile.firstname || user.profile.lastname
+            ? user.profile.firstname + ' ' + user.profile.lastname
+            : user.username;
+        gift.userBookId = userId;
+        const mailInfo = {
+          emailTo: 'mywishlistapp@mail.ru',
+          subject: 'Кто-то забронировал ваш подарок!',
+          templateName: 'bookGift',
+          context: {
+            name: name,
+            giftTitle: gift.title,
+            url: `http://localhost:8000/api/v1/event/${gift.eventId}`,
+          },
+        };
+        await this.mailService.sendMail(mailInfo);
+      }
       return this.giftRepository.save({ ...gift });
     } else {
       throw new HttpException(
