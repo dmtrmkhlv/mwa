@@ -7,3 +7,4 @@ export * from "./Header";
 export * from "./Stepper";
 export * from "./NavigationEvent";
 export * from "./Switcher";
+export * from "./WhyModal";

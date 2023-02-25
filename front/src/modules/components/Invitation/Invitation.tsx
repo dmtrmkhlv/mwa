@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
 import { NavLink } from "react-router-dom";
+import { WhyModal } from "../index";
 import "./Invitation.scss";
 
 export const Invitation = () => {
@@ -16,9 +17,9 @@ export const Invitation = () => {
           <NavLink className="reg" to={"/signup"}>
             Регистрация
           </NavLink>
-          <NavLink className="why" to={"/whyme"}>
-            Зачем мне это?
-          </NavLink>
+          {/* <NavLink className="why" to={"/whyme"}> */}
+          <WhyModal />
+          {/* </NavLink> */}
         </Box>
       </Box>
     </>
