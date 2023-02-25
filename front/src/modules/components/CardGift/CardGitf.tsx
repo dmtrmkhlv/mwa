@@ -29,7 +29,7 @@ export function CardGift() {
   }, []);
   return (
     <>
-      <CreateEvent />
+      {/* <CreateEvent /> */}
       {gift
         .filter((el) => el.eventId === slug)
         .map((el: ListGift) => {

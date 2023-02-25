@@ -7,8 +7,15 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
 import { useCreateEvent } from "./useCreateEvent";
+import { IconButton } from "@mui/material";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 
-export function CreateEvent() {
+interface CreateEventProps {
+  mini: boolean;
+}
+
+export function CreateEvent(props: CreateEventProps) {
+  const { mini } = props;
   const { title, description, error, handlerForm, submitButton } =
     useCreateEvent();
   const [open, setOpen] = useState(false);
@@ -27,9 +34,16 @@ export function CreateEvent() {
 
   return (
     <>
-      <Button sx={{ m: 2 }} variant="outlined" onClick={handleClickOpen}>
-        Создать новый список
-      </Button>
+      {mini ? (
+        <Button sx={{ m: 2 }} variant="outlined" onClick={handleClickOpen}>
+          Создать новый список
+        </Button>
+      ) : (
+        <IconButton onClick={handleClickOpen}>
+          <AddCircleIcon />
+        </IconButton>
+      )}
+
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Описание</DialogTitle>
         <DialogContent>

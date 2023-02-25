@@ -1,4 +1,3 @@
-export * from "./Menu";
 export * from "./Main";
 export * from "./Login";
 export * from "./SignUp";
