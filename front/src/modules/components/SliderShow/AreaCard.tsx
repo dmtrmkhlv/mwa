@@ -3,25 +3,12 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
-import { useNavigate, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectListGift, selectUser, useAppDispatch } from "../..";
-import { useRole } from "../../requireAuth";
-import { getGifts } from "../../store/ThunkCreator";
-import { useEffect } from "react";
-import { ListGift } from "../../../interfaces";
+import { useCustomeNavigate } from "../..";
 
-export function MultiActionAreaCard(props: any) {
-  const { images } = props;
-  const { value: user } = useSelector(selectUser);
-  const { slug } = useParams();
-  const dispatch = useAppDispatch();
-  const role = useRole(user.userId, 2);
+export function AreaCard(props: any) {
+  const { images, name } = props;
+  const [navigateMain] = useCustomeNavigate("/", true);
 
-  const navigate = useNavigate();
-  const navigateMain = () => {
-    setTimeout(() => navigate("/", { replace: true }), 500);
-  };
   return (
     <>
       <Card sx={{ width: 270, ml: "auto", mr: "auto", mb: "1em" }}>
@@ -34,7 +21,7 @@ export function MultiActionAreaCard(props: any) {
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-              {props.name}
+              {name}
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -47,9 +34,9 @@ export function MultiActionAreaCard(props: any) {
             }}
             size="small"
             color="primary"
-            onClick={navigateMain}
+            {...navigateMain}
           >
-            Узнать больше ›{slug}
+            Узнать больше ›
           </Button>
         </CardActions>
       </Card>

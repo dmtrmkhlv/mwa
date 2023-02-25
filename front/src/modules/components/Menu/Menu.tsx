@@ -5,6 +5,15 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useState, MouseEvent } from "react";
+import { CreateEvent } from "../CreateEvent";
+
+const rows = [
+  { key: 1, link: "/", title: "Главная" },
+  { key: 2, link: "/gifts", title: "Подарки" },
+  { key: 3, link: "/event", title: "События" },
+  { key: 4, link: "/event", title: "Подарок" },
+  { key: 5, link: "/create", title: "Создать" },
+];
 
 export function BasicMenu() {
   const navigate = useNavigate();
@@ -13,27 +22,11 @@ export function BasicMenu() {
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
+  const handleNavigate = (nav: string) => {
+    navigate(nav);
+    setAnchorEl(null);
+  };
   const handleClose = () => {
-    setAnchorEl(null);
-  };
-  const handleOne = () => {
-    navigate("/");
-    setAnchorEl(null);
-  };
-  const handleTwo = () => {
-    navigate("/gifts");
-    setAnchorEl(null);
-  };
-  const handleFour = () => {
-    navigate("/event");
-    setAnchorEl(null);
-  };
-  const handleThree = () => {
-    navigate("/event");
-    setAnchorEl(null);
-  };
-  const handleFive = () => {
-    navigate("/create");
     setAnchorEl(null);
   };
 
@@ -59,11 +52,14 @@ export function BasicMenu() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleOne}>Главная</MenuItem>
-        <MenuItem onClick={handleTwo}>Подарки</MenuItem>
-        <MenuItem onClick={handleFour}>События</MenuItem>
-        <MenuItem onClick={handleThree}>Подарок</MenuItem>
-        <MenuItem onClick={handleFive}>Создать</MenuItem>
+        {rows.map((row) => {
+          return (
+            <MenuItem onClick={() => handleNavigate(row.link)}>
+              {row.title}
+            </MenuItem>
+          );
+        })}
+        <CreateEvent />
       </Menu>
     </div>
   );

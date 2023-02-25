@@ -1,18 +1,15 @@
 import { Button, ThemeProvider } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { themeButton } from "./createTheme";
+import { useCustomeNavigate } from "../../hooks";
+import { useThemeButton } from "./useThemeButton";
 
 export const Entry = () => {
-  const navigate = useNavigate();
-  function handler() {
-    setTimeout(() => {
-      navigate("/login");
-    }, 500);
-  }
+  const [theme] = useThemeButton();
+  const [navlogin] = useCustomeNavigate("login", false);
+
   return (
-    <ThemeProvider theme={themeButton}>
+    <ThemeProvider {...theme}>
       <Button
-        onClick={handler}
+        {...navlogin}
         variant="outlined"
         sx={{ pl: 10, pr: 10 }}
         size="small"

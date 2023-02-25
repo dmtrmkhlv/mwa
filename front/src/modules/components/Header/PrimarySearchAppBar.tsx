@@ -1,5 +1,5 @@
 import { styled, alpha } from "@mui/material/styles";
-import AppBar from "@mui/material/AppBar";
+// import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -13,12 +13,38 @@ import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { BasicMenu } from "../Menu/Menu";
-import { Button } from "@mui/material";
+import { Button, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../hooks";
 import { userAuthenticatedOut } from "../../store/ActionCreator";
 import { PropsHeader } from "./HeaderProps";
 import { useState } from "react";
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
+import { drawerWidth } from "../DrawerEvent/DrawerProps";
+import MenuIcon from "@mui/icons-material/Menu";
+// import { drawerWidth } from "./DrawerProps";
+
+interface AppBarProps extends MuiAppBarProps {
+  open?: boolean;
+}
+
+export const AppBar = styled(MuiAppBar, {
+  shouldForwardProp: (prop) => prop !== "open",
+})<AppBarProps>(({ theme, open }) => ({
+  zIndex: theme.zIndex.drawer + 1,
+  transition: theme.transitions.create(["width", "margin"], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  ...(open && {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(["width", "margin"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  }),
+}));
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -37,7 +63,7 @@ const Search = styled("div")(({ theme }) => ({
 }));
 
 export function PrimarySearchAppBar(props: PropsHeader) {
-  const { session } = props;
+  const { session, open, setOpen } = props;
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -147,10 +173,13 @@ export function PrimarySearchAppBar(props: PropsHeader) {
       </MenuItem>
     </Menu>
   );
+  const handleDrawerOpen = () => {
+    if (setOpen !== undefined) setOpen(true);
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color="transparent">
+      <AppBar position="static" color="transparent" open={open}>
         <Toolbar
           sx={{
             display: "flex",
@@ -159,7 +188,18 @@ export function PrimarySearchAppBar(props: PropsHeader) {
             height: 128,
           }}
         >
-          {session ? <BasicMenu /> : <></>}
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            sx={{
+              marginRight: 5,
+              ...(open && { display: "none" }),
+            }}
+          >
+            <MenuIcon />
+          </IconButton>
 
           <Typography
             variant="h6"

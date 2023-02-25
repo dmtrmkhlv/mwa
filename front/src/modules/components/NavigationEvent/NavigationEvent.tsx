@@ -34,15 +34,7 @@ export function NavigationEvent() {
   const [value, setValue] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
-  // const [messages, setMessages] = useState(messageExamples);
 
-  // useEffect(() => {
-  //   (ref.current as HTMLDivElement).ownerDocument.body.scrollTop = 0;
-  //   setMessages(refreshMessages());
-  // }, [value, setMessages]);
-  const handler = () => {
-    // dispatch(createEvent("запрос"));
-  };
   return (
     <Box sx={{ pb: 7 }} ref={ref}>
       <CssBaseline />
@@ -62,13 +54,7 @@ export function NavigationEvent() {
           </ListItem>
         ))}
       </List>
-      {/* secondaryAction=
-      {
-        <IconButton aria-label="comment">
-          <DeleteIcon />
-        </IconButton>
-      } */}
-      <CreateEvent />
+
       <Paper
         sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
         elevation={3}

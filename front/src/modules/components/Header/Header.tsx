@@ -1,15 +1,9 @@
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import { Entry } from "../Button";
 import { NavLink } from "react-router-dom";
 import logo from "../images/logo_orange_little.png";
@@ -20,20 +14,16 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { Box as BoxSwitcher, useColorMode } from "@chakra-ui/react";
 import { ColorModeSwitcher } from "../Switcher/ColorModeSwitcher";
 import { PrimarySearchAppBar } from "./PrimarySearchAppBar";
-import { PropsHeader } from "./HeaderProps";
+import { navItemsProps, PropsHeader } from "./HeaderProps";
 import { useState } from "react";
+import { CustomeDrawer } from "./CustomeDrawer";
 
 interface Props {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-
   children: React.ReactElement;
 }
 
 const drawerWidth = 240;
-const navItems = [
+const navItems: navItemsProps[] = [
   { name: "Главная", link: "/" },
   { name: "О нас", link: "/aboutus" },
   { name: "Услуги", link: "/services" },
@@ -59,39 +49,11 @@ export function HeaderPublic(props: PropsHeader) {
   };
 
   const { colorMode } = useColorMode();
-
-  const drawer = (
-    <Box
-      onClick={handleDrawerToggle}
-      sx={{ textAlign: "center", width: "100%" }}
-    >
-      <Typography variant="h6" sx={{ my: 2 }}>
-        Меню
-      </Typography>
-      <Divider />
-      <List>
-        {navItems.map((item) => (
-          <ListItem key={item.name} disablePadding>
-            <ListItemButton sx={{ textAlign: "center" }} href={item.link}>
-              <ListItemText primary={item.name} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <ListItem key={"выход"} disablePadding>
-        <ListItemButton sx={{ textAlign: "center" }}>
-          <ListItemText primary={"выход"} />
-        </ListItemButton>
-      </ListItem>
-      <Entry />
-      <ChakraProvider>
-        <BoxSwitcher py={2} bg={colorMode === "dark" ? "gray.600" : "none"}>
-          <ColorModeSwitcher bg="none" />
-        </BoxSwitcher>
-      </ChakraProvider>
-    </Box>
-  );
+  const argumentsDrawer = {
+    handleDrawerToggle: handleDrawerToggle,
+    navItems: navItems,
+    colorMode: colorMode,
+  };
 
   return (
     <Box sx={{ boxSizing: "border-box" }}>
@@ -189,7 +151,7 @@ export function HeaderPublic(props: PropsHeader) {
             },
           }}
         >
-          {drawer}
+          <CustomeDrawer {...argumentsDrawer} />
         </Drawer>
       </Box>
 
@@ -200,9 +162,10 @@ export function HeaderPublic(props: PropsHeader) {
   );
 }
 
-export function Header({ session }: PropsHeader) {
+export function Header(props: PropsHeader) {
+  const { session } = props;
   if (session) {
-    return <PrimarySearchAppBar session={session} />;
+    return <PrimarySearchAppBar {...props} />;
   } else {
     return <HeaderPublic session={session} />;
   }
