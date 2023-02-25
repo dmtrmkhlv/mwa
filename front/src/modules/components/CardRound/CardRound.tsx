@@ -3,7 +3,6 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUser } from "../..";
 import { useRole } from "../../requireAuth";
@@ -13,10 +12,7 @@ export function CardRound(props: any) {
   const { images } = props;
   const { value: user } = useSelector(selectUser);
   const role = useRole(user.userId, 2);
-  const navigate = useNavigate();
-  const navigateMain = () => {
-    setTimeout(() => navigate("/", { replace: true }), 500);
-  };
+
   return (
     <Box className="roundCard" boxShadow="md">
       <CardActionArea>

@@ -4,15 +4,12 @@ import style from "./HeroSide.module.scss";
 
 import brown_lady from "../images/brown_lady.jpg";
 import wish_list_pen from "../images/wish_list_pen.jpg";
+import { useCustomeNavigate } from "../../hooks";
 
 export const HeroSide = () => {
-  const navigate = useNavigate();
-  const navigateCreate = () => {
-    setTimeout(() => navigate("/create", { replace: true }), 500);
-  };
-  const navigateHowItWorks = () => {
-    setTimeout(() => navigate("/howitworks", { replace: true }), 500);
-  };
+  const [navigateCreate] = useCustomeNavigate("/create", true);
+  const [navigateHowItWorks] = useCustomeNavigate("/howitworks", true);
+
   return (
     <Box>
       <div className={style.sides}>
@@ -20,7 +17,7 @@ export const HeroSide = () => {
           <div>
             <h1>Расскажите родным и друзьям, о чём мечтаете!</h1>
           </div>
-          <button className={style.create_wish} onClick={navigateCreate}>
+          <button className={style.create_wish} {...navigateCreate}>
             Создать список
           </button>
         </div>
@@ -39,7 +36,7 @@ export const HeroSide = () => {
             дарителями. Они увидят список ваших желаний и смогут договориться,
             кто что будет дарить!
           </p>
-          <button className={style.white_bg} onClick={navigateHowItWorks}>
+          <button className={style.white_bg} {...navigateHowItWorks}>
             Подробнее
           </button>
         </div>

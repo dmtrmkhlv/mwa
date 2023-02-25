@@ -1,8 +1,4 @@
-import {
-  HorizontalLinearStepper,
-  MultiActionAreaCard,
-  NavigationEvent,
-} from "../modules";
+import { HorizontalLinearStepper } from "../modules";
 import { FC } from "react";
 import { PageProps } from "../interfaces";
 import Layout from "../modules/layout/Layout";

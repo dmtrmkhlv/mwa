@@ -26,8 +26,8 @@ export function CreateEvent() {
   };
 
   return (
-    <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+    <>
+      <Button sx={{ m: 2 }} variant="outlined" onClick={handleClickOpen}>
         Создать новый список
       </Button>
       <Dialog open={open} onClose={handleClose}>
@@ -66,6 +66,6 @@ export function CreateEvent() {
           <Button onClick={handleCreate}>Создать</Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </>
   );
 }

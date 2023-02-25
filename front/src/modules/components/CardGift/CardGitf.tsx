@@ -5,15 +5,20 @@ import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectListGift, selectUser, useAppDispatch } from "../..";
+import {
+  selectListGift,
+  selectUser,
+  useAppDispatch,
+  useCustomeNavigate,
+} from "../..";
 import { useRole } from "../../requireAuth";
 import { getGifts } from "../../store/ThunkCreator";
 import { useEffect } from "react";
 import { ListGift } from "../../../interfaces";
 import { CreateEvent } from "../CreateEvent";
 
-export function CardGift(props: any) {
-  const { images } = props;
+export function CardGift() {
+  const [navigateMain] = useCustomeNavigate("/", true);
   const { value: user } = useSelector(selectUser);
   const { value: gift } = useSelector(selectListGift);
   const { slug } = useParams();
@@ -22,10 +27,6 @@ export function CardGift(props: any) {
   useEffect(() => {
     dispatch(getGifts("запрос"));
   }, []);
-  const navigate = useNavigate();
-  const navigateMain = () => {
-    setTimeout(() => navigate("/", { replace: true }), 500);
-  };
   return (
     <>
       <CreateEvent />
@@ -56,7 +57,7 @@ export function CardGift(props: any) {
                   }}
                   size="small"
                   color="primary"
-                  onClick={navigateMain}
+                  {...navigateMain}
                 >
                   Узнать больше ›
                 </Button>

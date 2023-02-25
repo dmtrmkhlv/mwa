@@ -29,7 +29,7 @@ export const useLogin: useLoginFunc = () => {
     username: "",
     password: "",
   });
-  let from = location.state?.from?.pathname || "/";
+  let from = location.state?.from?.pathname || "/event";
   const handleForm = (e: ChangeEvent<HTMLInputElement>) => {
     setForm((formProps) => ({
       ...formProps,
