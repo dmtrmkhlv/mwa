@@ -7,6 +7,7 @@ import { GiftEntity } from './entities/gift.entity';
 import { EventEntity } from 'src/event/entities/event.entity';
 import { MailService } from 'src/mail/mail.service';
 import { UserEntity } from 'src/users/entities/user.entity';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class GiftService {
@@ -18,6 +19,7 @@ export class GiftService {
     private mailService: MailService,
     @InjectRepository(UserEntity)
     private usersRepository: Repository<UserEntity>,
+    private readonly configService: ConfigService,
   ) {}
   async create(
     eventId: string,
@@ -111,6 +113,14 @@ export class GiftService {
             ? user.profile.firstname + ' ' + user.profile.lastname
             : user.username;
         gift.userBookId = userId;
+        const url =
+          this.configService.get('NODE_ENV') === 'development'
+            ? `${this.configService.get('HOST_URL_DEV')}/api/v1/event/${
+                gift.eventId
+              }`
+            : `${this.configService.get('HOST_URL')}/api/v1/event/${
+                gift.eventId
+              }`;
         const mailInfo = {
           emailTo: 'mywishlistapp@mail.ru',
           subject: 'Кто-то забронировал ваш подарок!',
@@ -118,7 +128,7 @@ export class GiftService {
           context: {
             name: name,
             giftTitle: gift.title,
-            url: `http://localhost:8000/api/v1/event/${gift.eventId}`,
+            url: url,
           },
         };
         await this.mailService.sendMail(mailInfo);
