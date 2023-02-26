@@ -1,7 +1,8 @@
 import { FC } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { PageProps } from "./interfaces";
-import { Route, routing } from "./modules";
+import { Route, routing, useAppDispatch } from "./modules";
+import { useRequiredAccount } from "./modules/hooks/useRequiredAccount";
 import {
   MainPage,
   LoginPage,
@@ -14,14 +15,23 @@ import {
   MorePage,
   PrivacyPage,
   HowItWorksPage,
+  ArchivePage,
+  BookingPage,
+  EventBookingPage,
 } from "./page";
 
 const subroute = routing();
 subroute.create(GiftPage, ":slug", "public", "подарки");
 subroute.create(GiftPage, "", "public", "подарки");
-
 const SubRouteGift: FC<PageProps> = () => {
   return <Route route={subroute.get} />;
+};
+
+const subrouteEvent = routing();
+subrouteEvent.create(EventBookingPage, ":slug", "public", "подарки");
+subrouteEvent.create(EventPage, "", "public", "подарки");
+const SubRouteEvent: FC<PageProps> = () => {
+  return <Route route={subrouteEvent.get} />;
 };
 
 const route = routing();
@@ -32,7 +42,9 @@ route.create(AboutUsPage, "/aboutus", "public", "о нас");
 route.create(HowItWorksPage, "/howitworks", "public", "Как это работает?");
 route.create(ServicesPage, "/services", "public", "услуги");
 route.create(SubRouteGift, "/gifts/*", "public", "подарки");
-route.create(EventPage, "/event", "public", "события");
+route.create(SubRouteEvent, "/event/*", "public", "мой список событий");
+route.create(ArchivePage, "/archive", "public", "архив событий");
+route.create(BookingPage, "/booking", "public", "я участник");
 route.create(CreatePage, "/create", "public", "создание");
 route.create(MorePage, "/more", "public", "подробнее");
 route.create(MainPage, "/brthd", "public", "ко дню рождения");
@@ -42,6 +54,7 @@ route.create(MainPage, "/christmas", "public", "на рождество");
 route.create(PrivacyPage, "/privacy", "public", "политики");
 
 export const App = () => {
+  useRequiredAccount();
   return (
     <BrowserRouter>
       <Route route={route.get} />

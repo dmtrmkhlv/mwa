@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { DataState, IUserSession } from "../../../interfaces";
-import { loginAccount } from "../ThunkCreator";
+import { loginAccount, requiredAccount } from "../ThunkCreator";
 
 const mokUser: IUserSession = {
   username: "",
@@ -36,6 +36,22 @@ export const UserSlice = createSlice({
       };
     });
     builder.addCase(loginAccount.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message ?? "";
+    });
+    builder.addCase(requiredAccount.pending, (state) => {
+      state.loading = true;
+      state.error = "";
+    });
+    builder.addCase(requiredAccount.fulfilled, (state, action) => {
+      state.loading = false;
+      state.value = {
+        username: action.payload.username,
+        session: action.payload.session,
+        userId: action.payload.userId,
+      };
+    });
+    builder.addCase(requiredAccount.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? "";
     });

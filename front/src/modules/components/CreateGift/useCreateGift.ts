@@ -1,23 +1,30 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { IData, selectListEvent, useAppDispatch } from "../../../modules";
+import {
+  IData,
+  IGift,
+  selectListEvent,
+  useAppDispatch,
+} from "../../../modules";
 import { useSelector } from "react-redux";
-import { createEvent } from "../../store/ThunkCreator";
+import { createEvent, createGift } from "../../store/ThunkCreator";
 
 interface OutLogin {
   title: string;
   description: string;
+  link: string;
   error: string;
   handlerForm: (e: ChangeEvent<HTMLInputElement>) => void;
   submitButton: () => void;
 }
 
-type useCreateFunc = () => OutLogin;
+type useCreateFunc = (eventId: string) => OutLogin;
 
-export const useCreateEvent: useCreateFunc = () => {
+export const useCreateGift: useCreateFunc = (eventId) => {
   const { value: listevent, error } = useSelector(selectListEvent);
   const dispatch = useAppDispatch();
   const [form, setForm] = useState({
     title: "",
+    link: "",
     description: "",
   });
   const handleForm = (e: ChangeEvent<HTMLInputElement>) => {
@@ -27,16 +34,17 @@ export const useCreateEvent: useCreateFunc = () => {
     }));
   };
   const submitButton = () => {
-    const value: IData = {
-      data: form,
+    const value: IGift = {
+      data: { ...form, id: eventId },
     };
-    dispatch(createEvent(value));
+    dispatch(createGift(value));
     console.log(error);
   };
 
   return {
     title: form.title,
     description: form.description,
+    link: form.link,
     error: error,
     handlerForm: handleForm,
     submitButton: submitButton,

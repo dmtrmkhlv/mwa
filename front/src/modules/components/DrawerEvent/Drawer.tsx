@@ -23,10 +23,11 @@ import { CreateEvent } from "../CreateEvent";
 
 const rows = [
   { key: 1, link: "/", title: "Главная" },
-  { key: 2, link: "/gifts", title: "Подарки" },
-  { key: 3, link: "/event", title: "События" },
-  { key: 4, link: "/event", title: "Подарок" },
-  { key: 5, link: "/create", title: "Создать" },
+  { key: 2, link: "/event", title: "Мои список событий" },
+  { key: 3, link: "/archive", title: "Архив событий" },
+  { key: 4, link: "/booking", title: "Я участник" },
+  { key: 5, link: "/gifts", title: "Что я дарю" },
+  { key: 6, link: "/gifts", title: "Что мне подарят" },
 ];
 
 export const DrawerHeader = styled("div")(({ theme }) => ({
@@ -112,30 +113,6 @@ export const CustomeDrawer = (props: CustomeDrawerProps) => {
       </List>
       <CreateEvent mini={open} />
       <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem key={text} disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
     </Drawer>
   );
 };

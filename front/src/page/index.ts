@@ -11,3 +11,6 @@ export * from "./MorePage";
 export * from "./PrivacyPage";
 export * from "./ServicesPage";
 export * from "./HowItWorksPage";
+export * from "./ArchivePage";
+export * from "./BookingPage";
+export * from "./EventBookingPage";

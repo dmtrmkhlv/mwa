@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { DataState, ListEvent } from "../../../interfaces";
-import { createEvent, getAllEvents } from "../ThunkCreator";
+import {
+  createEvent,
+  deactivate,
+  getAllEvents,
+  isActivate,
+} from "../ThunkCreator";
 
 export const initialState: DataState<ListEvent[]> = {
   value: [],
@@ -37,27 +42,32 @@ export const ListEventSlice = createSlice({
       state.loading = false;
       state.error = action.error.message ?? "";
     });
+    builder.addCase(deactivate.pending, (state) => {
+      state.loading = true;
+      state.error = "";
+    });
+    builder.addCase(deactivate.fulfilled, (state, action) => {
+      state.loading = false;
+      state.value = action.payload;
+    });
+    builder.addCase(deactivate.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message ?? "";
+    });
+    builder.addCase(isActivate.pending, (state) => {
+      state.loading = true;
+      state.error = "";
+    });
+    builder.addCase(isActivate.fulfilled, (state, action) => {
+      state.loading = false;
+      state.value = action.payload;
+    });
+    builder.addCase(isActivate.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message ?? "";
+    });
   },
-  //     userAuthenticatedOut(state, action) {
-  //       state.value = { username: "", session: false };
-  //     },
-  //   },
-  //   extraReducers: (builder) => {
-  //     builder.addCase(loginAccount.pending, (state) => {
-  //       state.loading = true;
-  //       state.error = "";
-  //     });
-  //     builder.addCase(loginAccount.fulfilled, (state, action) => {
-  //       state.loading = false;
-  //       state.value = {
-  //         username: action.payload.username,
-  //         session: action.payload.session,
-  //       };
-  //     });
-  //     builder.addCase(loginAccount.rejected, (state, action) => {
-  //       state.loading = false;
-  //       state.error = action.error.message ?? "";
-  //     });
+  // deactivate,
 });
 
 export const ListEventReducer = ListEventSlice.reducer;
