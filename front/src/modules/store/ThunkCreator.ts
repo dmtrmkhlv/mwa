@@ -14,10 +14,22 @@ export const loginAccount = thunks<IUserSession, IReqUser>(
   thunkapi.loginAccount,
   "user/setUser"
 );
+export const requiredAccount = thunks<IUserSession, any>(
+  thunkapi.requiredAccount,
+  "user/reqUser"
+);
 
 export const getAllEvents = thunks<ListEvent[], any>(
   thunkapi.getAllEvents,
   "event/getEvent"
+);
+export const deactivate = thunks<ListEvent[], any>(
+  thunkapi.deactivate,
+  "event/desactivate"
+);
+export const isActivate = thunks<ListEvent[], any>(
+  thunkapi.isActivate,
+  "event/isActivate"
 );
 export const getGifts = thunks<ListGift[], any>(
   thunkapi.getGifts,
@@ -25,5 +37,9 @@ export const getGifts = thunks<ListGift[], any>(
 );
 export const createEvent = thunks<ListEvent, any>(
   thunkapi.createEvent,
-  "gift/getGift"
+  "gift/createEvent"
+);
+export const createGift = thunks<ListGift[], any>(
+  thunkapi.createGift,
+  "gift/createGift"
 );

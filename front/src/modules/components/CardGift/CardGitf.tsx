@@ -15,7 +15,7 @@ import { useRole } from "../../requireAuth";
 import { getGifts } from "../../store/ThunkCreator";
 import { useEffect } from "react";
 import { ListGift } from "../../../interfaces";
-import { CreateEvent } from "../CreateEvent";
+import { CreateGift } from "../CreateGift";
 
 export function CardGift() {
   const [navigateMain] = useCustomeNavigate("/", true);
@@ -29,7 +29,7 @@ export function CardGift() {
   }, []);
   return (
     <>
-      {/* <CreateEvent /> */}
+      <CreateGift eventId={slug || ""} />
       {gift
         .filter((el) => el.eventId === slug)
         .map((el: ListGift) => {

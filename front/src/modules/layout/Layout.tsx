@@ -27,10 +27,9 @@ export default function Layout(props: LayoutProps): JSX.Element {
   return (
     <RequireAuth isAuth={session} isRequire={getRequireBoolean()}>
       <>
-        {/* {session ? <PrimarySearchAppBar session={session} /> : <Header />} */}
         <Header session={session} open={open} setOpen={setOpen} />
         {session ? <CustomeDrawer open={open} setOpen={setOpen} /> : <></>}
-        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <Box component="main" sx={{ flexGrow: 1, p: 1 }}>
           <DrawerHeader />
           <Container maxWidth="xl">
             <Box

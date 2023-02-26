@@ -30,6 +30,14 @@ export interface IData {
     isActive?: boolean;
   };
 }
+export interface IGift {
+  data: {
+    title: string;
+    description: string;
+    link?: string;
+    id?: string;
+  };
+}
 type GetUsersRequests = {
   data: {};
 };
@@ -56,10 +64,38 @@ export class Api {
 
     return data;
   }
+  async requiredAccount(val: any) {
+    const resptwo = await apifetch.get(`api/v1/auth/profile`);
+    const data = {
+      username: resptwo.data.username,
+      session: true,
+      userId: resptwo.data.userId,
+    };
+
+    return data;
+  }
   async getAllEvents(value: any) {
     try {
       const resp = await apifetch.get<ListEvent>(`/api/v1/event`);
       return resp.data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  async deactivate(value: string) {
+    try {
+      await apifetch.delete<any>(`/api/v1/event/active/${value}`);
+      const resptwo = await apifetch.get<ListEvent>(`/api/v1/event`);
+      return resptwo.data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  async isActivate(value: string) {
+    try {
+      await apifetch.post<any>(`/api/v1/event/active/${value}`);
+      const resptwo = await apifetch.get<ListEvent>(`/api/v1/event`);
+      return resptwo.data;
     } catch (error) {
       console.error(error);
     }
@@ -83,6 +119,26 @@ export class Api {
         ...data,
       });
       return resp.data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  async createGift(value: IGift) {
+    try {
+      const data = {
+        title: value.data.title,
+        description: value.data.description,
+        link: value.data.link,
+      };
+
+      const resp = await apifetch.post<CreateUserResponse>(
+        `/api/v1/gift/${value.data.id}`,
+        {
+          ...data,
+        }
+      );
+      const resptwo = await apifetch.get<GetUsersRequests>(`/api/v1/gift`);
+      return resptwo.data;
     } catch (error) {
       console.error(error);
     }
