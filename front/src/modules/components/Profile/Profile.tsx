@@ -11,55 +11,14 @@ import {
 } from "@mui/material";
 import DoneIcon from "@mui/icons-material/Done";
 import DoDisturbIcon from "@mui/icons-material/DoDisturb";
-import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
-import { selectUser } from "../../store";
-import { useAppDispatch } from "../../hooks";
-import { getAllEvents } from "../../store/ThunkCreator";
+import { useState } from "react";
 
 import GeneralSettings from "./GeneralSettings";
+import { useGetProfile } from "./useGetProfile";
 
 export function ProfileEvent() {
-  const { value: user } = useSelector(selectUser);
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(getAllEvents("запрос"));
-  }, []);
-  const ref = useRef<HTMLDivElement>(null);
+  const [profile, stringAvatar, avatarString] = useGetProfile("id");
 
-  function stringToColor(string: string) {
-    let hash = 0;
-    let i;
-    for (i = 0; i < string.length; i += 1) {
-      hash = string.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    let color = "#";
-    for (i = 0; i < 3; i += 1) {
-      const value = (hash >> (i * 8)) & 0xff;
-      color += `00${value.toString(16)}`.slice(-2);
-    }
-    return color;
-  }
-
-  function stringAvatar(name: string) {
-    return {
-      sx: {
-        bgcolor: stringToColor(name),
-      },
-      children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
-    };
-  }
-
-  const profile = {
-    firstName: "Della",
-    lastName: "Kent",
-    email: "a.c@infor.com",
-    phone: "2543545345",
-    username: "DellaKent",
-    emailIsActive: false,
-    photo: "profile.photo",
-    password: "password",
-  };
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -70,19 +29,14 @@ export function ProfileEvent() {
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: "80%",
-    bgcolor: "background.paper",
+    bgcolor: "#ffffff",
     border: "2px solid #000",
     boxShadow: 24,
     p: 4,
   };
 
-  const avatarString =
-    profile.firstName || profile.lastName
-      ? profile.firstName + " " + profile.lastName
-      : profile.username;
-
   return (
-    <Box sx={{ pb: 3 }} ref={ref}>
+    <Box sx={{ pb: 3 }}>
       <CssBaseline />
       <Card sx={{ minWidth: 275 }}>
         <CardContent>
