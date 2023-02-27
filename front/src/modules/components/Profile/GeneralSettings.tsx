@@ -14,14 +14,15 @@ import {
   IconButton,
   OutlinedInput,
 } from "@mui/material";
-
+import CloseIcon from "@mui/icons-material/Close";
 import SuccessSnackbar from "./SuccessSnackbar";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const GeneralSettings = (props: any) => {
-  const { profile } = props;
+  const { onClose, profile } = props;
   const [change, setChange] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
+  const [confirmButtonDisabled, setConfirmButtonDisabled] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -32,6 +33,7 @@ const GeneralSettings = (props: any) => {
   };
 
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarText, setSnackbarText] = useState("Изменения сохранены!");
   const [values, setValues] = useState({
     firstName: profile.firstName,
     lastName: profile.lastName,
@@ -64,11 +66,21 @@ const GeneralSettings = (props: any) => {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
+    setSnackbarText("Изменения сохранены!");
     setOpenSnackbar(true);
   };
 
   const handleSnackbarClose = () => {
     setOpenSnackbar(false);
+  };
+
+  const handleSendConfirm = () => {
+    setSnackbarText("Запрос отправлен");
+    setOpenSnackbar(true);
+    if (confirmButtonDisabled) {
+      return;
+    }
+    setConfirmButtonDisabled(true);
   };
 
   return (
@@ -170,7 +182,12 @@ const GeneralSettings = (props: any) => {
             </Grid>
             {!values.emailIsActive ? (
               <Grid item md={6} xs={12}>
-                <Button type="button" variant="contained">
+                <Button
+                  type="button"
+                  variant="contained"
+                  onClick={handleSendConfirm}
+                  disabled={confirmButtonDisabled}
+                >
                   Подтвердить Email
                 </Button>
               </Grid>
@@ -185,8 +202,24 @@ const GeneralSettings = (props: any) => {
             Сохранить
           </Button>
         </CardActions>
+        <IconButton
+          aria-label="close"
+          onClick={onClose}
+          sx={{
+            position: "absolute",
+            right: 8,
+            top: 8,
+            color: "grey",
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
       </form>
-      <SuccessSnackbar onClose={handleSnackbarClose} open={openSnackbar} />
+      <SuccessSnackbar
+        onClose={handleSnackbarClose}
+        open={openSnackbar}
+        snackbarText={snackbarText}
+      />
     </Card>
   );
 };

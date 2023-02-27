@@ -13,14 +13,14 @@ import DoneIcon from "@mui/icons-material/Done";
 import DoDisturbIcon from "@mui/icons-material/DoDisturb";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { selectListEvent } from "../../store";
+import { selectUser } from "../../store";
 import { useAppDispatch } from "../../hooks";
 import { getAllEvents } from "../../store/ThunkCreator";
 
 import GeneralSettings from "./GeneralSettings";
 
 export function ProfileEvent() {
-  const { value: events } = useSelector(selectListEvent);
+  const { value: user } = useSelector(selectUser);
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getAllEvents("запрос"));
@@ -56,7 +56,7 @@ export function ProfileEvent() {
     email: "a.c@infor.com",
     phone: "2543545345",
     username: "DellaKent",
-    emailIsActive: true,
+    emailIsActive: false,
     photo: "profile.photo",
     password: "password",
   };
@@ -130,7 +130,7 @@ export function ProfileEvent() {
             aria-describedby="modal-modal-description"
           >
             <Box sx={modalStyle}>
-              <GeneralSettings profile={profile} />
+              <GeneralSettings onClose={handleClose} profile={profile} />
             </Box>
           </Modal>
         </CardActions>

@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { Snackbar, SnackbarContent } from "@mui/material";
 
 const SuccessSnackbar = (props: any) => {
-  const { open, onClose } = props;
+  const { open, onClose, snackbarText } = props;
 
   return (
     <Snackbar
@@ -14,7 +14,7 @@ const SuccessSnackbar = (props: any) => {
       onClose={onClose}
       open={open}
     >
-      <SnackbarContent message={<span>Изменения сохранены!</span>} />
+      <SnackbarContent message={<span>{snackbarText}</span>} />
     </Snackbar>
   );
 };
@@ -22,6 +22,7 @@ const SuccessSnackbar = (props: any) => {
 SuccessSnackbar.propTypes = {
   onClose: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
+  snackbarText: "string",
 };
 
 SuccessSnackbar.defaultProps = {
