@@ -48,8 +48,7 @@ export function CreateEvent(props: CreateEventProps) {
         <DialogTitle>Описание</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Для того чтобы создать список требуется заполнить поля с названием и
-            описанием
+            Для того, чтобы создать список, заполнить поля:
           </DialogContentText>
           <TextField
             autoFocus
