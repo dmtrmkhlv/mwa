@@ -107,12 +107,12 @@ export class GiftService {
           profile: true,
         },
       });
+      gift.userBookId = userId;
       if (user.profile.emailIsActive) {
         const name =
           user.profile.firstname || user.profile.lastname
             ? user.profile.firstname + ' ' + user.profile.lastname
             : user.username;
-        gift.userBookId = userId;
         const url =
           this.configService.get('NODE_ENV') === 'development'
             ? `${this.configService.get('HOST_URL_DEV')}/api/v1/event/${
