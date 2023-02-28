@@ -18,7 +18,6 @@ import { useGetProfile } from "./useGetProfile";
 
 export function ProfileEvent() {
   const [profile, avatarFromName] = useGetProfile();
-
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);

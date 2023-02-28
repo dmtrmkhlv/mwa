@@ -1,5 +1,6 @@
 import { apifetch } from "./axios";
 import { IListCreator, IReqUser, ListEvent } from "../../interfaces";
+import { IUser } from "../store/slices/ProfileSlice";
 
 type CreateUserResponse = {
   access_token: string;
@@ -67,6 +68,16 @@ export class Api {
   async getProfile() {
     try {
       const resp = await apifetch.post(`/api/v1/users/profile`);
+      return resp.data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  async updateProfile(value: { id: string; data: IUser }) {
+    try {
+      const resp = await apifetch.patch(`/api/v1/users/${value.id}`, {
+        ...value.data,
+      });
       return resp.data;
     } catch (error) {
       console.error(error);

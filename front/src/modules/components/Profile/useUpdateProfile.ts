@@ -2,17 +2,30 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectProfile } from "../../store";
 import { useAppDispatch } from "../../hooks";
-import { getProfile } from "../../store/ThunkCreator";
+import { updateProfile } from "../../store/ThunkCreator";
 
-export const useUpdateProfile = () => {
+export interface IUpdateUser {
+  username?: string;
+  password?: string;
+  profile?: {
+    photo?: string | null;
+    firstname?: string | null;
+    lastname?: string | null;
+    phone?: string | null;
+    email?: string | null;
+  };
+}
+
+export const useUpdateProfile = (updateData: IUpdateUser) => {
   const { value: userProfile } = useSelector(selectProfile);
 
+  const id = userProfile?.id;
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(getProfile("profile"));
-  }, [dispatch]);
+    dispatch(updateProfile({ id, data: updateData }));
+  }, [dispatch, id, updateData]);
 
-  const userResponse: any = {
+  const updateUserResponse: any = {
     username: userProfile?.username || "",
     password: userProfile?.password || "",
     firstname: userProfile?.profile?.firstname || "",
@@ -23,5 +36,5 @@ export const useUpdateProfile = () => {
     emailIsActive: userProfile?.profile?.emailIsActive || false,
   };
 
-  return [userResponse];
+  return [updateUserResponse];
 };

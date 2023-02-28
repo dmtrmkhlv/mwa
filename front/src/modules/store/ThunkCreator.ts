@@ -19,6 +19,10 @@ export const getProfile = thunks<IUser, any>(
   thunkapi.getProfile,
   "user/getProfile"
 );
+export const updateProfile = thunks<IUser, any>(
+  thunkapi.updateProfile,
+  "user/updateProfile"
+);
 export const requiredAccount = thunks<IUserSession, any>(
   thunkapi.requiredAccount,
   "user/reqUser"
