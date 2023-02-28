@@ -17,21 +17,13 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import SuccessSnackbar from "./SuccessSnackbar";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { useUpdateProfile } from "./useUpdateProfile";
 
 const GeneralSettings = (props: any) => {
   const { onClose, profile } = props;
   const [change, setChange] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [confirmButtonDisabled, setConfirmButtonDisabled] = useState(false);
-
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-  const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault();
-  };
-
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarText, setSnackbarText] = useState("Изменения сохранены!");
   const [values, setValues] = useState({
@@ -44,6 +36,27 @@ const GeneralSettings = (props: any) => {
     photo: profile.photo,
     password: profile.password,
   });
+  const [updateUserData, setUpdateUserData] = useState({
+    username: values.username,
+    password: values.password,
+    profile: {
+      photo: values.photo,
+      firstname: values.firstname,
+      lastname: values.lastname,
+      phone: values.phone,
+      email: values.email,
+    },
+  });
+
+  const [updateUserResponse] = useUpdateProfile(updateUserData);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   function isEqual(object1: any, object2: any) {
@@ -72,6 +85,7 @@ const GeneralSettings = (props: any) => {
 
   const handleChange = (event: any) => {
     event.persist();
+
     setValues({
       ...values,
       [event.target.name]:
@@ -91,8 +105,25 @@ const GeneralSettings = (props: any) => {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    setSnackbarText("Изменения сохранены!");
-    setOpenSnackbar(true);
+
+    setUpdateUserData({
+      username: values.username,
+      password: values.password,
+      profile: {
+        photo: values.photo,
+        firstname: values.firstname,
+        lastname: values.lastname,
+        phone: values.phone,
+        email: values.email,
+      },
+    });
+
+    console.log(updateUserResponse);
+
+    if (updateUserResponse.username) {
+      setSnackbarText("Изменения сохранены!");
+      setOpenSnackbar(true);
+    }
   };
 
   const handleSnackbarClose = () => {
@@ -127,7 +158,7 @@ const GeneralSettings = (props: any) => {
               />
             </Grid>
             <Grid item md={6} xs={12}>
-              <FormControl variant="outlined" fullWidth>
+              <FormControl variant="outlined" fullWidth required>
                 <InputLabel htmlFor="outlined-adornment-password">
                   Пароль
                 </InputLabel>
