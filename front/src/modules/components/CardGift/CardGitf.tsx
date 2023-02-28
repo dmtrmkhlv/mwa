@@ -13,58 +13,106 @@ import {
 } from "../..";
 import { useRole } from "../../requireAuth";
 import { getGifts } from "../../store/ThunkCreator";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ListGift } from "../../../interfaces";
 import { CreateGift } from "../CreateGift";
+import { useDeleteGift } from "./useDelteGift";
+import { useReserveGift } from "./useReservGift";
 
-export function CardGift() {
-  const [navigateMain] = useCustomeNavigate("/", true);
-  const { value: user } = useSelector(selectUser);
+interface CustomeCardProps {
+  el: ListGift;
+  role: string;
+}
+
+const CustomeCard = (props: CustomeCardProps) => {
+  const { el, role } = props;
+  const [bookingGift] = useReserveGift(el.id);
+  const [deleteGift] = useDeleteGift(el.id);
+  return (
+    <Card key={el.id} sx={{ width: 270, ml: "auto", mr: "auto", mb: "1em" }}>
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          height="140"
+          image={el.link}
+          alt="green iguana"
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {el.title}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+
+      <CardActions>
+        {role === "creator" ? (
+          <Button
+            sx={{
+              textTransform: "unset",
+              color: "#333",
+              paddingLeft: "10px",
+            }}
+            size="small"
+            color="primary"
+            {...deleteGift}
+          >
+            Удалить подарок
+          </Button>
+        ) : (
+          <>
+            <Button
+              sx={{
+                textTransform: "unset",
+                color: "#333",
+                paddingLeft: "10px",
+              }}
+              size="small"
+              color="primary"
+              {...bookingGift}
+            >
+              Забронировать подарок
+            </Button>
+            <Button
+              sx={{
+                textTransform: "unset",
+                color: "#333",
+                paddingLeft: "10px",
+              }}
+              size="small"
+              color="primary"
+              {...bookingGift}
+            >
+              снять бронь
+            </Button>
+          </>
+        )}
+      </CardActions>
+    </Card>
+  );
+};
+
+const SubCardGift = () => {
+  const [role] = useRole();
   const { value: gift } = useSelector(selectListGift);
   const { slug } = useParams();
-  const dispatch = useAppDispatch();
-  const role = useRole(user.userId, 2);
-  useEffect(() => {
-    dispatch(getGifts("запрос"));
-  }, []);
   return (
     <>
-      <CreateGift eventId={slug || ""} />
-      {gift
-        .filter((el) => el.eventId === slug)
-        .map((el: ListGift) => {
-          return (
-            <Card sx={{ width: 270, ml: "auto", mr: "auto", mb: "1em" }}>
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image={el.link}
-                  alt="green iguana"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    {el.title}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <Button
-                  sx={{
-                    textTransform: "unset",
-                    color: "#333",
-                    paddingLeft: "10px",
-                  }}
-                  size="small"
-                  color="primary"
-                  {...navigateMain}
-                >
-                  Узнать больше ›
-                </Button>
-              </CardActions>
-            </Card>
-          );
-        })}
+      {role === "creator" ? <CreateGift eventId={slug || ""} /> : <></>}
+      <h1>{role}</h1>
+      {gift.map((el: ListGift) => {
+        return <CustomeCard el={el} role={role} />;
+      })}
     </>
   );
+};
+
+export function CardGift() {
+  const dispatch = useAppDispatch();
+  const { slug } = useParams();
+  useEffect(() => {
+    if (slug) {
+      dispatch(getGifts(slug));
+    }
+  }, []);
+  return <SubCardGift />;
 }

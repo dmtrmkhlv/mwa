@@ -5,13 +5,11 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import { useSelector } from "react-redux";
 import { selectUser } from "../..";
-import { useRole } from "../../requireAuth";
 import "./CardRound.css";
 
 export function CardRound(props: any) {
   const { images } = props;
   const { value: user } = useSelector(selectUser);
-  const role = useRole(user.userId, 2);
 
   return (
     <Box className="roundCard" boxShadow="md">
