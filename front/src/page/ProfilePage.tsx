@@ -1,12 +1,12 @@
-import { BookingEvent } from "../modules";
+import { ProfileEvent } from "../modules";
 import { FC } from "react";
 import { PageProps } from "../interfaces";
 import Layout from "../modules/layout/Layout";
 
-export const BookingPage: FC<PageProps> = ({ isRequire }) => {
+export const ProfilePage: FC<PageProps> = ({ isRequire }) => {
   return (
     <Layout isRequire={isRequire}>
-      <BookingEvent />
+      <ProfileEvent />
     </Layout>
   );
 };

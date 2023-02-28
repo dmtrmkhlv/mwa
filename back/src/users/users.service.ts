@@ -226,6 +226,18 @@ export class UsersService {
     });
   }
 
+  async getUserProfile(id: string): Promise<UserEntity | undefined> {
+    const userProfileWithoutPassword = await this.usersRepository.findOne({
+      where: {
+        id: id,
+      },
+      relations: {
+        profile: true,
+      },
+    });
+    return userProfileWithoutPassword;
+  }
+
   async getUserProfileWithoutPassword(
     id: string,
   ): Promise<UserEntity | undefined> {

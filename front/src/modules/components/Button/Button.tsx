@@ -4,7 +4,7 @@ import { useThemeButton } from "./useThemeButton";
 
 export const Entry = () => {
   const [theme] = useThemeButton();
-  const [navlogin] = useCustomeNavigate("login", false);
+  const [navlogin] = useCustomeNavigate("/login", false);
 
   return (
     <ThemeProvider {...theme}>

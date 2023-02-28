@@ -14,3 +14,4 @@ export * from "./HowItWorksPage";
 export * from "./ArchivePage";
 export * from "./BookingPage";
 export * from "./EventBookingPage";
+export * from "./ProfilePage";

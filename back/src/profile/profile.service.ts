@@ -55,10 +55,15 @@ export class ProfileService {
       secret: jwtConstants.secret,
       expiresIn: `${this.configService.get('EXPIRESIN') || 60}s`,
     });
-    const rootURL = '/api/v1/auth/user-profile';
-    const url = `${
-      this.configService.get('EMAIL_CONFIRMATION_URL') || rootURL
-    }?token=${token}`;
+
+    const url =
+      this.configService.get('NODE_ENV') === 'development'
+        ? `${this.configService.get(
+            'HOST_URL_DEV',
+          )}/api/v1/auth/user-profile?token=${token}`
+        : `${this.configService.get(
+            'HOST_URL',
+          )}/api/v1/auth/user-profile?token=${token}`;
 
     const name =
       user.profile.firstname || user.profile.lastname
