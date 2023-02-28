@@ -91,6 +91,9 @@ export function PrimarySearchAppBar(props: PropsHeader) {
     dispatch(userAuthenticatedOut("Выход"));
     navigate("/login");
   };
+  const handleProfile = () => {
+    navigate("/profile");
+  };
 
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMobileMoreAnchorEl(event.currentTarget);
@@ -113,7 +116,7 @@ export function PrimarySearchAppBar(props: PropsHeader) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Профиль</MenuItem>
+      <MenuItem onClick={handleProfile}>Профиль</MenuItem>
       <MenuItem onClick={handleMenuClose}>Мой аккаунт</MenuItem>
       <MenuItem onClick={handleOut}>Выход</MenuItem>
     </Menu>

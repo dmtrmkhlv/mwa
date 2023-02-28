@@ -7,12 +7,17 @@ import {
 } from "../../interfaces";
 import { api, Api } from "../api";
 import { thunks } from "./helper";
+import { IUser } from "./slices/ProfileSlice";
 
 const thunkapi = new Api();
 
 export const loginAccount = thunks<IUserSession, IReqUser>(
   thunkapi.loginAccount,
   "user/setUser"
+);
+export const getProfile = thunks<IUser, any>(
+  thunkapi.getProfile,
+  "user/getProfile"
 );
 export const requiredAccount = thunks<IUserSession, any>(
   thunkapi.requiredAccount,
