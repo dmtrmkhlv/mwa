@@ -21,6 +21,7 @@ import { useState } from "react";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import { drawerWidth } from "../DrawerEvent/DrawerProps";
 import MenuIcon from "@mui/icons-material/Menu";
+import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 // import { drawerWidth } from "./DrawerProps";
 import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 
@@ -115,8 +116,8 @@ export function PrimarySearchAppBar(props: PropsHeader) {
         horizontal: "right",
       }}
       open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
+
+      onClose={handleMenuClose}>
       <MenuItem onClick={handleProfile}>Профиль</MenuItem>
       <MenuItem onClick={handleOut}>Выйти</MenuItem>
     </Menu>
@@ -139,8 +140,7 @@ export function PrimarySearchAppBar(props: PropsHeader) {
         horizontal: "right",
       }}
       open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
+      onClose={handleMobileMenuClose}>
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="error">
@@ -153,8 +153,7 @@ export function PrimarySearchAppBar(props: PropsHeader) {
         <IconButton
           size="large"
           aria-label="show 17 new notifications"
-          color="inherit"
-        >
+          color="inherit">
           <Badge badgeContent={17} color="error">
             <NotificationsIcon />
           </Badge>
@@ -167,8 +166,7 @@ export function PrimarySearchAppBar(props: PropsHeader) {
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
-          color="inherit"
-        >
+          color="inherit">
           <AccountCircle />
         </IconButton>
         <p>Profile</p>
@@ -188,8 +186,7 @@ export function PrimarySearchAppBar(props: PropsHeader) {
             justifyContent: { xs: "end", sm: "center" },
             flexGrow: 1,
             height: 128,
-          }}
-        >
+          }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -198,8 +195,7 @@ export function PrimarySearchAppBar(props: PropsHeader) {
             sx={{
               marginRight: 5,
               ...(open && { display: "none" }),
-            }}
-          >
+            }}>
             <MenuIcon />
           </IconButton>
 
@@ -208,9 +204,8 @@ export function PrimarySearchAppBar(props: PropsHeader) {
             noWrap
             component="div"
             color="black"
-            sx={{ display: { xs: "none", sm: "block" } }}
-          >
-            Список подарков
+            sx={{ display: { xs: "none", sm: "block" } }}>
+            Мои списки 📋
           </Typography>
 
           <Box sx={{ flexGrow: 1 }} />
@@ -220,8 +215,7 @@ export function PrimarySearchAppBar(props: PropsHeader) {
                 <IconButton
                   size="large"
                   aria-label="show 4 new mails"
-                  color="default"
-                >
+                  color="default">
                   <Badge badgeContent={4} color="error">
                     <MailIcon />
                   </Badge>
@@ -229,8 +223,7 @@ export function PrimarySearchAppBar(props: PropsHeader) {
                 <IconButton
                   size="large"
                   aria-label="show 17 new notifications"
-                  color="default"
-                >
+                  color="default">
                   <Badge badgeContent={17} color="error">
                     <NotificationsIcon />
                   </Badge>
@@ -242,8 +235,7 @@ export function PrimarySearchAppBar(props: PropsHeader) {
                   aria-controls={menuId}
                   aria-haspopup="true"
                   onClick={handleProfileMenuOpen}
-                  color="default"
-                >
+                  color="default">
                   <AccountCircle />
                 </IconButton>
               </>
@@ -258,8 +250,7 @@ export function PrimarySearchAppBar(props: PropsHeader) {
               aria-controls={mobileMenuId}
               aria-haspopup="true"
               onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
+              color="inherit">
               <MoreIcon />
             </IconButton>
           </Box>
