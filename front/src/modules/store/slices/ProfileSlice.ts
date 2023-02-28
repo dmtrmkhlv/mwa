@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { DataState } from "../../../interfaces";
-import { getProfile, loginAccount, requiredAccount } from "../ThunkCreator";
+import { getProfile } from "../ThunkCreator";
 
-interface IProfile {
+interface IUserProfile {
   id: string;
   photo: string;
   firstname: string;
@@ -12,15 +12,32 @@ interface IProfile {
   emailIsActive: boolean;
 }
 
-export interface IUserProfile {
+export interface IUser {
   id: string;
   username: string;
   password: string;
-  profile: IProfile;
+  profile: IUserProfile;
+  events: any[];
 }
 
-export const initialState: DataState<IUserProfile | null> = {
-  value: null,
+const mokUser: IUser = {
+  id: "",
+  username: "",
+  password: "",
+  profile: {
+    id: "",
+    photo: "",
+    firstname: "",
+    lastname: "",
+    phone: "",
+    email: "",
+    emailIsActive: false,
+  },
+  events: [],
+};
+
+export const initialState: DataState<IUser | null> = {
+  value: mokUser,
   loading: false,
   error: "",
 };

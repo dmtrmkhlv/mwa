@@ -64,9 +64,13 @@ export class Api {
 
     return data;
   }
-  async getProfile(val: string) {
-    const resp = await apifetch.get<CreateUserResponse>(`/api/v1/users/${val}`);
-    return resp;
+  async getProfile() {
+    try {
+      const resp = await apifetch.post(`/api/v1/users/profile`);
+      return resp.data;
+    } catch (error) {
+      console.error(error);
+    }
   }
   async requiredAccount(val: any) {
     const resptwo = await apifetch.get(`api/v1/auth/profile`);

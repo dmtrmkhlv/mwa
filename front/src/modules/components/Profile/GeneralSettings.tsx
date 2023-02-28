@@ -35,8 +35,8 @@ const GeneralSettings = (props: any) => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarText, setSnackbarText] = useState("Изменения сохранены!");
   const [values, setValues] = useState({
-    firstName: profile.firstName,
-    lastName: profile.lastName,
+    firstname: profile.firstname,
+    lastname: profile.lastname,
     email: profile.email,
     phone: profile.phone,
     username: profile.username,
@@ -44,6 +44,31 @@ const GeneralSettings = (props: any) => {
     photo: profile.photo,
     password: profile.password,
   });
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  function isEqual(object1: any, object2: any) {
+    const props1 = Object.getOwnPropertyNames(object1);
+    const props2 = Object.getOwnPropertyNames(object2);
+
+    if (props1.length !== props2.length) {
+      return false;
+    }
+
+    for (let i = 0; i < props1.length; i += 1) {
+      const prop = props1[i];
+      const bothAreObjects =
+        typeof object1[prop] === "object" && typeof object2[prop] === "object";
+
+      if (
+        (!bothAreObjects && object1[prop] !== object2[prop]) ||
+        (bothAreObjects && !isEqual(object1[prop], object2[prop]))
+      ) {
+        return false;
+      }
+    }
+
+    return true;
+  }
 
   const handleChange = (event: any) => {
     event.persist();
@@ -57,12 +82,12 @@ const GeneralSettings = (props: any) => {
   };
 
   useEffect(() => {
-    if (JSON.stringify(profile) === JSON.stringify(values)) {
+    if (isEqual(profile, values)) {
       setChange(true);
     } else {
       setChange(false);
     }
-  }, [profile, values]);
+  }, [isEqual, profile, values]);
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
@@ -95,6 +120,7 @@ const GeneralSettings = (props: any) => {
                 fullWidth
                 label="Username"
                 name="username"
+                required
                 onChange={handleChange}
                 value={values.username}
                 variant="outlined"
@@ -109,6 +135,7 @@ const GeneralSettings = (props: any) => {
                   id="outlined-adornment-password"
                   name="password"
                   fullWidth
+                  required
                   defaultValue={values.password}
                   onChange={handleChange}
                   type={showPassword ? "text" : "password"}
@@ -134,7 +161,7 @@ const GeneralSettings = (props: any) => {
                 label="Имя"
                 name="firstName"
                 onChange={handleChange}
-                value={values.firstName}
+                value={values.firstname}
                 variant="outlined"
               />
             </Grid>
@@ -144,7 +171,7 @@ const GeneralSettings = (props: any) => {
                 label="Фамилия"
                 name="lastName"
                 onChange={handleChange}
-                value={values.lastName}
+                value={values.lastname}
                 variant="outlined"
               />
             </Grid>
@@ -165,7 +192,6 @@ const GeneralSettings = (props: any) => {
                 label="Фото"
                 name="photo"
                 onChange={handleChange}
-                // required
                 value={values.photo}
                 variant="outlined"
               />

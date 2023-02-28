@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { Snackbar, SnackbarContent } from "@mui/material";
 
 const SuccessSnackbar = (props: any) => {
@@ -17,17 +16,6 @@ const SuccessSnackbar = (props: any) => {
       <SnackbarContent message={<span>{snackbarText}</span>} />
     </Snackbar>
   );
-};
-
-SuccessSnackbar.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  open: PropTypes.bool.isRequired,
-  snackbarText: "string",
-};
-
-SuccessSnackbar.defaultProps = {
-  open: true,
-  onClose: () => {},
 };
 
 export default SuccessSnackbar;

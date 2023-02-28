@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { selectProfile, selectUser } from "../../store";
+import { selectProfile } from "../../store";
 import { useAppDispatch } from "../../hooks";
 import { getProfile } from "../../store/ThunkCreator";
 
 export const useGetProfile = () => {
   const { value: userProfile } = useSelector(selectProfile);
-  const { value: user } = useSelector(selectUser);
+
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(getProfile(user?.userId || ""));
-  }, []);
+    dispatch(getProfile("profile"));
+  }, [dispatch]);
 
   function stringToColor(string: string) {
     let hash = 0;
@@ -34,24 +34,27 @@ export const useGetProfile = () => {
       children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
     };
   }
-  let avatarString = "";
-  if (userProfile !== null) {
+  let avatarString = "Whishlist App";
+
+  if (userProfile && userProfile?.username !== "") {
     avatarString =
-      userProfile.profile.firstname || userProfile.profile.lastname
+      userProfile?.profile.firstname || userProfile?.profile.lastname
         ? userProfile.profile.firstname + " " + userProfile.profile.lastname
         : userProfile.username;
   }
 
+  const avatarFromName = stringAvatar(avatarString);
+
   const userResponse: any = {
-    userName: userProfile?.username || "",
+    username: userProfile?.username || "",
     password: userProfile?.password || "",
-    firstName: userProfile?.profile.firstname || "",
-    lastName: userProfile?.profile.lastname || "",
-    email: userProfile?.profile.email || "",
-    phone: userProfile?.profile.phone || "",
-    emailIsActive: userProfile?.profile.emailIsActive || false,
-    photo: userProfile?.profile.photo || "",
+    firstname: userProfile?.profile?.firstname || "",
+    lastname: userProfile?.profile?.lastname || "",
+    phone: userProfile?.profile?.phone || "",
+    photo: userProfile?.profile?.photo || "",
+    email: userProfile?.profile?.email || "",
+    emailIsActive: userProfile?.profile?.emailIsActive || false,
   };
 
-  return [userResponse, { stringAvatar: stringAvatar }, avatarString];
+  return [userResponse, avatarFromName];
 };

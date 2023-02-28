@@ -17,7 +17,7 @@ import GeneralSettings from "./GeneralSettings";
 import { useGetProfile } from "./useGetProfile";
 
 export function ProfileEvent() {
-  const [profile, stringAvatar, avatarString] = useGetProfile("id");
+  const [profile, avatarFromName] = useGetProfile();
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -44,18 +44,18 @@ export function ProfileEvent() {
             Ваши данные:
           </Typography>
           <Avatar
-            {...stringAvatar(avatarString)}
-            alt={avatarString}
+            {...avatarFromName}
+            alt={profile.username}
             sx={{ width: 56, height: 56, marginBottom: "20px" }}
           />
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
             Username: {profile.username}
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            Имя: {profile.firstName}
+            Имя: {profile.firstname}
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            Фамилия: {profile.lastName}
+            Фамилия: {profile.lastname}
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
             Телефон: {profile.phone}
