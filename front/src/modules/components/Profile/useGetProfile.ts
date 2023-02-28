@@ -38,9 +38,12 @@ export const useGetProfile = () => {
 
   if (userProfile && userProfile?.username !== "") {
     avatarString =
-      userProfile?.profile.firstname || userProfile?.profile.lastname
-        ? userProfile.profile.firstname + " " + userProfile.profile.lastname
-        : userProfile.username;
+      userProfile?.profile.firstname !== "" ||
+      userProfile?.profile.lastname !== ""
+        ? userProfile.profile?.firstname + " " + userProfile.profile?.lastname
+        : userProfile.username.slice(0, 1) +
+          " " +
+          userProfile.username.slice(1, 2);
   }
 
   const avatarFromName = stringAvatar(avatarString);
