@@ -68,7 +68,8 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @Post('profile')
   getProfile(@Request() req) {
-    return this.usersService.getUserProfileWithoutPassword(req.user.userId);
+    return this.usersService.getUserProfile(req.user.userId);
+    // return this.usersService.getUserProfileWithoutPassword(req.user.userId);
   }
 
   @ApiOperation({ summary: 'Update user' })
