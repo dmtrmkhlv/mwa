@@ -50,7 +50,7 @@ export function CreateGift(props: CreateEventProps) {
         <DialogTitle>Описание</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Для того чтобы создать подарок заполните поля
+            Для того, чтобы создать подарок, заполните поля:
           </DialogContentText>
           <TextField
             autoFocus

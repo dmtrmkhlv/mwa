@@ -100,7 +100,7 @@ const SubCardGift = () => {
       {role === "creator" ? <CreateGift eventId={slug || ""} /> : <></>}
       <h1>{role}</h1>
       {gift.map((el: ListGift) => {
-        return <CustomeCard el={el} role={role} />;
+        return <CustomeCard key={el.id} el={el} role={role} />;
       })}
     </>
   );

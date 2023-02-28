@@ -67,7 +67,7 @@ export class Api {
   }
   async getProfile() {
     try {
-      const resp = await apifetch.post(`/api/v1/users/profile`);
+      const resp = await apifetch.post(`/api/v1/users/profile`, {});
       return resp.data;
     } catch (error) {
       console.error(error);
@@ -76,7 +76,15 @@ export class Api {
   async updateProfile(value: { id: string; data: IUser }) {
     try {
       const resp = await apifetch.patch(`/api/v1/users/${value.id}`, {
-        ...value.data,
+        username: value.data.username,
+        // password: value.data.password,
+        profile: {
+          // photo: value.data.profile.photo || "",
+          firstname: value.data.profile.firstname || " ",
+          lastname: value.data.profile.lastname || " ",
+          // phone: value.data.profile.phone || "",
+          // email: value.data.profile.email || "",
+        },
       });
       return resp.data;
     } catch (error) {

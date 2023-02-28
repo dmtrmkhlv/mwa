@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectProfile } from "../../store";
 import { useAppDispatch } from "../../hooks";
@@ -16,16 +16,21 @@ export interface IUpdateUser {
   };
 }
 
+type UpdateUser = {
+  [key: string]: unknown;
+};
+
+type ResponseUser = [
+  UpdateUser,
+  {
+    onClick: (update: any) => void;
+    setData: (update: any) => void;
+  }
+];
+
 export const useUpdateProfile = (updateData: IUpdateUser) => {
   const { value: userProfile } = useSelector(selectProfile);
-
-  const id = userProfile?.id;
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(updateProfile({ id, data: updateData }));
-  }, [dispatch, id, updateData]);
-
-  const updateUserResponse: any = {
+  const updateUserResponse: UpdateUser = {
     username: userProfile?.username || "",
     password: userProfile?.password || "",
     firstname: userProfile?.profile?.firstname || "",
@@ -35,6 +40,22 @@ export const useUpdateProfile = (updateData: IUpdateUser) => {
     email: userProfile?.profile?.email || "",
     emailIsActive: userProfile?.profile?.emailIsActive || false,
   };
+  const [data, setData] = useState(updateUserResponse);
 
-  return [updateUserResponse];
+  const id = userProfile?.id;
+  const dispatch = useAppDispatch();
+  // useEffect(() => {
+  //   dispatch(updateProfile({ id, data: updateData }));
+  // }, [dispatch, id, updateData]);
+
+  const func = () => {
+    dispatch(updateProfile({ id, data: updateData }));
+  };
+  const setDatat = (update: any) => {
+    setData(update);
+    console.log(data);
+  };
+  const response: ResponseUser = [data, { onClick: func, setData: setDatat }];
+
+  return response;
 };

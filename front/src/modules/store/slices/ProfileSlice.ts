@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { DataState } from "../../../interfaces";
-import { getProfile } from "../ThunkCreator";
+import { getProfile, updateProfile } from "../ThunkCreator";
 
 interface IUserProfile {
   id: string;
@@ -56,6 +56,18 @@ export const ProfileSlice = createSlice({
       state.value = action.payload;
     });
     builder.addCase(getProfile.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message ?? "";
+    });
+    builder.addCase(updateProfile.pending, (state) => {
+      state.loading = true;
+      state.error = "";
+    });
+    builder.addCase(updateProfile.fulfilled, (state, action) => {
+      state.loading = false;
+      // state.value = action.payload;
+    });
+    builder.addCase(updateProfile.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? "";
     });

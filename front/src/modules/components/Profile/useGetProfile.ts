@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectProfile } from "../../store";
 import { useAppDispatch } from "../../hooks";
@@ -6,6 +6,16 @@ import { getProfile } from "../../store/ThunkCreator";
 
 export const useGetProfile = () => {
   const { value: userProfile } = useSelector(selectProfile);
+  const [data, setData] = useState({
+    username: userProfile?.username || "",
+    password: userProfile?.password || "",
+    firstname: userProfile?.profile?.firstname || "",
+    lastname: userProfile?.profile?.lastname || "",
+    phone: userProfile?.profile?.phone || "",
+    photo: userProfile?.profile?.photo || "",
+    email: userProfile?.profile?.email || "",
+    emailIsActive: userProfile?.profile?.emailIsActive || false,
+  });
 
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -58,6 +68,7 @@ export const useGetProfile = () => {
     email: userProfile?.profile?.email || "",
     emailIsActive: userProfile?.profile?.emailIsActive || false,
   };
+  const resp: [any, any] = [userResponse, avatarFromName];
 
-  return [userResponse, avatarFromName];
+  return resp;
 };
