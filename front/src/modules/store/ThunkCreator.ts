@@ -36,15 +36,27 @@ export const isActivate = thunks<ListEvent[], any>(
   thunkapi.isActivate,
   "event/isActivate"
 );
-export const getGifts = thunks<ListGift[], any>(
-  thunkapi.getGifts,
-  "gift/getGift"
-);
 export const createEvent = thunks<ListEvent, any>(
   thunkapi.createEvent,
   "gift/createEvent"
 );
+export const getGifts = thunks<ListGift[], any>(
+  thunkapi.getGifts,
+  "gift/getGift"
+);
 export const createGift = thunks<ListGift[], any>(
   thunkapi.createGift,
   "gift/createGift"
+);
+export const deleteGift = thunks<ListGift[], any>(
+  thunkapi.deleteGift,
+  "gift/deleteGift"
+);
+export const reserveGift = thunks<ListGift[], any>(
+  thunkapi.reserveGift,
+  "gift/reserveGift"
+);
+export const getAllOtherEvents = thunks<ListEvent[], any>(
+  thunkapi.getAllOtherEvents,
+  "gift/getAllOtherEvents"
 );
