@@ -48,7 +48,7 @@ const GeneralSettings = (props: any) => {
     },
   });
 
-  const [updateUserResponse] = useUpdateProfile(updateUserData);
+  const [updateUserResponse, func] = useUpdateProfile(updateUserData);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -87,6 +87,13 @@ const GeneralSettings = (props: any) => {
     event.persist();
 
     setValues({
+      ...values,
+      [event.target.name]:
+        event.target.type === "checkbox"
+          ? event.target.checked
+          : event.target.value,
+    });
+    func.setData({
       ...values,
       [event.target.name]:
         event.target.type === "checkbox"
@@ -190,7 +197,7 @@ const GeneralSettings = (props: any) => {
               <TextField
                 fullWidth
                 label="Имя"
-                name="firstName"
+                name="firstname"
                 onChange={handleChange}
                 value={values.firstname}
                 variant="outlined"
@@ -200,7 +207,7 @@ const GeneralSettings = (props: any) => {
               <TextField
                 fullWidth
                 label="Фамилия"
-                name="lastName"
+                name="lastname"
                 onChange={handleChange}
                 value={values.lastname}
                 variant="outlined"
@@ -255,7 +262,12 @@ const GeneralSettings = (props: any) => {
         </CardContent>
         <Divider />
         <CardActions>
-          <Button type="submit" variant="contained" disabled={change}>
+          <Button
+            type="submit"
+            variant="contained"
+            disabled={change}
+            onClick={func.onClick}
+          >
             Сохранить
           </Button>
         </CardActions>

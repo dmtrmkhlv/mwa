@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { DataState, ListGift } from "../../../interfaces";
-import { createGift, getGifts } from "../ThunkCreator";
+import { createGift, deleteGift, getGifts } from "../ThunkCreator";
 
 export const initialState: DataState<ListGift[]> = {
   value: [],
@@ -34,6 +34,18 @@ export const ListGiftSlice = createSlice({
       state.value = action.payload;
     });
     builder.addCase(createGift.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message ?? "";
+    });
+    builder.addCase(deleteGift.pending, (state) => {
+      state.loading = true;
+      state.error = "";
+    });
+    builder.addCase(deleteGift.fulfilled, (state, action) => {
+      state.loading = false;
+      state.value = action.payload;
+    });
+    builder.addCase(deleteGift.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? "";
     });

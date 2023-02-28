@@ -22,6 +22,7 @@ import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import { drawerWidth } from "../DrawerEvent/DrawerProps";
 import MenuIcon from "@mui/icons-material/Menu";
 // import { drawerWidth } from "./DrawerProps";
+import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
@@ -117,8 +118,7 @@ export function PrimarySearchAppBar(props: PropsHeader) {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleProfile}>Профиль</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Мой аккаунт</MenuItem>
-      <MenuItem onClick={handleOut}>Выход</MenuItem>
+      <MenuItem onClick={handleOut}>Выйти</MenuItem>
     </Menu>
   ) : (
     <></>
