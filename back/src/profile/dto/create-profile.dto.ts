@@ -27,8 +27,8 @@ export class CreateProfileDto {
   phone: string;
 
   @ApiProperty()
-  @IsEmail()
   @IsOptional()
+  // @IsEmail()
   email: string;
 
   @Allow()

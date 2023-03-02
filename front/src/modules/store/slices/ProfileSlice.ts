@@ -16,7 +16,7 @@ export interface IUser {
   id: string;
   username: string;
   password: string;
-  profile: IUserProfile;
+  profile: IUserProfile | null;
   events: any[];
 }
 

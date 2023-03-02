@@ -11,19 +11,41 @@ import {
 } from "@mui/material";
 import DoneIcon from "@mui/icons-material/Done";
 import DoDisturbIcon from "@mui/icons-material/DoDisturb";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
 import GeneralSettings from "./GeneralSettings";
 import { useGetProfile } from "./useGetProfile";
+import { useGetAvatarName } from "./useGetAvatarName";
+import { usePhoneMask } from "./usePhoneMask";
+
+export interface IUserProfile {
+  id: string;
+  username: string;
+  password: string;
+  profile: {
+    id: string;
+    photo: string;
+    firstname: string;
+    lastname: string;
+    phone: string;
+    email: string;
+    emailIsActive: boolean;
+  };
+}
 
 export function ProfileEvent() {
-  const [profile, avatarFromName] = useGetProfile();
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => {
-    console.log(profile);
-    setOpen(true);
-  };
+  const getUserProfile = useGetProfile();
+  const [userProfile, setUserProfile] = useState(getUserProfile);
+  const { setPhoneValue } = usePhoneMask();
+
+  const [avatarname] = useGetAvatarName(userProfile);
+  const [open, setOpen] = useState<boolean>(false);
+  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  useEffect(() => {
+    if (userProfile.id !== getUserProfile.id) {
+      setUserProfile(getUserProfile);
+    }
+  }, [getUserProfile, userProfile.id]);
 
   const modalStyle = {
     position: "absolute" as "absolute",
@@ -45,28 +67,36 @@ export function ProfileEvent() {
           <Typography variant="h5" component="div" gutterBottom>
             Ваши данные:
           </Typography>
-          <Avatar
-            {...avatarFromName}
-            alt={profile.username}
-            sx={{ width: 56, height: 56, marginBottom: "20px" }}
-          />
+          {userProfile.profile.photo !== "" ? (
+            <Avatar
+              alt={userProfile?.username}
+              src={userProfile.profile.photo}
+              sx={{ width: 56, height: 56, marginBottom: "20px" }}
+            />
+          ) : (
+            <Avatar
+              {...avatarname}
+              alt={userProfile?.username}
+              sx={{ width: 56, height: 56, marginBottom: "20px" }}
+            />
+          )}
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            Username: {profile.username}
+            Username: {userProfile.username}
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            Имя: {profile.firstname}
+            Имя: {userProfile.profile.firstname}
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            Фамилия: {profile.lastname}
+            Фамилия: {userProfile.profile.lastname}
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            Телефон: {profile.phone}
+            Телефон: {setPhoneValue(userProfile.profile.phone)}
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            Email: {profile.email}
+            Email: {userProfile.profile.email}
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            {profile.emailIsActive ? (
+            {userProfile.profile.emailIsActive ? (
               <>
                 Email подтвержден <DoneIcon sx={{ color: "green" }} />
               </>
@@ -86,7 +116,11 @@ export function ProfileEvent() {
             aria-describedby="modal-modal-description"
           >
             <Box sx={modalStyle}>
-              <GeneralSettings onClose={handleClose} profile={profile} />
+              <GeneralSettings
+                onClose={handleClose}
+                userProfile={userProfile}
+                setUserProfile={setUserProfile}
+              />
             </Box>
           </Modal>
         </CardActions>
