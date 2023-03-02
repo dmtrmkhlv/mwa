@@ -21,7 +21,7 @@ import { useState } from "react";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import { drawerWidth } from "../DrawerEvent/DrawerProps";
 import MenuIcon from "@mui/icons-material/Menu";
-import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
+// import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 // import { drawerWidth } from "./DrawerProps";
 import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 
