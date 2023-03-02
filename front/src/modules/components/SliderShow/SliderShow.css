@@ -1,1 +1,75 @@
-@import"react-slideshow-image/dist/styles.css";.main_cont-occasions{font-family:"Montserrat",sans-serif;flex:0 0 100%;padding-bottom:107px;width:100%}.main_cont-occasions .occasions-center{text-align:center}.main_cont-occasions h2{font-weight:400;font-size:32px;line-height:39px;text-align:center;margin-top:96px;margin-bottom:22px}.main_cont-occasions>p{font-weight:400;font-size:18px;line-height:1.4;margin:0 0 64px}@media(max-width: 768px){.main_cont-occasions .occasions-cont{overflow:hidden}}.main_cont-occasions .occasions-cont>img{cursor:pointer;margin:auto}.main_cont-occasions .occasions-cont .occasions-cont__inner{text-align:center}.main_cont-occasions .occasions-cont .occasions-cont-item{display:inline-block;margin:0 15px;box-shadow:10px 10px 15px rgba(0,0,0,.05);background-color:#fafafa;max-width:270px;left:0;transition:.3s ease;cursor:pointer;vertical-align:top;text-align:initial}@media(max-width: 768px){.main_cont-occasions .occasions-cont .occasions-cont-item{margin:0 0 25px;width:100%}}.main_cont-occasions .occasions-cont .occasions-cont-item>div{padding:24px}.main_cont-occasions .occasions-cont .occasions-cont-item>div>p{font-weight:400;font-size:20px;line-height:24px;-webkit-hyphens:auto;hyphens:auto;margin-top:0}.main_cont-occasions .occasions-cont .occasions-cont-item>div>.occasions-cont-more{font-weight:400;font-size:14px;line-height:19px;text-decoration:none;color:#000}.main_cont-occasions .occasions-cont .occasions-cont-item>img{display:block}
+@import "react-slideshow-image/dist/styles.css";
+.main_cont-occasions {
+  font-family: "Montserrat", sans-serif;
+  flex: 0 0 100%;
+  padding-bottom: 107px;
+  width: 100%;
+}
+.main_cont-occasions .occasions-center {
+  text-align: center;
+}
+.main_cont-occasions h2 {
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 39px;
+  text-align: center;
+  margin-top: 96px;
+  margin-bottom: 22px;
+}
+.main_cont-occasions > p {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.4;
+  margin: 0 0 64px;
+}
+@media (max-width: 768px) {
+  .main_cont-occasions .occasions-cont {
+    overflow: hidden;
+  }
+}
+.main_cont-occasions .occasions-cont > img {
+  cursor: pointer;
+  margin: auto;
+}
+.main_cont-occasions .occasions-cont .occasions-cont__inner {
+  text-align: center;
+}
+.main_cont-occasions .occasions-cont .occasions-cont-item {
+  display: inline-block;
+  margin: 0 15px;
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
+  background-color: #fafafa;
+  max-width: 270px;
+  left: 0;
+  transition: 0.3s ease;
+  cursor: pointer;
+  vertical-align: top;
+  text-align: initial;
+}
+@media (max-width: 768px) {
+  .main_cont-occasions .occasions-cont .occasions-cont-item {
+    margin: 0 0 25px;
+    width: 100%;
+  }
+}
+.main_cont-occasions .occasions-cont .occasions-cont-item > div {
+  padding: 24px;
+}
+.main_cont-occasions .occasions-cont .occasions-cont-item > div > p {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  -webkit-hyphens: auto;
+          hyphens: auto;
+  margin-top: 0;
+}
+.main_cont-occasions .occasions-cont .occasions-cont-item > div > .occasions-cont-more {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  text-decoration: none;
+  color: #000000;
+}
+.main_cont-occasions .occasions-cont .occasions-cont-item > img {
+  display: block;
+}/*# sourceMappingURL=SliderShow.css.map */

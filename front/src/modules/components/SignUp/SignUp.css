@@ -1,16 +1,12 @@
 .reg-wrapper fieldset {
   border-color: inherit;
 }
-
 .reg-wrapper fieldset legend span {
   color: inherit;
 }
-
 .reg-wrapper label {
   color: inherit;
 }
-
 .reg-wrapper svg path {
   fill: inherit;
-}
-/*# sourceMappingURL=SignUp.css.map */
+}/*# sourceMappingURL=SignUp.css.map */
