@@ -17,134 +17,40 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import SuccessSnackbar from "./SuccessSnackbar";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { useUpdateProfile } from "./useUpdateProfile";
+import { useFormHandlers } from "./useFormHandlers";
+import { IUserProfile } from "./Profile";
+import { usePhoneMask } from "./usePhoneMask";
 
-const GeneralSettings = (props: any) => {
-  const { onClose, profile } = props;
-  const [change, setChange] = useState(true);
-  const [showPassword, setShowPassword] = useState(false);
-  const [confirmButtonDisabled, setConfirmButtonDisabled] = useState(false);
-  const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [snackbarText, setSnackbarText] = useState("Изменения сохранены!");
-  const [values, setValues] = useState({
-    firstname: profile.firstname,
-    lastname: profile.lastname,
-    email: profile.email,
-    phone: profile.phone,
-    username: profile.username,
-    emailIsActive: profile.emailIsActive,
-    photo: profile.photo,
-    password: profile.password,
-  });
-  const [updateUserData, setUpdateUserData] = useState({
-    username: values.username,
-    password: values.password,
-    profile: {
-      photo: values.photo,
-      firstname: values.firstname,
-      lastname: values.lastname,
-      phone: values.phone,
-      email: values.email,
-    },
-  });
+const GeneralSettings = (props: {
+  onClose: () => void;
+  userProfile: IUserProfile;
+  setUserProfile: any;
+}) => {
+  const { onClose, userProfile, setUserProfile } = props;
+  const [saveButtonStatus, setSaveButtonStatus] = useState(true);
+  const {
+    showPassword,
+    handleClickShowPassword,
+    handleMouseDownPassword,
+    isEqual,
+    handleChange,
+    userFormData,
+    handleSubmit,
+    handleSnackbarClose,
+    handleSendConfirm,
+    openSnackbar,
+    snackbarText,
+  } = useFormHandlers(userProfile, setUserProfile);
 
-  const [updateUserResponse, func] = useUpdateProfile(updateUserData);
-
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-  const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault();
-  };
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  function isEqual(object1: any, object2: any) {
-    const props1 = Object.getOwnPropertyNames(object1);
-    const props2 = Object.getOwnPropertyNames(object2);
-
-    if (props1.length !== props2.length) {
-      return false;
-    }
-
-    for (let i = 0; i < props1.length; i += 1) {
-      const prop = props1[i];
-      const bothAreObjects =
-        typeof object1[prop] === "object" && typeof object2[prop] === "object";
-
-      if (
-        (!bothAreObjects && object1[prop] !== object2[prop]) ||
-        (bothAreObjects && !isEqual(object1[prop], object2[prop]))
-      ) {
-        return false;
-      }
-    }
-
-    return true;
-  }
-
-  const handleChange = (event: any) => {
-    event.persist();
-
-    setValues({
-      ...values,
-      [event.target.name]:
-        event.target.type === "checkbox"
-          ? event.target.checked
-          : event.target.value,
-    });
-    func.setData({
-      ...values,
-      [event.target.name]:
-        event.target.type === "checkbox"
-          ? event.target.checked
-          : event.target.value,
-    });
-  };
+  const { setPhoneValue } = usePhoneMask();
 
   useEffect(() => {
-    if (isEqual(profile, values)) {
-      setChange(true);
+    if (isEqual(userProfile, userFormData)) {
+      setSaveButtonStatus(true);
     } else {
-      setChange(false);
+      setSaveButtonStatus(false);
     }
-  }, [isEqual, profile, values]);
-
-  const handleSubmit = (event: any) => {
-    event.preventDefault();
-
-    setUpdateUserData({
-      username: values.username,
-      password: values.password,
-      profile: {
-        photo: values.photo,
-        firstname: values.firstname,
-        lastname: values.lastname,
-        phone: values.phone,
-        email: values.email,
-      },
-    });
-
-    console.log(updateUserResponse);
-
-    if (updateUserResponse.username) {
-      setSnackbarText("Изменения сохранены!");
-      setOpenSnackbar(true);
-    }
-  };
-
-  const handleSnackbarClose = () => {
-    setOpenSnackbar(false);
-  };
-
-  const handleSendConfirm = () => {
-    setSnackbarText("Запрос отправлен");
-    setOpenSnackbar(true);
-    if (confirmButtonDisabled) {
-      return;
-    }
-    setConfirmButtonDisabled(true);
-  };
+  }, [isEqual, userProfile, userFormData]);
 
   return (
     <Card>
@@ -160,8 +66,9 @@ const GeneralSettings = (props: any) => {
                 name="username"
                 required
                 onChange={handleChange}
-                value={values.username}
+                value={userFormData.username}
                 variant="outlined"
+                inputProps={{ minLength: 6, maxLength: 30 }}
               />
             </Grid>
             <Grid item md={6} xs={12}>
@@ -174,8 +81,9 @@ const GeneralSettings = (props: any) => {
                   name="password"
                   fullWidth
                   required
-                  defaultValue={values.password}
+                  defaultValue={userFormData.password}
                   onChange={handleChange}
+                  inputProps={{ minLength: 6, maxLength: 30 }}
                   type={showPassword ? "text" : "password"}
                   endAdornment={
                     <InputAdornment position="end">
@@ -199,7 +107,7 @@ const GeneralSettings = (props: any) => {
                 label="Имя"
                 name="firstname"
                 onChange={handleChange}
-                value={values.firstname}
+                value={userFormData.profile.firstname}
                 variant="outlined"
               />
             </Grid>
@@ -209,7 +117,7 @@ const GeneralSettings = (props: any) => {
                 label="Фамилия"
                 name="lastname"
                 onChange={handleChange}
-                value={values.lastname}
+                value={userFormData.profile.lastname}
                 variant="outlined"
               />
             </Grid>
@@ -219,9 +127,11 @@ const GeneralSettings = (props: any) => {
                 fullWidth
                 label="Телефон"
                 name="phone"
+                type="tel"
                 onChange={handleChange}
-                value={values.phone}
+                value={setPhoneValue(userFormData.profile.phone)}
                 variant="outlined"
+                placeholder="+7(___)___-__-__"
               />
             </Grid>
             <Grid item md={6} xs={12}>
@@ -229,8 +139,9 @@ const GeneralSettings = (props: any) => {
                 fullWidth
                 label="Фото"
                 name="photo"
+                type="url"
                 onChange={handleChange}
-                value={values.photo}
+                value={userFormData.profile.photo}
                 variant="outlined"
               />
             </Grid>
@@ -239,18 +150,21 @@ const GeneralSettings = (props: any) => {
                 fullWidth
                 label="Email"
                 name="email"
+                type="email"
                 onChange={handleChange}
-                value={values.email}
+                value={userFormData.profile.email}
                 variant="outlined"
               />
             </Grid>
-            {!values.emailIsActive ? (
+            {!userFormData.profile.emailIsActive ? (
               <Grid item md={6} xs={12}>
                 <Button
                   type="button"
                   variant="contained"
                   onClick={handleSendConfirm}
-                  disabled={confirmButtonDisabled}
+                  disabled={
+                    !saveButtonStatus || userFormData.profile.email === ""
+                  }
                 >
                   Подтвердить Email
                 </Button>
@@ -262,12 +176,7 @@ const GeneralSettings = (props: any) => {
         </CardContent>
         <Divider />
         <CardActions>
-          <Button
-            type="submit"
-            variant="contained"
-            disabled={change}
-            onClick={func.onClick}
-          >
+          <Button type="submit" variant="contained" disabled={saveButtonStatus}>
             Сохранить
           </Button>
         </CardActions>
@@ -276,8 +185,8 @@ const GeneralSettings = (props: any) => {
           onClick={onClose}
           sx={{
             position: "absolute",
-            right: 8,
-            top: 8,
+            right: 2,
+            top: 2,
             color: "grey",
           }}
         >

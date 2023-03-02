@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { selectProfile } from "../../store";
+import { useEffect, useMemo } from "react";
 import { useAppDispatch } from "../../hooks";
 import { updateProfile } from "../../store/ThunkCreator";
-
+import { IUserProfile } from "./Profile";
 export interface IUpdateUser {
   username?: string;
   password?: string;
@@ -16,46 +14,31 @@ export interface IUpdateUser {
   };
 }
 
-type UpdateUser = {
-  [key: string]: unknown;
-};
-
-type ResponseUser = [
-  UpdateUser,
-  {
-    onClick: (update: any) => void;
-    setData: (update: any) => void;
-  }
-];
-
-export const useUpdateProfile = (updateData: IUpdateUser) => {
-  const { value: userProfile } = useSelector(selectProfile);
-  const updateUserResponse: UpdateUser = {
-    username: userProfile?.username || "",
-    password: userProfile?.password || "",
-    firstname: userProfile?.profile?.firstname || "",
-    lastname: userProfile?.profile?.lastname || "",
-    phone: userProfile?.profile?.phone || "",
-    photo: userProfile?.profile?.photo || "",
-    email: userProfile?.profile?.email || "",
-    emailIsActive: userProfile?.profile?.emailIsActive || false,
+export const useUpdateProfile = (userProfileData: IUserProfile) => {
+  const updateUserProfile = (userProfileData: IUserProfile): IUpdateUser => {
+    return {
+      username: userProfileData?.username,
+      password: userProfileData?.password,
+      profile: {
+        photo: userProfileData?.profile?.photo,
+        firstname: userProfileData?.profile?.firstname,
+        lastname: userProfileData?.profile?.lastname,
+        phone: userProfileData?.profile?.phone,
+        email: userProfileData?.profile?.email,
+      },
+    };
   };
-  const [data, setData] = useState(updateUserResponse);
 
-  const id = userProfile?.id;
+  const memoUpdateUserProfile = useMemo(
+    () => updateUserProfile(userProfileData),
+    [userProfileData]
+  );
   const dispatch = useAppDispatch();
-  // useEffect(() => {
-  //   dispatch(updateProfile({ id, data: updateData }));
-  // }, [dispatch, id, updateData]);
+  useEffect(() => {
+    dispatch(
+      updateProfile({ id: userProfileData?.id, data: memoUpdateUserProfile })
+    );
+  }, [dispatch, memoUpdateUserProfile, userProfileData?.id]);
 
-  const func = () => {
-    dispatch(updateProfile({ id, data: updateData }));
-  };
-  const setDatat = (update: any) => {
-    setData(update);
-    console.log(data);
-  };
-  const response: ResponseUser = [data, { onClick: func, setData: setDatat }];
-
-  return response;
+  return [memoUpdateUserProfile];
 };
