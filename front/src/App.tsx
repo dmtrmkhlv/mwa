@@ -18,6 +18,7 @@ import {
   ArchivePage,
   BookingPage,
   EventBookingPage,
+  ProfilePage,
 } from "./page";
 
 const subroute = routing();
@@ -52,6 +53,7 @@ route.create(MainPage, "/annyversary", "public", "подробнее");
 route.create(MainPage, "/valentines", "public", "ко дню святого валентина");
 route.create(MainPage, "/christmas", "public", "на рождество");
 route.create(PrivacyPage, "/privacy", "public", "политики");
+route.create(ProfilePage, "/profile", "public", "мой профиль");
 
 export const App = () => {
   useRequiredAccount();

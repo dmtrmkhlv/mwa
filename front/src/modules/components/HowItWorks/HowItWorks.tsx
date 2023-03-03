@@ -1,10 +1,18 @@
 import { Box, Container, Typography } from "@mui/material";
+import happy_b from "../images/happy_b.jpg";
 
 export const HowItWorks = () => {
+  const style = {
+    width: "100%",
+    border: "none",
+    mt: 4,
+    mb: 4,
+  };
+
   return (
     <Container maxWidth="md">
       <Box>
-        <Typography variant="h2" component="h2" mb={4}>
+        <Typography variant="h2" component="h3" mb={4}>
           Как это работает?
         </Typography>
         <Typography variant="body1" mb={2}>
@@ -40,6 +48,13 @@ export const HowItWorks = () => {
           их&nbsp;забронировать и&nbsp;приобрести онлайн. Исключается
           вероятность получения нескольких одинаковых подарков.
         </Typography>
+        <Box sx={style}>
+          <img
+            src={happy_b}
+            alt="happy_birthday"
+            style={{ margin: "0 auto" }}
+          />
+        </Box>
       </Box>
     </Container>
   );

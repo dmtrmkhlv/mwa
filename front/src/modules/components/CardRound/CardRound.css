@@ -1,35 +1,26 @@
 .roundCard {
   width: 270px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  justify-content: center;
   text-align: center;
   color: inherit !important;
+  margin: auto;
 }
-
 .roundCard button {
   cursor: default;
   margin: auto;
   background-color: transparent;
 }
-
 .roundCard button p {
   color: inherit;
   -webkit-hyphens: auto;
-      -ms-hyphens: auto;
           hyphens: auto;
 }
-
 .roundCard h4 {
   font-size: 22px;
 }
-
 .roundCard .cardMedia {
   display: block;
   border-radius: 50%;
   padding: 1em;
-}
-/*# sourceMappingURL=CardRound.css.map */
+}/*# sourceMappingURL=CardRound.css.map */

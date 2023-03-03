@@ -5,13 +5,11 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import { useSelector } from "react-redux";
 import { selectUser } from "../..";
-import { useRole } from "../../requireAuth";
 import "./CardRound.css";
 
 export function CardRound(props: any) {
   const { images } = props;
   const { value: user } = useSelector(selectUser);
-  const role = useRole(user.userId, 2);
 
   return (
     <Box className="roundCard" boxShadow="md">
@@ -28,19 +26,29 @@ export function CardRound(props: any) {
             {props.name}
           </Typography>
 
-          <Typography gutterBottom variant="h4" component="h4">
-            Навыки:
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {props.navyk}
-          </Typography>
+          { props.navyk ? (
+          <>
+            <Typography gutterBottom variant="h4" component="h4">
+              Навыки:
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {props.navyk}
+            </Typography>
+          </>
+          ) : ('') 
+          }
 
-          <Typography gutterBottom variant="h4" component="h4">
-            Вклад:
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {props.business}
-          </Typography>
+          { props.business ? (
+          <>
+            <Typography gutterBottom variant="h4" component="h4">
+              Вклад:
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {props.business}
+            </Typography>
+          </>
+          ) : ('')
+          }
         </CardContent>
       </CardActionArea>
     </Box>

@@ -17,10 +17,10 @@ export interface DataState<T> {
 
 interface IUser {
   username: string;
-  userId?: number | null;
+  userId?: string | null;
 }
 interface IUserId {
-  id: number;
+  id: string;
 }
 
 export interface IUserSession extends IUser {

@@ -1,5 +1,6 @@
 @import "react-slideshow-image/dist/styles.css";
 .main_cont-occasions {
+  font-family: "Montserrat", sans-serif;
   flex: 0 0 100%;
   padding-bottom: 107px;
   width: 100%;
@@ -37,7 +38,7 @@
   display: inline-block;
   margin: 0 15px;
   box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   max-width: 270px;
   left: 0;
   transition: 0.3s ease;

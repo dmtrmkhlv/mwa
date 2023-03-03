@@ -21,7 +21,9 @@ import { useState } from "react";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import { drawerWidth } from "../DrawerEvent/DrawerProps";
 import MenuIcon from "@mui/icons-material/Menu";
+// import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 // import { drawerWidth } from "./DrawerProps";
+import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
@@ -91,6 +93,9 @@ export function PrimarySearchAppBar(props: PropsHeader) {
     dispatch(userAuthenticatedOut("Выход"));
     navigate("/login");
   };
+  const handleProfile = () => {
+    navigate("/profile");
+  };
 
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMobileMoreAnchorEl(event.currentTarget);
@@ -113,9 +118,8 @@ export function PrimarySearchAppBar(props: PropsHeader) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Профиль</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Мой аккаунт</MenuItem>
-      <MenuItem onClick={handleOut}>Выход</MenuItem>
+      <MenuItem onClick={handleProfile}>Профиль</MenuItem>
+      <MenuItem onClick={handleOut}>Выйти</MenuItem>
     </Menu>
   ) : (
     <></>
@@ -207,7 +211,7 @@ export function PrimarySearchAppBar(props: PropsHeader) {
             color="black"
             sx={{ display: { xs: "none", sm: "block" } }}
           >
-            Список подарков
+            Мои списки 📋
           </Typography>
 
           <Box sx={{ flexGrow: 1 }} />

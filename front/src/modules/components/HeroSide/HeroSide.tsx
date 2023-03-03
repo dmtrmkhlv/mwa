@@ -1,7 +1,6 @@
 import { Box, Button } from "@mui/material";
 import { useNavigate, Link } from "react-router-dom";
 import style from "./HeroSide.module.scss";
-
 import brown_lady from "../images/brown_lady.jpg";
 import wish_list_pen from "../images/wish_list_pen.jpg";
 import { useCustomeNavigate } from "../../hooks";
@@ -32,10 +31,11 @@ export const HeroSide = () => {
         <div className={style.sides_pad}>
           <h2>Как это работает?</h2>
           <p>
-            Залогиньтесь получателем и пригласите знакомых залогиниться
-            дарителями. Они увидят список ваших желаний и смогут договориться,
-            кто что будет дарить!
+            Регистрируйтесь, чтобы создать список подарков и&nbsp;пригласите
+            тех, кто будет дарить. Все участники увидят список ваших желаний
+            и&nbsp;смогут договориться, кто что будет дарить!🎁🎁🎁
           </p>
+          {/* <p style={{ display: "block" }}></p> */}
           <button className={style.white_bg} {...navigateHowItWorks}>
             Подробнее
           </button>

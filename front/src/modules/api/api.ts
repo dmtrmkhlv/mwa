@@ -1,5 +1,6 @@
 import { apifetch } from "./axios";
 import { IListCreator, IReqUser, ListEvent } from "../../interfaces";
+import { IUser } from "../store/slices/ProfileSlice";
 
 type CreateUserResponse = {
   access_token: string;
@@ -64,6 +65,24 @@ export class Api {
 
     return data;
   }
+  async getProfile() {
+    try {
+      const resp = await apifetch.post(`/api/v1/users/profile`, {});
+      return resp.data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  async updateProfile(value: { id: string; data: IUser }) {
+    try {
+      const resp = await apifetch.patch(`/api/v1/users/${value.id}`, {
+        ...value.data,
+      });
+      return resp.data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
   async requiredAccount(val: any) {
     const resptwo = await apifetch.get(`api/v1/auth/profile`);
     const data = {
@@ -81,6 +100,13 @@ export class Api {
     } catch (error) {
       console.error(error);
     }
+  }
+  async getAllOtherEvents(value: any) {
+    const resp = await apifetch.get<any>(`/api/v1/users`);
+    const resptwo = resp.data.map((el: any) => {
+      return el.events;
+    });
+    return resptwo.flat();
   }
   async deactivate(value: string) {
     try {
@@ -102,8 +128,8 @@ export class Api {
   }
   async getGifts(value: any) {
     try {
-      const resp = await apifetch.get<GetUsersRequests>(`/api/v1/gift`);
-      return resp.data;
+      const resp = await apifetch.get<ListEvent[]>(`/api/v1/event/${value}`);
+      return resp.data[0].gifts;
     } catch (error) {
       console.error(error);
     }
@@ -137,11 +163,32 @@ export class Api {
           ...data,
         }
       );
-      const resptwo = await apifetch.get<GetUsersRequests>(`/api/v1/gift`);
-      return resptwo.data;
+      const resptwo = await apifetch.get<ListEvent[]>(
+        `/api/v1/event/${value.data.id}`
+      );
+      return resptwo.data[0].gifts;
     } catch (error) {
       console.error(error);
     }
+  }
+  async deleteGift(value: any) {
+    const resp = await apifetch.delete<CreateUserResponse>(
+      `/api/v1/gift/${value.id}`
+    );
+    const resptwo = await apifetch.get<ListEvent[]>(
+      `/api/v1/event/${value.slug || ""}`
+    );
+    return resptwo.data[0].gifts;
+  }
+  async reserveGift(value: any) {
+    const resp = await apifetch.post<CreateUserResponse>(
+      `/api/v1/gift/book/${value.id}`,
+      {}
+    );
+    const resptwo = await apifetch.get<ListEvent[]>(
+      `/api/v1/event/${value.slug || ""}`
+    );
+    return resptwo.data[0].gifts;
   }
   static async registerAccount(value: IReqUser) {
     const user = { username: value.username, password: value.password };

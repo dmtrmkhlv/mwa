@@ -10,6 +10,7 @@
   margin: auto 0 20%;
   text-transform: uppercase;
   margin-top: 1em;
+  align-self: start;
 
   @media (max-width: 768px) {
     margin: 1em auto;
@@ -29,6 +30,7 @@
   padding: 19px 23px;
   margin: 0 0 1em;
   text-transform: uppercase;
+  align-self: start;
 
   @media (max-width: 768px) {
     margin: 1em auto 30px;
@@ -49,6 +51,7 @@
   }
 
   h1 {
+    font-family: "Montserrat", sans-serif;
     font-weight: 600;
     font-size: 48px;
     line-height: 59px;
@@ -70,9 +73,11 @@
   }
 
   h2 {
+    font-family: "Montserrat", sans-serif;
     font-weight: 500;
     font-size: 32px;
     line-height: 1.4;
+    align-self: start;
     @media (max-width: 768px) {
       margin-bottom: 10px;
     }
@@ -102,10 +107,11 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
 
   @media (max-width: 768px) {
     padding: 10%;
-    flex-direction: column;
   }
 }
 

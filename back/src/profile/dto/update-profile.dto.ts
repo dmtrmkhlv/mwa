@@ -35,8 +35,9 @@ export class UpdateProfileDto extends PartialType(CreateProfileDto) {
   phone: string;
 
   @ApiProperty()
-  @IsEmail()
-  @IsNotEmpty()
+  @IsOptional()
+  // @IsEmail()
+  // @IsNotEmpty()
   email: string;
 
   @Allow()

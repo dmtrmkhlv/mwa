@@ -21,9 +21,14 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ArchiveIcon from "@mui/icons-material/Archive";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { selectListEvent } from "../../store";
+import { selectListEvent, selectListOtherEvent, selectUser } from "../../store";
 import { useAppDispatch } from "../../hooks";
-import { deactivate, getAllEvents, isActivate } from "../../store/ThunkCreator";
+import {
+  deactivate,
+  getAllEvents,
+  getAllOtherEvents,
+  isActivate,
+} from "../../store/ThunkCreator";
 import { NavLink, useNavigate } from "react-router-dom";
 import { CreateEvent } from "../CreateEvent/CreateEvent";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
@@ -120,13 +125,36 @@ const ListEvents = (props: ListEventsProps) => {
   );
 };
 
-export function NavigationEvent() {
+const useEvents = () => {
   const { value: events } = useSelector(selectListEvent);
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getAllEvents("запрос"));
   }, []);
   const ref = useRef<HTMLDivElement>(null);
+  const response: [ListEvent[], React.RefObject<HTMLDivElement>] = [
+    events,
+    ref,
+  ];
+  return response;
+};
+
+const useBooking = () => {
+  const { value: events } = useSelector(selectListOtherEvent);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(getAllOtherEvents("запрос"));
+  }, []);
+  const ref = useRef<HTMLDivElement>(null);
+  const response: [ListEvent[], React.RefObject<HTMLDivElement>] = [
+    events,
+    ref,
+  ];
+  return response;
+};
+
+export function NavigationEvent() {
+  const [events, ref] = useEvents();
 
   return (
     <Box sx={{ pb: 3 }} ref={ref}>
@@ -143,12 +171,7 @@ export function NavigationEvent() {
 }
 
 export function ArchiveEvent() {
-  const { value: events } = useSelector(selectListEvent);
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(getAllEvents("запрос"));
-  }, []);
-  const ref = useRef<HTMLDivElement>(null);
+  const [events, ref] = useEvents();
 
   return (
     <Box sx={{ pb: 3 }} ref={ref}>
@@ -158,6 +181,30 @@ export function ArchiveEvent() {
           .filter((event) => event.isActive !== true)
           .map((event) => (
             <ListEvents key={event.id} event={event} archive={true} />
+          ))}
+      </List>
+    </Box>
+  );
+}
+
+export function BookingEvent() {
+  const [events, ref] = useBooking();
+  const { value: user } = useSelector(selectUser);
+
+  return (
+    <Box sx={{ pb: 3 }} ref={ref}>
+      <CssBaseline />
+      <List sx={{ width: 500 }}>
+        {events
+          .filter((event) => event.isActive === true)
+          .filter((event) => {
+            if (!!event.gifts.find((el) => el.userBookId === user.userId)) {
+              return true;
+            }
+            return false;
+          })
+          .map((event) => (
+            <ListEvents key={event.id} event={event} archive={false} />
           ))}
       </List>
     </Box>
