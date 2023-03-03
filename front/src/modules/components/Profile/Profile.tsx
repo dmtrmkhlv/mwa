@@ -90,7 +90,10 @@ export function ProfileEvent() {
             Фамилия: {userProfile.profile.lastname}
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            Телефон: {setPhoneValue(userProfile.profile.phone)}
+            Телефон:{" "}
+            {userProfile.profile.phone.length === 1
+              ? ""
+              : setPhoneValue(userProfile.profile.phone)}
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
             Email: {userProfile.profile.email}

@@ -23,6 +23,10 @@ export const updateProfile = thunks<IUser, any>(
   thunkapi.updateProfile,
   "user/updateProfile"
 );
+export const sendConfirmLink = thunks<IUser, any>(
+  thunkapi.sendConfirmLink,
+  "user/sendConfirmLink"
+);
 export const requiredAccount = thunks<IUserSession, any>(
   thunkapi.requiredAccount,
   "user/reqUser"

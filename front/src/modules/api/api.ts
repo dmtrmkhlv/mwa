@@ -83,6 +83,18 @@ export class Api {
       console.error(error);
     }
   }
+  async sendConfirmLink(value: { email: string }) {
+    try {
+      const resp = await apifetch.post(
+        `api/v1/auth/user-profile/confirm-email/${value.email}`,
+        {}
+      );
+      return resp.data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   async requiredAccount(val: any) {
     const resptwo = await apifetch.get(`api/v1/auth/profile`);
     const data = {
