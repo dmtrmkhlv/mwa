@@ -45,6 +45,18 @@ export const useFormHandlers = (
     event.preventDefault();
   };
 
+  const isImgUrl = async (url: string) => {
+    const img = new Image();
+    img.src = url;
+    let answer = new Promise((resolve) => {
+      img.onerror = () => resolve(false);
+      img.onload = () => resolve(true);
+    }).then((value) => {
+      return value;
+    });
+    return await answer;
+  };
+
   const { phoneMask } = usePhoneMask();
 
   const isEqual = (object1: any, object2: any): boolean => {
@@ -158,63 +170,87 @@ export const useFormHandlers = (
     }
   }, [dispatch, userFormData.profile.email, sendEmailStatus]);
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
+
+    let phoneErrors = {
+      helperText: "",
+      error: false,
+    };
+    let usernameErrors = {
+      helperText: "",
+      error: false,
+    };
+    let passwordErrors = {
+      helperText: "",
+      error: false,
+    };
+    let emailErrors = {
+      helperText: "",
+      error: false,
+    };
+    let photoErrors = async () => {
+      if (
+        (await isImgUrl(userFormData.profile.photo)) ||
+        userFormData.profile.photo === ""
+      ) {
+        return {
+          helperText: "",
+          error: false,
+        };
+      }
+      return {
+        helperText: "Вставьте ссылку на изоражение",
+        error: true,
+      };
+    };
 
     if (
       userFormData.profile.phone.length > 1 &&
       userFormData.profile.phone.length < 11
     ) {
-      setInputErrors({
-        ...inputErrors,
-        phone: {
-          helperText: "Неправильный формат телефона",
-          error: true,
-        },
-      });
+      phoneErrors = {
+        helperText: "Неправильный формат телефона",
+        error: true,
+      };
     }
 
     if (userFormData.username.length < 6 || userFormData.username.length > 30) {
-      setInputErrors({
-        ...inputErrors,
-        username: {
-          helperText: "Длина username должна быть от 6 до 30 символов",
-          error: true,
-        },
-      });
+      usernameErrors = {
+        helperText: "Длина username должна быть от 6 до 30 символов",
+        error: true,
+      };
     }
     if (userFormData.password.length < 6 || userFormData.password.length > 30) {
-      setInputErrors({
-        ...inputErrors,
-        password: {
-          helperText: "Длина пароля должна быть от 6 до 30 символов",
-          error: true,
-        },
-      });
+      passwordErrors = {
+        helperText: "Длина пароля должна быть от 6 до 30 символов",
+        error: true,
+      };
     }
     const emailValidate = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
       userFormData.profile.email
     );
     if (emailValidate === false) {
-      setInputErrors({
-        ...inputErrors,
-        email: {
-          helperText: "Неправильный адрес почты",
-          error: true,
-        },
-      });
+      emailErrors = {
+        helperText: "Неправильный адрес почты",
+        error: true,
+      };
     }
 
+    setInputErrors({
+      phone: phoneErrors,
+      username: usernameErrors,
+      password: passwordErrors,
+      email: emailErrors,
+      photo: await photoErrors(),
+    });
+
     if (
-      (userFormData.profile.phone.length === 1 ||
-        userFormData.profile.phone.length === 11) &&
-      (userFormData.username.length >= 6 ||
-        (userFormData.username.length > 6 &&
-          userFormData.username.length <= 30)) &&
-      (userFormData.password.length >= 6 ||
-        (userFormData.password.length > 6 &&
-          userFormData.password.length <= 30)) &&
-      emailValidate
+      !phoneErrors.error &&
+      !usernameErrors.error &&
+      !passwordErrors.error &&
+      !emailErrors.error &&
+      !(await photoErrors()).error
     ) {
       setUserProfile({
         ...userFormData,

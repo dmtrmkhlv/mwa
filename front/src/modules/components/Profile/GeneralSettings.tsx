@@ -147,10 +147,12 @@ const GeneralSettings = (props: {
                 fullWidth
                 label="Фото"
                 name="photo"
-                type="url"
+                // type="url"
                 onChange={handleChange}
                 value={userFormData.profile.photo}
                 variant="outlined"
+                helperText={inputErrors.photo.helperText}
+                error={inputErrors.photo.error}
               />
             </Grid>
             <Grid item md={6} xs={12}>
