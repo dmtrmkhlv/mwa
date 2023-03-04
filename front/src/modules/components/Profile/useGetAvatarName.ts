@@ -28,7 +28,9 @@ export const useGetAvatarName = (userProfile: IUserProfile) => {
     avatarString =
       userProfile?.profile?.firstname !== "" ||
       userProfile?.profile?.lastname !== ""
-        ? userProfile?.profile?.firstname + " " + userProfile?.profile?.lastname
+        ? (userProfile?.profile?.firstname || ".") +
+          " " +
+          (userProfile?.profile?.lastname || ".")
         : userProfile?.username.slice(0, 1) +
           " " +
           userProfile?.username.slice(1, 2);
