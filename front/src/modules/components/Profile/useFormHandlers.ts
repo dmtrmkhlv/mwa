@@ -200,7 +200,7 @@ export const useFormHandlers = (
         };
       }
       return {
-        helperText: "Вставьте ссылку на изоражение",
+        helperText: "Вставьте ссылку на изображение",
         error: true,
       };
     };
@@ -230,7 +230,7 @@ export const useFormHandlers = (
     const emailValidate = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
       userFormData.profile.email
     );
-    if (emailValidate === false) {
+    if (emailValidate === false && userFormData.profile.email !== "") {
       emailErrors = {
         helperText: "Неправильный адрес почты",
         error: true,
