@@ -91,7 +91,8 @@ export function ProfileEvent() {
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
             Телефон:{" "}
-            {userProfile.profile.phone.length === 1
+            {userProfile.profile.phone.length === 1 ||
+            userProfile.profile.phone === ""
               ? ""
               : setPhoneValue(userProfile.profile.phone)}
           </Typography>
