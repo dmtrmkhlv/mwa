@@ -7,24 +7,15 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
 import { useCreateGift } from "./useCreateGift";
-import { IconButton } from "@mui/material";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 interface CreateEventProps {
   mini?: boolean;
   eventId: string;
 }
 
-// /api/1v / gift / { eventId };
-// {
-//   "title": "string",
-//   "link": "string",
-//   "description": "string"
-// }
-
 export function CreateGift(props: CreateEventProps) {
   const { eventId } = props;
-  const { title, description, link, error, handlerForm, submitButton } =
+  const { title, description, link, handlerForm, submitButton } =
     useCreateGift(eventId);
   const [open, setOpen] = useState(false);
 

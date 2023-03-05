@@ -13,6 +13,7 @@ import {
   InputAdornment,
   IconButton,
   OutlinedInput,
+  FormHelperText,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import SuccessSnackbar from "./SuccessSnackbar";
@@ -28,6 +29,7 @@ const GeneralSettings = (props: {
 }) => {
   const { onClose, userProfile, setUserProfile } = props;
   const [saveButtonStatus, setSaveButtonStatus] = useState(true);
+
   const {
     showPassword,
     handleClickShowPassword,
@@ -40,6 +42,8 @@ const GeneralSettings = (props: {
     handleSendConfirm,
     openSnackbar,
     snackbarText,
+    confirmButtonDisabled,
+    inputErrors,
   } = useFormHandlers(userProfile, setUserProfile);
 
   const { setPhoneValue } = usePhoneMask();
@@ -64,11 +68,11 @@ const GeneralSettings = (props: {
                 fullWidth
                 label="Username"
                 name="username"
-                required
                 onChange={handleChange}
                 value={userFormData.username}
                 variant="outlined"
-                inputProps={{ minLength: 6, maxLength: 30 }}
+                helperText={inputErrors.username.helperText}
+                error={inputErrors.username.error}
               />
             </Grid>
             <Grid item md={6} xs={12}>
@@ -80,11 +84,10 @@ const GeneralSettings = (props: {
                   id="outlined-adornment-password"
                   name="password"
                   fullWidth
-                  required
                   defaultValue={userFormData.password}
                   onChange={handleChange}
-                  inputProps={{ minLength: 6, maxLength: 30 }}
                   type={showPassword ? "text" : "password"}
+                  error={inputErrors.password.error}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
@@ -99,6 +102,9 @@ const GeneralSettings = (props: {
                   }
                   label="password"
                 />
+                <FormHelperText error>
+                  {inputErrors.password.helperText}
+                </FormHelperText>
               </FormControl>
             </Grid>
             <Grid item md={6} xs={12}>
@@ -132,6 +138,8 @@ const GeneralSettings = (props: {
                 value={setPhoneValue(userFormData.profile.phone)}
                 variant="outlined"
                 placeholder="+7(___)___-__-__"
+                helperText={inputErrors.phone.helperText}
+                error={inputErrors.phone.error}
               />
             </Grid>
             <Grid item md={6} xs={12}>
@@ -139,10 +147,12 @@ const GeneralSettings = (props: {
                 fullWidth
                 label="Фото"
                 name="photo"
-                type="url"
+                // type="url"
                 onChange={handleChange}
                 value={userFormData.profile.photo}
                 variant="outlined"
+                helperText={inputErrors.photo.helperText}
+                error={inputErrors.photo.error}
               />
             </Grid>
             <Grid item md={6} xs={12}>
@@ -154,6 +164,8 @@ const GeneralSettings = (props: {
                 onChange={handleChange}
                 value={userFormData.profile.email}
                 variant="outlined"
+                helperText={inputErrors.email.helperText}
+                error={inputErrors.email.error}
               />
             </Grid>
             {!userFormData.profile.emailIsActive ? (
@@ -163,7 +175,9 @@ const GeneralSettings = (props: {
                   variant="contained"
                   onClick={handleSendConfirm}
                   disabled={
-                    !saveButtonStatus || userFormData.profile.email === ""
+                    !saveButtonStatus ||
+                    userFormData.profile.email === "" ||
+                    confirmButtonDisabled
                   }
                 >
                   Подтвердить Email

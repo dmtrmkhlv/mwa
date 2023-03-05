@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch } from "../../hooks";
-import { updateProfile } from "../../store/ThunkCreator";
+import { sendConfirmLink, updateProfile } from "../../store/ThunkCreator";
 import { IUserProfile } from "./Profile";
 import { usePhoneMask } from "./usePhoneMask";
 
@@ -13,10 +13,48 @@ export const useFormHandlers = (
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarText, setSnackbarText] = useState("Изменения сохранены!");
   const [confirmButtonDisabled, setConfirmButtonDisabled] = useState(false);
+  const [updateUserProfileStatus, setUpdateUserProfileStatus] = useState(false);
+  const [sendEmailStatus, setSendEmailStatus] = useState(false);
+
+  const [inputErrors, setInputErrors]: any = useState({
+    phone: {
+      helperText: "",
+      error: false,
+    },
+    username: {
+      helperText: "",
+      error: false,
+    },
+    password: {
+      helperText: "",
+      error: false,
+    },
+    email: {
+      helperText: "",
+      error: false,
+    },
+    photo: {
+      helperText: "",
+      error: false,
+    },
+  });
+
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
     event.preventDefault();
+  };
+
+  const isImgUrl = async (url: string) => {
+    const img = new Image();
+    img.src = url;
+    let answer = new Promise((resolve) => {
+      img.onerror = () => resolve(false);
+      img.onload = () => resolve(true);
+    }).then((value) => {
+      return value;
+    });
+    return await answer;
   };
 
   const { phoneMask } = usePhoneMask();
@@ -61,6 +99,14 @@ export const useFormHandlers = (
 
   const handleChange = (event: any) => {
     event.persist();
+    setInputErrors({
+      ...inputErrors,
+      [event.target.name]: {
+        helperText: "",
+        error: false,
+      },
+    });
+
     if (event.target.type === "tel") {
       if (
         event.target.value.length -
@@ -111,25 +157,127 @@ export const useFormHandlers = (
 
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(updateProfile({ id: userFormData?.id, data: updateUserProfile }));
-  }, [dispatch, updateUserProfile, userFormData?.id]);
+    if (updateUserProfileStatus) {
+      dispatch(
+        updateProfile({ id: userFormData?.id, data: updateUserProfile })
+      );
+    }
+  }, [dispatch, updateUserProfile, updateUserProfileStatus, userFormData?.id]);
 
-  const handleSubmit = (event: any) => {
+  useEffect(() => {
+    if (sendEmailStatus) {
+      dispatch(sendConfirmLink({ email: userFormData.profile.email }));
+    }
+  }, [dispatch, userFormData.profile.email, sendEmailStatus]);
+
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
-    setUserProfile(userFormData);
-    setUpdateUserProfile({
-      username: userFormData?.username,
-      password: userFormData?.password,
-      profile: {
-        photo: userFormData?.profile?.photo,
-        firstname: userFormData?.profile?.firstname,
-        lastname: userFormData?.profile?.lastname,
-        phone: userFormData?.profile?.phone,
-        email: userFormData?.profile?.email,
-      },
+
+    let phoneErrors = {
+      helperText: "",
+      error: false,
+    };
+    let usernameErrors = {
+      helperText: "",
+      error: false,
+    };
+    let passwordErrors = {
+      helperText: "",
+      error: false,
+    };
+    let emailErrors = {
+      helperText: "",
+      error: false,
+    };
+    let photoErrors = async () => {
+      if (
+        (await isImgUrl(userFormData.profile.photo)) ||
+        userFormData.profile.photo === ""
+      ) {
+        return {
+          helperText: "",
+          error: false,
+        };
+      }
+      return {
+        helperText: "Вставьте ссылку на изображение",
+        error: true,
+      };
+    };
+
+    if (
+      userFormData.profile.phone.length > 1 &&
+      userFormData.profile.phone.length < 11
+    ) {
+      phoneErrors = {
+        helperText: "Неправильный формат телефона",
+        error: true,
+      };
+    }
+
+    if (userFormData.username.length < 6 || userFormData.username.length > 30) {
+      usernameErrors = {
+        helperText: "Длина username должна быть от 6 до 30 символов",
+        error: true,
+      };
+    }
+    if (userFormData.password.length < 6 || userFormData.password.length > 30) {
+      passwordErrors = {
+        helperText: "Длина пароля должна быть от 6 до 30 символов",
+        error: true,
+      };
+    }
+    const emailValidate = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
+      userFormData.profile.email
+    );
+    if (emailValidate === false && userFormData.profile.email !== "") {
+      emailErrors = {
+        helperText: "Неправильный адрес почты",
+        error: true,
+      };
+    }
+
+    setInputErrors({
+      phone: phoneErrors,
+      username: usernameErrors,
+      password: passwordErrors,
+      email: emailErrors,
+      photo: await photoErrors(),
     });
-    setSnackbarText("Изменения сохранены!");
-    setOpenSnackbar(true);
+
+    if (
+      !phoneErrors.error &&
+      !usernameErrors.error &&
+      !passwordErrors.error &&
+      !emailErrors.error &&
+      !(await photoErrors()).error
+    ) {
+      setUserProfile({
+        ...userFormData,
+        profile: {
+          ...userFormData.profile,
+          emailIsActive:
+            userProfile.profile.emailIsActive &&
+            userFormData?.profile?.email !== userProfile.profile.email
+              ? false
+              : userProfile.profile.emailIsActive,
+        },
+      });
+      setUpdateUserProfile({
+        username: userFormData?.username,
+        password: userFormData?.password,
+        profile: {
+          photo: userFormData?.profile?.photo,
+          firstname: userFormData?.profile?.firstname,
+          lastname: userFormData?.profile?.lastname,
+          phone: userFormData?.profile?.phone,
+          email: userFormData?.profile?.email,
+        },
+      });
+      setUpdateUserProfileStatus(true);
+      setSnackbarText("Изменения сохранены!");
+      setOpenSnackbar(true);
+    }
   };
 
   const handleSnackbarClose = () => {
@@ -137,8 +285,10 @@ export const useFormHandlers = (
   };
 
   const handleSendConfirm = () => {
+    setSendEmailStatus(true);
     setSnackbarText("Запрос отправлен");
     setOpenSnackbar(true);
+
     if (confirmButtonDisabled) {
       return;
     }
@@ -157,5 +307,6 @@ export const useFormHandlers = (
     openSnackbar,
     snackbarText,
     confirmButtonDisabled,
+    inputErrors,
   };
 };
