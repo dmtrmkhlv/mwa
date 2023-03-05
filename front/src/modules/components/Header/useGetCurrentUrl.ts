@@ -4,7 +4,7 @@ export const useGetCurrentUrl = () => {
   const location = useLocation();
 
   let headerName = "";
-  switch (location.pathname) {
+  switch ("/" + location.pathname.split("/")[1]) {
     case "/":
       headerName = "Главная";
       break;
