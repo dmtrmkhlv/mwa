@@ -1,11 +1,10 @@
 import {
-  IListCreator,
   IReqUser,
   IUserSession,
   ListEvent,
   ListGift,
 } from "../../interfaces";
-import { api, Api } from "../api";
+import { Api } from "../api";
 import { thunks } from "./helper";
 import { IUser } from "./slices/ProfileSlice";
 
