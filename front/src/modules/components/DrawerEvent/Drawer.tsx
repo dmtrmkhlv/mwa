@@ -1,15 +1,10 @@
 import MuiDrawer from "@mui/material/Drawer";
 import { closedMixin, drawerWidth, openedMixin } from "./DrawerProps";
 import * as React from "react";
-import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
+import { styled, useTheme } from "@mui/material/styles";
 import List from "@mui/material/List";
-import CssBaseline from "@mui/material/CssBaseline";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
@@ -92,15 +87,13 @@ export const CustomeDrawer = (props: CustomeDrawerProps) => {
                 justifyContent: open ? "initial" : "center",
                 px: 2.5,
               }}
-              onClick={() => handleNavigate(row.link)}
-            >
+              onClick={() => handleNavigate(row.link)}>
               <ListItemIcon
                 sx={{
                   minWidth: 0,
                   mr: open ? 3 : "auto",
                   justifyContent: "center",
-                }}
-              >
+                }}>
                 {row.key % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>
               <ListItemText

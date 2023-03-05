@@ -1,5 +1,5 @@
 import { Box, Container, Typography } from "@mui/material";
-import happy_b from "../images/happy_b.jpg";
+import gift from "../images/gift.png";
 
 export const HowItWorks = () => {
   const style = {
@@ -12,7 +12,7 @@ export const HowItWorks = () => {
   return (
     <Container maxWidth="md">
       <Box>
-        <Typography variant="h2" component="h3" mb={4}>
+        <Typography variant="h2" component="h3" mb={4} align="center">
           Как это работает?
         </Typography>
         <Typography variant="body1" mb={2}>
@@ -49,11 +49,7 @@ export const HowItWorks = () => {
           вероятность получения нескольких одинаковых подарков.
         </Typography>
         <Box sx={style}>
-          <img
-            src={happy_b}
-            alt="happy_birthday"
-            style={{ margin: "0 auto" }}
-          />
+          <img src={gift} alt="gift" style={{ margin: "0 auto" }} />
         </Box>
       </Box>
     </Container>

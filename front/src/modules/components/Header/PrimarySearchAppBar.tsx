@@ -1,10 +1,8 @@
 import { styled, alpha } from "@mui/material/styles";
-// import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
@@ -21,8 +19,6 @@ import { useState } from "react";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import { drawerWidth } from "../DrawerEvent/DrawerProps";
 import MenuIcon from "@mui/icons-material/Menu";
-// import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
-// import { drawerWidth } from "./DrawerProps";
 import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 
 interface AppBarProps extends MuiAppBarProps {
