@@ -19,7 +19,7 @@ import { useState } from "react";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import { drawerWidth } from "../DrawerEvent/DrawerProps";
 import MenuIcon from "@mui/icons-material/Menu";
-import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
+import { useGetCurrentUrl } from "./useGetCurrentUrl";
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
@@ -96,6 +96,8 @@ export function PrimarySearchAppBar(props: PropsHeader) {
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+  const { headerName } = useGetCurrentUrl();
 
   const menuId = "primary-search-account-menu";
   const renderMenu = session ? (
@@ -207,7 +209,7 @@ export function PrimarySearchAppBar(props: PropsHeader) {
             color="black"
             sx={{ display: { xs: "none", sm: "block" } }}
           >
-            Мои списки 📋
+            {headerName}
           </Typography>
 
           <Box sx={{ flexGrow: 1 }} />
