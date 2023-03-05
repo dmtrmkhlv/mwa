@@ -1,19 +1,21 @@
 import * as React from "react";
-import { useState } from "react";
-import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
 import { LayoutProps } from "./LayoutProps";
 import { Header, Footer } from "../components";
-import { Container, useTheme } from "@mui/material";
+import { Container } from "@mui/material";
 import { RequireAuth } from "../requireAuth/RequireAuth";
 import { useRequireAuth } from "../requireAuth/useRequireAuth";
 import { CustomeDrawer, DrawerHeader } from "../components/DrawerEvent/Drawer";
 
+// import { styled } from "@mui/material/styles";
+// import { useTheme } from "@mui/material";
+// import Paper from "@mui/material/Paper";
+// import Grid from "@mui/material/Grid";
+// import { useState } from "react";
+
 export default function Layout(props: LayoutProps): JSX.Element {
   const { session } = useRequireAuth();
-  const theme = useTheme();
+  // const theme = useTheme();
   const [open, setOpen] = React.useState(true);
   const { children, isRequire } = props;
   const getRequireBoolean = () => {
@@ -39,8 +41,7 @@ export default function Layout(props: LayoutProps): JSX.Element {
                 flexWrap: "wrap",
                 alignContent: "center",
                 flexDirection: "column",
-              }}
-            >
+              }}>
               {children}
             </Box>
           </Container>

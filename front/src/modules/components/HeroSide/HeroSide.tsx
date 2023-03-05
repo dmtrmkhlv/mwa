@@ -1,5 +1,4 @@
-import { Box, Button } from "@mui/material";
-import { useNavigate, Link } from "react-router-dom";
+import { Box } from "@mui/material";
 import style from "./HeroSide.module.scss";
 import brown_lady from "../images/brown_lady.jpg";
 import wish_list_pen from "../images/wish_list_pen.jpg";
@@ -35,7 +34,6 @@ export const HeroSide = () => {
             тех, кто будет дарить. Все участники увидят список ваших желаний
             и&nbsp;смогут договориться, кто что будет дарить!🎁🎁🎁
           </p>
-          {/* <p style={{ display: "block" }}></p> */}
           <button className={style.white_bg} {...navigateHowItWorks}>
             Подробнее
           </button>
