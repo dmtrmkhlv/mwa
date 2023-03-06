@@ -4,7 +4,6 @@ import gift from "../images/gift.png";
 export const HowItWorks = () => {
   const style = {
     width: "100%",
-    border: "none",
     mt: 4,
     mb: 4,
   };
@@ -15,7 +14,7 @@ export const HowItWorks = () => {
         <Typography variant="h2" component="h3" mb={4} align="center">
           Как это работает?
         </Typography>
-        <Typography variant="body1" mb={2}>
+        <Typography variant="body1" mb={2} lineHeight="1,5">
           Зарегистрируйтесь на&nbsp;сайте. Составьте свой список желаемых
           подарков. Добавляя подарок, укажите ссылку на&nbsp;товар или услугу
           из&nbsp;любого интернет-магазина. По&nbsp;ссылке друзьям будет проще
@@ -36,7 +35,7 @@ export const HowItWorks = () => {
           могут его купить и&nbsp;вписать ваш адрес в&nbsp;качестве адреса
           доставки.
         </Typography>
-        <Typography variant="body1">
+        <Typography variant="body1" lineHeight="1,5">
           Мы&nbsp;делаем процесс дарения и&nbsp;получения подарков простым
           и&nbsp;приятным для каждого участника этого сакрального процесса.
           В&nbsp;особенности это удобно для людей, которые находятся далеко
@@ -51,6 +50,7 @@ export const HowItWorks = () => {
         <Box sx={style}>
           <img src={gift} alt="gift" style={{ margin: "0 auto" }} />
         </Box>
+        <hr />
       </Box>
     </Container>
   );

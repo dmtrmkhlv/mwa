@@ -19,6 +19,7 @@ import {
   BookingPage,
   EventBookingPage,
   ProfilePage,
+  BlogPage,
   Page404,
 } from "./page";
 
@@ -55,6 +56,7 @@ route.create(MainPage, "/valentines", "public", "ко дню святого ва
 route.create(MainPage, "/christmas", "public", "на рождество");
 route.create(PrivacyPage, "/privacy", "public", "политики");
 route.create(ProfilePage, "/profile", "public", "мой профиль");
+route.create(BlogPage, "/blog", "public", "блог");
 route.create(Page404, "*", "public", "404");
 
 export const App = () => {

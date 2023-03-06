@@ -17,9 +17,7 @@ export const Invitation = () => {
           <NavLink className="reg" to={"/signup"}>
             Регистрация
           </NavLink>
-          {/* <NavLink className="why" to={"/whyme"}> */}
           <WhyModal />
-          {/* </NavLink> */}
         </Box>
       </Box>
     </>
