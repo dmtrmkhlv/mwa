@@ -1,15 +1,9 @@
 import {
   Box,
   CssBaseline,
-  BottomNavigation,
-  BottomNavigationAction,
-  Paper,
   List,
   ListItem,
-  ListItemAvatar,
   ListItemText,
-  Avatar,
-  Button,
   ListItemButton,
   IconButton,
   ClickAwayListener,
@@ -18,9 +12,6 @@ import {
   Link,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import RestoreIcon from "@mui/icons-material/Restore";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ArchiveIcon from "@mui/icons-material/Archive";
 import { Image } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
@@ -32,8 +23,7 @@ import {
   getAllOtherEvents,
   isActivate,
 } from "../../store/ThunkCreator";
-import { NavLink, useNavigate } from "react-router-dom";
-import { CreateEvent } from "../CreateEvent/CreateEvent";
+import { useNavigate } from "react-router-dom";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { ListEvent } from "../../../interfaces";
 import ShortcutIcon from "@mui/icons-material/Shortcut";

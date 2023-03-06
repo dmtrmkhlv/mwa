@@ -173,7 +173,7 @@ export const Login = () => {
           </Grid>
         </Box>
       </Box>
-      {error !== "" ? (
+      {/* {error !== "" ? (
         <Typography
           variant="h6"
           gutterBottom
@@ -182,7 +182,7 @@ export const Login = () => {
         </Typography>
       ) : (
         <></>
-      )}
+      )} */}
     </Container>
   );
 };
