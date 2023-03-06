@@ -16,3 +16,4 @@ export * from "./BookingPage";
 export * from "./EventBookingPage";
 export * from "./ProfilePage";
 export * from "./Page404";
+export * from "./BlogPage";
