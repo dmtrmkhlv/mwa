@@ -16,7 +16,7 @@ import { CustomeDrawer, DrawerHeader } from "../components/DrawerEvent/Drawer";
 export default function Layout(props: LayoutProps): JSX.Element {
   const { session } = useRequireAuth();
   // const theme = useTheme();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const { children, isRequire } = props;
   const getRequireBoolean = () => {
     if (isRequire === "protected") {
@@ -41,7 +41,8 @@ export default function Layout(props: LayoutProps): JSX.Element {
                 flexWrap: "wrap",
                 alignContent: "center",
                 flexDirection: "column",
-              }}>
+              }}
+            >
               {children}
             </Box>
           </Container>

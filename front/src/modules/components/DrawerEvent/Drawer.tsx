@@ -57,12 +57,12 @@ interface CustomeDrawerProps {
 }
 
 export const CustomeDrawer = (props: CustomeDrawerProps) => {
+  const { open, setOpen } = props;
   const navigate = useNavigate();
+  const theme = useTheme();
   const handleNavigate = (nav: string) => {
     navigate(nav);
   };
-  const theme = useTheme();
-  const { open, setOpen } = props;
   const handleDrawerClose = () => {
     setOpen(!open);
   };
@@ -70,11 +70,7 @@ export const CustomeDrawer = (props: CustomeDrawerProps) => {
     <Drawer variant="permanent" open={open}>
       <DrawerHeader>
         <IconButton onClick={handleDrawerClose}>
-          {theme.direction === "rtl" ? (
-            <ChevronRightIcon />
-          ) : (
-            <ChevronLeftIcon />
-          )}
+          {!open ? <ChevronRightIcon /> : <ChevronLeftIcon />}
         </IconButton>
       </DrawerHeader>
       <Divider />
@@ -87,13 +83,15 @@ export const CustomeDrawer = (props: CustomeDrawerProps) => {
                 justifyContent: open ? "initial" : "center",
                 px: 2.5,
               }}
-              onClick={() => handleNavigate(row.link)}>
+              onClick={() => handleNavigate(row.link)}
+            >
               <ListItemIcon
                 sx={{
                   minWidth: 0,
                   mr: open ? 3 : "auto",
                   justifyContent: "center",
-                }}>
+                }}
+              >
                 {row.key % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>
               <ListItemText
