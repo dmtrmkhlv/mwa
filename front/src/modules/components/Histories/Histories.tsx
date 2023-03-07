@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import "./Histories.scss";
 import read_more from "../images/read_more.jpg";
+import { NavLink } from "react-router-dom";
 
 export const Histories = () => {
   return (
@@ -19,9 +20,7 @@ export const Histories = () => {
               составлялись детьми для отправки Санта-Клаусу, а хитрые взрослые
               могли таким образом точно исполнить желания ребенка.
             </p>
-            <a href={"/histories/:id"} title="Читать далее">
-              Читать далее
-            </a>
+            <NavLink to={"/blog"}>Читать далее</NavLink>
           </Box>
         </Box>
 

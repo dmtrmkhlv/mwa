@@ -1,11 +1,10 @@
 import {
-  IListCreator,
   IReqUser,
   IUserSession,
   ListEvent,
   ListGift,
 } from "../../interfaces";
-import { api, Api } from "../api";
+import { Api } from "../api";
 import { thunks } from "./helper";
 import { IUser } from "./slices/ProfileSlice";
 
@@ -22,6 +21,10 @@ export const getProfile = thunks<IUser, any>(
 export const updateProfile = thunks<IUser, any>(
   thunkapi.updateProfile,
   "user/updateProfile"
+);
+export const sendConfirmLink = thunks<IUser, any>(
+  thunkapi.sendConfirmLink,
+  "user/sendConfirmLink"
 );
 export const requiredAccount = thunks<IUserSession, any>(
   thunkapi.requiredAccount,

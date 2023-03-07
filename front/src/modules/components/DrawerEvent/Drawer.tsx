@@ -1,15 +1,10 @@
 import MuiDrawer from "@mui/material/Drawer";
 import { closedMixin, drawerWidth, openedMixin } from "./DrawerProps";
 import * as React from "react";
-import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
+import { styled, useTheme } from "@mui/material/styles";
 import List from "@mui/material/List";
-import CssBaseline from "@mui/material/CssBaseline";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
@@ -62,12 +57,12 @@ interface CustomeDrawerProps {
 }
 
 export const CustomeDrawer = (props: CustomeDrawerProps) => {
+  const { open, setOpen } = props;
   const navigate = useNavigate();
+  const theme = useTheme();
   const handleNavigate = (nav: string) => {
     navigate(nav);
   };
-  const theme = useTheme();
-  const { open, setOpen } = props;
   const handleDrawerClose = () => {
     setOpen(!open);
   };
@@ -75,11 +70,7 @@ export const CustomeDrawer = (props: CustomeDrawerProps) => {
     <Drawer variant="permanent" open={open}>
       <DrawerHeader>
         <IconButton onClick={handleDrawerClose}>
-          {theme.direction === "rtl" ? (
-            <ChevronRightIcon />
-          ) : (
-            <ChevronLeftIcon />
-          )}
+          {!open ? <ChevronRightIcon /> : <ChevronLeftIcon />}
         </IconButton>
       </DrawerHeader>
       <Divider />

@@ -1,7 +1,6 @@
 import {
   AccountCircle,
   Check,
-  Email,
   Visibility,
   VisibilityOff,
 } from "@mui/icons-material";
@@ -15,7 +14,7 @@ import {
   OutlinedInput,
   TextField,
 } from "@mui/material";
-import { useLogin } from "../Login/useLogin";
+// import { useLogin } from "../Login/useLogin";
 import "./SignUp.css";
 import { IReqUser } from "../../../interfaces";
 import { useNavigate } from "react-router-dom";
@@ -58,7 +57,7 @@ export const SignUp = () => {
     if (access === "Успешно") {
       setTimeout(() => navigate("/login"), 500);
     }
-  }, [access]);
+  }, [access, navigate]);
 
   return (
     <Box sx={{ mb: 10 }}>
@@ -70,8 +69,7 @@ export const SignUp = () => {
           maxWidth: 600,
           margin: "auto",
           mb: 2,
-        }}
-      >
+        }}>
         Регистрация
       </Box>
 
@@ -83,15 +81,13 @@ export const SignUp = () => {
           mr: "auto",
           ml: "auto",
           mb: 2,
-        }}
-      >
+        }}>
         <Box
           sx={{
             "& .MuiTextField-root": { mb: 1, maxWidth: 600, width: "100%" },
           }}
           display="flex"
-          flexDirection={"column"}
-        >
+          flexDirection={"column"}>
           <FormGroup row={false}>
             <TextField
               fullWidth
@@ -141,8 +137,7 @@ export const SignUp = () => {
                     aria-label="toggle password visibility"
                     onClick={handleClickShowPassword}
                     onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
+                    edge="end">
                     {showPassword ? (
                       <VisibilityOff sx={{ fill: "rgb(63 68 78)" }} />
                     ) : (
@@ -165,8 +160,7 @@ export const SignUp = () => {
                   color: "#F7941E",
                 },
               }}
-              onClick={handlerSignUp}
-            >
+              onClick={handlerSignUp}>
               <Check /> Регистрироваться
             </Button>
           </FormGroup>

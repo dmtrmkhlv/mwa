@@ -1,0 +1,10 @@
+.servicesContainer .author {
+  text-align: right;
+  font-style: italic;
+}
+.servicesContainer p {
+  margin: 1em 0;
+}
+.servicesContainer p img {
+  margin-bottom: 1em;
+}/*# sourceMappingURL=Services.css.map */

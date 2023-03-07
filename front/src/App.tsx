@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { PageProps } from "./interfaces";
-import { Route, routing, useAppDispatch } from "./modules";
+import { Route, routing } from "./modules"; //useAppDispatch
 import { useRequiredAccount } from "./modules/hooks/useRequiredAccount";
 import {
   MainPage,
@@ -19,6 +19,8 @@ import {
   BookingPage,
   EventBookingPage,
   ProfilePage,
+  BlogPage,
+  Page404,
 } from "./page";
 
 const subroute = routing();
@@ -54,6 +56,8 @@ route.create(MainPage, "/valentines", "public", "ко дню святого ва
 route.create(MainPage, "/christmas", "public", "на рождество");
 route.create(PrivacyPage, "/privacy", "public", "политики");
 route.create(ProfilePage, "/profile", "public", "мой профиль");
+route.create(BlogPage, "/blog", "public", "блог");
+route.create(Page404, "*", "public", "404");
 
 export const App = () => {
   useRequiredAccount();

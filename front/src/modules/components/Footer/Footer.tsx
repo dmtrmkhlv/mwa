@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import "./Footer.scss";
 import logo from "../images/logo_orange_little.png";

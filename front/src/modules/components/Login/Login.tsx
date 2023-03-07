@@ -38,28 +38,23 @@ export const Login = () => {
   const handleClickRemember = () => setRememberLogin((yes) => !yes);
 
   return (
-    <Container
-      className="logCont"
-      sx={{ marginBottom: '3em' }}>
+    <Container className="logCont" sx={{ marginBottom: "3em" }}>
       <Box
         sx={{
           width: 600,
           margin: "0 auto",
-          maxWidth: "100%"
-        }}
-      >
+          maxWidth: "100%",
+        }}>
         <Grid
           container
           sx={{
             alignItems: "center",
-          }}
-        >
+          }}>
           <Grid item sm={8} xs={7}>
-            <Box 
-              className="auth-header" 
-              component="h1" 
-              sx={{ fontSize: "48px",
-                fontWeight: 600 }}>
+            <Box
+              className="auth-header"
+              component="h1"
+              sx={{ fontSize: "44px", fontWeight: 600 }}>
               Войти
             </Box>
           </Grid>
@@ -72,9 +67,8 @@ export const Login = () => {
                 textTransform: "uppercase",
                 fontWeight: "300",
                 border: "1px solid #e2e8f0",
-                color: "initial"
-              }}
-            >
+                color: "initial",
+              }}>
               Регистрация
             </Button>
           </Grid>
@@ -88,17 +82,15 @@ export const Login = () => {
           mb: 10,
           margin: "auto",
           maxWidth: "100%",
-        }}
-      >
+        }}>
         <Box
           sx={{
             "& .MuiTextField-root": { mb: 1, width: 600, maxWidth: "100%" },
           }}
           display="flex"
-          flexDirection={"column"}
-        >
+          flexDirection={"column"}>
           <TextField
-            sx={{ width: 1, color: 'initial' }}
+            sx={{ width: 1, color: "initial" }}
             fullWidth
             id="outlined-basic"
             label="Обязательно"
@@ -106,8 +98,8 @@ export const Login = () => {
             defaultValue="Имя"
             InputProps={{
               startAdornment: (
-                <InputAdornment position="start" >
-                  <AccountCircle sx={{ fill: 'rgb(63 68 78)' }} />
+                <InputAdornment position="start">
+                  <AccountCircle sx={{ fill: "rgb(63 68 78)" }} />
                 </InputAdornment>
               ),
             }}
@@ -132,10 +124,12 @@ export const Login = () => {
                   aria-label="toggle password visibility"
                   onClick={handleClickShowPassword}
                   onMouseDown={handleMouseDownPassword}
-                  edge="end"
-                  
-                >
-                  {showPassword ? <VisibilityOff sx={{ fill: 'rgb(63 68 78)' }} /> : <Visibility sx={{ fill: 'rgb(63 68 78)' }} />}
+                  edge="end">
+                  {showPassword ? (
+                    <VisibilityOff sx={{ fill: "rgb(63 68 78)" }} />
+                  ) : (
+                    <Visibility sx={{ fill: "rgb(63 68 78)" }} />
+                  )}
                 </IconButton>
               </InputAdornment>
             }
@@ -153,16 +147,14 @@ export const Login = () => {
             }}
             type="submit"
             variant="contained"
-            onClick={submitButton}
-          >
+            onClick={submitButton}>
             <Check /> Войти
           </Button>
           <Grid container sx={{ mt: 2, alignItems: "center" }}>
             <Grid item sm={2} xs={6}>
               <div
                 className={`rememberLogin ${rememberLogin}`}
-                onClick={handleClickRemember}
-              >
+                onClick={handleClickRemember}>
                 <span></span>
               </div>
             </Grid>
@@ -173,8 +165,7 @@ export const Login = () => {
               item
               sx={{ textAlign: { sm: "right", xs: "center" } }}
               sm={6}
-              xs={12}
-            >
+              xs={12}>
               <Link className="decolored" to={"/forget"}>
                 Забыли пароль?
               </Link>
@@ -182,17 +173,16 @@ export const Login = () => {
           </Grid>
         </Box>
       </Box>
-      {error !== "" ? (
+      {/* {error !== "" ? (
         <Typography
           variant="h6"
           gutterBottom
-          sx={{ color: "red", m: 1, width: "23ch" }}
-        >
+          sx={{ color: "red", m: 1, width: "23ch" }}>
           {error}
         </Typography>
       ) : (
         <></>
-      )}
+      )} */}
     </Container>
   );
 };

@@ -11,9 +11,9 @@ function createData(key: number, images: string, name: string) {
 
 export const rows = [
   createData(1, happy_brthd, "С Днем рожденья!"),
-  createData(2, annyversary, "С юбилеем!"),
-  createData(3, valentines, "С днем Валентина!"),
+  createData(2, annyversary, "С Юбилеем!"),
+  createData(3, valentines, "С Днем Св. Валентина!"),
   createData(4, christmas, "С Рождеством!"),
-  createData(5, wedding, "На свадьбу"),
-  createData(6, graduate, "На окончание"),
+  createData(5, wedding, "На Cвадьбу"),
+  createData(6, graduate, "На Выпускной"),
 ];

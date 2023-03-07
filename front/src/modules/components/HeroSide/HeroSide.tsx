@@ -1,7 +1,5 @@
-import { Box, Button } from "@mui/material";
-import { useNavigate, Link } from "react-router-dom";
+import { Box } from "@mui/material";
 import style from "./HeroSide.module.scss";
-
 import brown_lady from "../images/brown_lady.jpg";
 import wish_list_pen from "../images/wish_list_pen.jpg";
 import { useCustomeNavigate } from "../../hooks";

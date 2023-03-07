@@ -1,64 +1,49 @@
 .auth-wrapper fieldset {
   border-color: inherit;
 }
-
 .auth-wrapper fieldset legend span {
   color: inherit;
 }
-
 .auth-wrapper label {
   color: inherit;
 }
-
 .auth-wrapper svg path {
   fill: inherit;
 }
-
 .auth-wrapper .decolored {
   text-decoration: none;
 }
-
 .auth-wrapper .rememberLogin {
   width: 83px;
   height: 37px;
   border-width: 1px;
   border-radius: 20px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   position: relative;
   cursor: pointer;
 }
-
 .auth-wrapper .rememberLogin .decolored {
   text-decoration: none;
 }
-
 .auth-wrapper .rememberLogin.true:after {
   content: url(../images/check.svg);
   right: 10px;
   position: absolute;
   top: 8px;
 }
-
 .auth-wrapper .rememberLogin.true:before {
-  content: '';
+  content: "";
 }
-
 .auth-wrapper .rememberLogin.false:before {
   content: url(../images/cross.svg);
   position: absolute;
   left: 10px;
   top: 8px;
 }
-
 .auth-wrapper .rememberLogin.false:after {
-  content: '';
+  content: "";
 }
-
 .auth-wrapper .rememberLogin span {
   display: block;
   width: 29px;
@@ -66,17 +51,14 @@
   border-radius: 50%;
   left: 5px;
   position: absolute;
-  -webkit-transition: .3s;
-  transition: .3s;
+  transition: 0.3s;
   background-color: #3f444e;
   z-index: 10;
 }
-
 .auth-wrapper .rememberLogin.false span {
   left: 50px;
 }
 
-[data-theme="dark"] .rememberLogin span {
+[data-theme=dark] .rememberLogin span {
   background-color: #e2e8f0;
-}
-/*# sourceMappingURL=Login.css.map */
+}/*# sourceMappingURL=Login.css.map */

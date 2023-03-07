@@ -1,24 +1,18 @@
 import {
   Box,
   CssBaseline,
-  BottomNavigation,
-  BottomNavigationAction,
-  Paper,
   List,
   ListItem,
-  ListItemAvatar,
   ListItemText,
-  Avatar,
-  Button,
   ListItemButton,
   IconButton,
   ClickAwayListener,
   Tooltip,
+  ButtonGroup,
+  Link,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import RestoreIcon from "@mui/icons-material/Restore";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ArchiveIcon from "@mui/icons-material/Archive";
+import { Image } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectListEvent, selectListOtherEvent, selectUser } from "../../store";
@@ -29,11 +23,11 @@ import {
   getAllOtherEvents,
   isActivate,
 } from "../../store/ThunkCreator";
-import { NavLink, useNavigate } from "react-router-dom";
-import { CreateEvent } from "../CreateEvent/CreateEvent";
+import { useNavigate } from "react-router-dom";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { ListEvent } from "../../../interfaces";
 import ShortcutIcon from "@mui/icons-material/Shortcut";
+import { baseURL } from "../../api/baseURL";
 
 interface ListEventsProps {
   event: ListEvent;
@@ -96,8 +90,11 @@ const ListEvents = (props: ListEventsProps) => {
         </ListItem>
       ) : (
         <ListItem>
-          <ClickAwayListener onClickAway={handleTooltipClose}>
-            <div>
+          <ButtonGroup
+            variant="contained"
+            aria-label="outlined primary button group"
+          >
+            <ClickAwayListener onClickAway={handleTooltipClose}>
               <Tooltip
                 PopperProps={{
                   disablePortal: true,
@@ -113,12 +110,96 @@ const ListEvents = (props: ListEventsProps) => {
                   edge="end"
                   aria-label="delete"
                   onClick={handleTooltipOpen}
+                  sx={{
+                    margin: "5px",
+                  }}
                 >
                   <ContentCopyIcon />
                 </IconButton>
               </Tooltip>
-            </div>
-          </ClickAwayListener>
+            </ClickAwayListener>
+            <Link
+              href={`https://vk.com/share.php?url=${encodeURIComponent(
+                "https://xn--80aacmsbc4canw2ai.xn--p1ai/event/" + event.id
+              )}&title=${encodeURIComponent(
+                event.title
+              )}&description=${encodeURIComponent(
+                event.description
+              )}&image=${encodeURIComponent(
+                "https://xn--80aacmsbc4canw2ai.xn--p1ai/static/media/brown_lady.46b41722967335586fa0.jpg"
+              )}&noparse=true`}
+              underline="none"
+              target="_blank"
+              sx={{
+                margin: "5px",
+              }}
+            >
+              <Image
+                src="https://cdn-icons-png.flaticon.com/512/5968/5968835.png"
+                alt="VK"
+                boxSize="32px"
+                objectFit="cover"
+              />
+            </Link>
+            <Link
+              href={`https://connect.ok.ru/offer?url=${encodeURIComponent(
+                "https://xn--80aacmsbc4canw2ai.xn--p1ai/event/" + event.id
+              )}&title=${encodeURIComponent(
+                event.title
+              )}&imageUrl=${encodeURIComponent(
+                "https://xn--80aacmsbc4canw2ai.xn--p1ai/static/media/brown_lady.46b41722967335586fa0.jpg"
+              )}`}
+              underline="none"
+              target="_blank"
+              sx={{
+                margin: "5px",
+              }}
+            >
+              <Image
+                src="https://cdn-icons-png.flaticon.com/512/3669/3669991.png"
+                alt="Odnoklassniki"
+                boxSize="32px"
+                objectFit="cover"
+              />
+            </Link>
+            <Link
+              href={`https://t.me/share/url?url=
+              ${encodeURIComponent(
+                "https://xn--80aacmsbc4canw2ai.xn--p1ai/event/" + event.id
+              )}
+              &text=${encodeURIComponent(event.title)}
+              `}
+              underline="none"
+              target="_blank"
+              sx={{
+                margin: "5px",
+              }}
+            >
+              <Image
+                src="https://cdn-icons-png.flaticon.com/512/3536/3536661.png"
+                alt="Telegram"
+                boxSize="32px"
+                objectFit="cover"
+              />
+            </Link>
+            <Link
+              href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
+                "https://xn--80aacmsbc4canw2ai.xn--p1ai/event/" + event.id
+              )}`}
+              underline="none"
+              target="_blank"
+              sx={{
+                margin: "5px",
+              }}
+            >
+              <Image
+                src="https://cdn-icons-png.flaticon.com/512/3670/3670051.png"
+                alt="WhatsApp"
+                boxSize="32px"
+                objectFit="cover"
+              />
+            </Link>
+          </ButtonGroup>
         </ListItem>
       )}
     </Box>

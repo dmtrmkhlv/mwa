@@ -1,18 +1,13 @@
 import { styled, alpha } from "@mui/material/styles";
-// import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
-import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import { Button, useTheme } from "@mui/material";
+import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../hooks";
 import { userAuthenticatedOut } from "../../store/ActionCreator";
@@ -21,8 +16,7 @@ import { useState } from "react";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import { drawerWidth } from "../DrawerEvent/DrawerProps";
 import MenuIcon from "@mui/icons-material/Menu";
-// import { drawerWidth } from "./DrawerProps";
-import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
+import { useGetCurrentUrl } from "./useGetCurrentUrl";
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
@@ -100,6 +94,8 @@ export function PrimarySearchAppBar(props: PropsHeader) {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const { headerName } = useGetCurrentUrl();
+
   const menuId = "primary-search-account-menu";
   const renderMenu = session ? (
     <Menu
@@ -115,6 +111,7 @@ export function PrimarySearchAppBar(props: PropsHeader) {
         horizontal: "right",
       }}
       open={isMenuOpen}
+      onClick={handleMenuClose}
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleProfile}>Профиль</MenuItem>
@@ -139,40 +136,11 @@ export function PrimarySearchAppBar(props: PropsHeader) {
         horizontal: "right",
       }}
       open={isMobileMenuOpen}
+      onClick={handleMobileMenuClose}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
+      <MenuItem onClick={handleProfile}>Профиль</MenuItem>
+      <MenuItem onClick={handleOut}>Выйти</MenuItem>
     </Menu>
   );
   const handleDrawerOpen = () => {
@@ -210,31 +178,13 @@ export function PrimarySearchAppBar(props: PropsHeader) {
             color="black"
             sx={{ display: { xs: "none", sm: "block" } }}
           >
-            Список подарков
+            {headerName}
           </Typography>
 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             {session ? (
               <>
-                <IconButton
-                  size="large"
-                  aria-label="show 4 new mails"
-                  color="default"
-                >
-                  <Badge badgeContent={4} color="error">
-                    <MailIcon />
-                  </Badge>
-                </IconButton>
-                <IconButton
-                  size="large"
-                  aria-label="show 17 new notifications"
-                  color="default"
-                >
-                  <Badge badgeContent={17} color="error">
-                    <NotificationsIcon />
-                  </Badge>
-                </IconButton>
                 <IconButton
                   size="large"
                   edge="end"

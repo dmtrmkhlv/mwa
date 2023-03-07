@@ -16,8 +16,7 @@ interface CreateEventProps {
 
 export function CreateEvent(props: CreateEventProps) {
   const { mini } = props;
-  const { title, description, error, handlerForm, submitButton } =
-    useCreateEvent();
+  const { title, description, handlerForm, submitButton } = useCreateEvent();
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {

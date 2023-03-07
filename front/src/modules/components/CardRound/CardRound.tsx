@@ -26,19 +26,29 @@ export function CardRound(props: any) {
             {props.name}
           </Typography>
 
-          <Typography gutterBottom variant="h4" component="h4">
-            Навыки:
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {props.navyk}
-          </Typography>
+          { props.navyk ? (
+          <>
+            <Typography gutterBottom variant="h4" component="h4">
+              Навыки:
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {props.navyk}
+            </Typography>
+          </>
+          ) : ('') 
+          }
 
-          <Typography gutterBottom variant="h4" component="h4">
-            Вклад:
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {props.business}
-          </Typography>
+          { props.business ? (
+          <>
+            <Typography gutterBottom variant="h4" component="h4">
+              Вклад:
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {props.business}
+            </Typography>
+          </>
+          ) : ('')
+          }
         </CardContent>
       </CardActionArea>
     </Box>

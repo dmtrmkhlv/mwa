@@ -80,6 +80,7 @@
     align-self: start;
     @media (max-width: 768px) {
       margin-bottom: 10px;
+      align-self: center;
     }
   }
 
@@ -112,7 +113,6 @@
 
   @media (max-width: 768px) {
     padding: 10%;
-    flex-direction: column;
   }
 }
 

@@ -76,21 +76,25 @@ export class Api {
   async updateProfile(value: { id: string; data: IUser }) {
     try {
       const resp = await apifetch.patch(`/api/v1/users/${value.id}`, {
-        username: value.data.username,
-        // password: value.data.password,
-        profile: {
-          // photo: value.data.profile.photo || "",
-          firstname: value.data.profile.firstname || " ",
-          lastname: value.data.profile.lastname || " ",
-          // phone: value.data.profile.phone || "",
-          // email: value.data.profile.email || "",
-        },
+        ...value.data,
       });
       return resp.data;
     } catch (error) {
       console.error(error);
     }
   }
+  async sendConfirmLink(value: { email: string }) {
+    try {
+      const resp = await apifetch.post(
+        `api/v1/auth/user-profile/confirm-email/${value.email}`,
+        {}
+      );
+      return resp.data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   async requiredAccount(val: any) {
     const resptwo = await apifetch.get(`api/v1/auth/profile`);
     const data = {

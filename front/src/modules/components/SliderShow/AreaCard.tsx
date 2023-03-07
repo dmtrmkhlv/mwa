@@ -11,7 +11,7 @@ export function AreaCard(props: any) {
 
   return (
     <>
-      <Card sx={{ width: 270, ml: "auto", mr: "auto", mb: "1em" }}>
+      <Card sx={{ width: 300, ml: "auto", mr: "auto", mb: "1em" }}>
         <CardActionArea>
           <CardMedia
             component="img"
@@ -34,8 +34,7 @@ export function AreaCard(props: any) {
             }}
             size="small"
             color="primary"
-            {...navigateMain}
-          >
+            {...navigateMain}>
             Узнать больше ›
           </Button>
         </CardActions>
