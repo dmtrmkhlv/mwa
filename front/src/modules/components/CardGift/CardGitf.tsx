@@ -92,13 +92,24 @@ const CustomeCard = (props: CustomeCardProps) => {
 };
 
 const SubCardGift = () => {
-  const [role] = useRole();
+  const [role, setRole] = useState("creator");
+  const { value: user } = useSelector(selectUser);
   const { value: gift } = useSelector(selectListGift);
+  const dispatch = useAppDispatch();
   const { slug } = useParams();
+  useEffect(() => {
+    const resp = gift.find((el) => el.eventId === slug)?.userCreatorId || "";
+    if (resp === user.userId) {
+      setRole("creator");
+    } else {
+      console.log(resp);
+      setRole("giver");
+    }
+  }, [slug, gift, user]);
+
   return (
     <>
       {role === "creator" ? <CreateGift eventId={slug || ""} /> : <></>}
-      <h1>{role}</h1>
       {gift.map((el: ListGift) => {
         return <CustomeCard key={el.id} el={el} role={role} />;
       })}
