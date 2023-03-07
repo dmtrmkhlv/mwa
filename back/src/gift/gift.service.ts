@@ -115,12 +115,8 @@ export class GiftService {
             : user.username;
         const url =
           this.configService.get('NODE_ENV') === 'development'
-            ? `${this.configService.get('HOST_URL_DEV')}/api/v1/event/${
-                gift.eventId
-              }`
-            : `${this.configService.get('HOST_URL')}/api/v1/event/${
-                gift.eventId
-              }`;
+            ? `${this.configService.get('HOST_URL_DEV')}/gifts/${gift.eventId}`
+            : `${this.configService.get('HOST_URL')}/gifts/${gift.eventId}`;
         const mailInfo = {
           emailTo: 'mywishlistapp@mail.ru',
           subject: 'Кто-то забронировал ваш подарок!',
