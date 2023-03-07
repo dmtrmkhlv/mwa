@@ -163,12 +163,9 @@ const ListEvents = (props: ListEventsProps) => {
               />
             </Link>
             <Link
-              href={`https://t.me/share/url?url=
-              ${encodeURIComponent(
+              href={`https://t.me/share/url?url=${encodeURIComponent(
                 "https://xn--80aacmsbc4canw2ai.xn--p1ai/event/" + event.id
-              )}
-              &text=${encodeURIComponent(event.title)}
-              `}
+              )}&text=${encodeURIComponent(event.title)}`}
               underline="none"
               target="_blank"
               sx={{

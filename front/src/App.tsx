@@ -22,6 +22,7 @@ import {
   BlogPage,
   Page404,
 } from "./page";
+import { ConfirmEmail } from "./page/ConfirmEmail";
 
 const subroute = routing();
 subroute.create(GiftPage, ":slug", "public", "подарки");
@@ -58,6 +59,7 @@ route.create(PrivacyPage, "/privacy", "public", "политики");
 route.create(ProfilePage, "/profile", "public", "мой профиль");
 route.create(BlogPage, "/blog", "public", "блог");
 route.create(Page404, "*", "public", "404");
+route.create(ConfirmEmail, "/confirm", "public", "Подтверждение почты");
 
 export const App = () => {
   useRequiredAccount();
