@@ -91,7 +91,11 @@ export class ProfileService {
       if (typeof payload === 'object' && 'email' in payload) {
         const profileToConfirm = await this.findProfileByEmail(payload.email);
         profileToConfirm.emailIsActive = true;
-        return this.update(profileToConfirm);
+        const updateEmailProfile = await this.update(profileToConfirm);
+        if (updateEmailProfile.emailIsActive === true) {
+          return true;
+        }
+        return false;
       }
       throw new BadRequestException();
     } catch (error) {

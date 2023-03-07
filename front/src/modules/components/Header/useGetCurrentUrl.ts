@@ -59,6 +59,12 @@ export const useGetCurrentUrl = () => {
     case "/profile":
       headerName = "Мой профиль";
       break;
+    case "/blog":
+      headerName = "Блог";
+      break;
+    case "/confirm":
+      headerName = "Подтверждение почты";
+      break;
     default:
       headerName = "Такой страницы не существует";
       break;

@@ -6,6 +6,7 @@ import {
   UseGuards,
   Param,
   Request,
+  Redirect,
 } from '@nestjs/common';
 import { ProfileService } from './profile.service';
 import { ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
@@ -30,7 +31,16 @@ export class ProfileController {
 
   @ApiOperation({ summary: 'Service entrypoint to confirm Email' })
   @Get()
-  confirmEmail(@Query('token') token: string) {
-    return this.profileService.confirmEmail(token);
+  @Redirect('https://xn--80aacmsbc4canw2ai.xn--p1ai')
+  async confirmEmail(@Query('token') token: string) {
+    const status = await this.profileService.confirmEmail(token);
+    if (status) {
+      return {
+        url: `https://xn--80aacmsbc4canw2ai.xn--p1ai/confirm?status=true`,
+      };
+    }
+    return {
+      url: `https://xn--80aacmsbc4canw2ai.xn--p1ai/confirm?status=false`,
+    };
   }
 }
