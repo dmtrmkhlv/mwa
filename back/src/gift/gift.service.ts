@@ -118,7 +118,7 @@ export class GiftService {
             ? `${this.configService.get('HOST_URL_DEV')}/gifts/${gift.eventId}`
             : `${this.configService.get('HOST_URL')}/gifts/${gift.eventId}`;
         const mailInfo = {
-          emailTo: 'mywishlistapp@mail.ru',
+          emailTo: user.profile.email,
           subject: 'Кто-то забронировал ваш подарок!',
           templateName: 'bookGift',
           context: {
