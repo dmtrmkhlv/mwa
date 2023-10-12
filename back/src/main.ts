@@ -4,6 +4,7 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
+  const port = process.env.PORT
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   app.enableCors({
@@ -11,7 +12,7 @@ async function bootstrap() {
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
   });
-  const config = new DocumentBuilder()
+  const configDoc = new DocumentBuilder()
     .setTitle('Документация API')
     .setDescription('Entrypoint бэкенда')
     .setVersion('1.0')
@@ -19,9 +20,9 @@ async function bootstrap() {
     .setBasePath('api')
     .addBearerAuth()
     .build();
-  const document = SwaggerModule.createDocument(app, config);
+  const document = SwaggerModule.createDocument(app, configDoc);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(8000);
+  await app.listen(port);
 }
 bootstrap();
