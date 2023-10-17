@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { IData, selectListEvent, useAppDispatch } from "../../../modules";
 import { useSelector } from "react-redux";
 import { createEvent } from "../../store/ThunkCreator";
@@ -14,7 +14,7 @@ interface OutLogin {
 type useCreateFunc = () => OutLogin;
 
 export const useCreateEvent: useCreateFunc = () => {
-  const { value: listevent, error } = useSelector(selectListEvent);
+  const { error } = useSelector(selectListEvent);
   const dispatch = useAppDispatch();
   const [form, setForm] = useState({
     title: "",

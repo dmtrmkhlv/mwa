@@ -1,7 +1,7 @@
 import MuiDrawer from "@mui/material/Drawer";
 import { closedMixin, drawerWidth, openedMixin } from "./DrawerProps";
 import * as React from "react";
-import { styled, useTheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -59,7 +59,6 @@ interface CustomeDrawerProps {
 export const CustomeDrawer = (props: CustomeDrawerProps) => {
   const { open, setOpen } = props;
   const navigate = useNavigate();
-  const theme = useTheme();
   const handleNavigate = (nav: string) => {
     navigate(nav);
   };

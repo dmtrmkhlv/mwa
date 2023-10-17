@@ -1,11 +1,6 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import React, { ChangeEvent, useEffect, useState } from "react";
-import {
-  RootState,
-  selectUser,
-  useAppDispatch,
-  useAppSelector,
-} from "../../../modules";
+import { useLocation, useNavigate } from "react-router-dom";
+import { ChangeEvent, useEffect, useState } from "react";
+import { selectUser, useAppDispatch } from "../../../modules";
 import { useSelector } from "react-redux";
 import { loginAccount } from "../../store/ThunkCreator";
 

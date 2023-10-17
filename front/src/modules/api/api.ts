@@ -19,11 +19,7 @@ interface IUserID {
 interface IEventID {
   id: string;
 }
-interface IGiftData {
-  title: string;
-  link: string;
-  description: string;
-}
+
 export interface IData {
   data: {
     title: string;
@@ -169,12 +165,9 @@ export class Api {
         link: value.data.link,
       };
 
-      const resp = await apifetch.post<CreateUserResponse>(
-        `/api/v1/gift/${value.data.id}`,
-        {
-          ...data,
-        }
-      );
+      await apifetch.post<CreateUserResponse>(`/api/v1/gift/${value.data.id}`, {
+        ...data,
+      });
       const resptwo = await apifetch.get<ListEvent[]>(
         `/api/v1/event/${value.data.id}`
       );
@@ -184,16 +177,14 @@ export class Api {
     }
   }
   async deleteGift(value: any) {
-    const resp = await apifetch.delete<CreateUserResponse>(
-      `/api/v1/gift/${value.id}`
-    );
+    await apifetch.delete<CreateUserResponse>(`/api/v1/gift/${value.id}`);
     const resptwo = await apifetch.get<ListEvent[]>(
       `/api/v1/event/${value.slug || ""}`
     );
     return resptwo.data[0].gifts;
   }
   async reserveGift(value: any) {
-    const resp = await apifetch.post<CreateUserResponse>(
+    await apifetch.post<CreateUserResponse>(
       `/api/v1/gift/book/${value.id}`,
       {}
     );
@@ -262,7 +253,7 @@ export const api: IApi = {
   },
   getAllUsers: async (value: IReqUser) => {
     try {
-      const resp = await apifetch.get<GetUsersResponse>(`/api/v1/users`);
+      await apifetch.get<GetUsersResponse>(`/api/v1/users`);
     } catch (error) {
       console.error(error);
     }
@@ -273,7 +264,7 @@ export const api: IApi = {
       username: value.username,
       password: value.password,
     };
-    const resp = await apifetch.post<CreateUserResponse>(`/api/v1/users`, {
+    await apifetch.post<CreateUserResponse>(`/api/v1/users`, {
       ...data,
     });
   },
@@ -281,7 +272,7 @@ export const api: IApi = {
   getUserbyId: async (value: IUserID) => {
     try {
       const id = value.id;
-      const resp = await apifetch.get<GetUsersResponse>(`/api/v1/users/${id}`);
+      await apifetch.get<GetUsersResponse>(`/api/v1/users/${id}`);
     } catch (error) {
       console.error(error);
     }
@@ -289,9 +280,7 @@ export const api: IApi = {
   updateUser: async (value: IUserID) => {
     try {
       const id = value.id;
-      const resp = await apifetch.patch<GetUsersRequests>(
-        `/api/v1/users/${id}`
-      );
+      await apifetch.patch<GetUsersRequests>(`/api/v1/users/${id}`);
     } catch (error) {
       console.error(error);
     }
@@ -299,9 +288,7 @@ export const api: IApi = {
   deleteUser: async (value: IUserID) => {
     try {
       const id = value.id;
-      const resp = await apifetch.delete<GetUsersResponse>(
-        `/api/v1/users/${id}`
-      );
+      await apifetch.delete<GetUsersResponse>(`/api/v1/users/${id}`);
     } catch (error) {
       console.error(error);
     }
@@ -311,13 +298,13 @@ export const api: IApi = {
       username: value.username,
       password: value.password,
     };
-    const resp = await apifetch.post<CreateUserResponse>(`/api/v1/register`, {
+    await apifetch.post<CreateUserResponse>(`/api/v1/register`, {
       ...data,
     });
   },
   getUserProfile: async (value: any) => {
     try {
-      const resp = await apifetch.get<GetUsersResponse>(`/api/v1/auth/profile`);
+      await apifetch.get<GetUsersResponse>(`/api/v1/auth/profile`);
     } catch (error) {
       console.error(error);
     }
@@ -329,7 +316,7 @@ export const api: IApi = {
         description: value.data.description,
       };
 
-      const resp = await apifetch.post<CreateUserResponse>(`/api/v1/event`, {
+      await apifetch.post<CreateUserResponse>(`/api/v1/event`, {
         ...data,
       });
     } catch (error) {
@@ -340,7 +327,7 @@ export const api: IApi = {
   getEventbyId: async (value: IEventID) => {
     try {
       const id = value.id;
-      const resp = await apifetch.get<GetUsersRequests>(`/api/v1/event/${id}`);
+      await apifetch.get<GetUsersRequests>(`/api/v1/event/${id}`);
     } catch (error) {
       console.error(error);
     }
@@ -348,9 +335,7 @@ export const api: IApi = {
   updateEvent: async (value: IEventID) => {
     try {
       const id = value.id;
-      const resp = await apifetch.patch<GetUsersRequests>(
-        `/api/v1/event/${id}`
-      );
+      await apifetch.patch<GetUsersRequests>(`/api/v1/event/${id}`);
     } catch (error) {
       console.error(error);
     }
@@ -358,9 +343,7 @@ export const api: IApi = {
   deleteEvent: async (value: IEventID) => {
     try {
       const id = value.id;
-      const resp = await apifetch.delete<GetUsersResponse>(
-        `/api/v1/event/${id}`
-      );
+      await apifetch.delete<GetUsersResponse>(`/api/v1/event/${id}`);
     } catch (error) {
       console.error(error);
     }
@@ -368,14 +351,14 @@ export const api: IApi = {
   createGift: async (value: IEventID) => {
     try {
       const id = value.id;
-      const resp = await apifetch.post<GetUsersRequests>(`/api/v1/gift/${id}`);
+      await apifetch.post<GetUsersRequests>(`/api/v1/gift/${id}`);
     } catch (error) {
       console.error(error);
     }
   },
   getAllGifts: async (value: any) => {
     try {
-      const resp = await apifetch.get<GetUsersResponse>(`/api/v1/gift`);
+      await apifetch.get<GetUsersResponse>(`/api/v1/gift`);
     } catch (error) {
       console.error(error);
     }
@@ -383,7 +366,7 @@ export const api: IApi = {
   getGiftbyId: async (value: IEventID) => {
     try {
       const id = value.id;
-      const resp = await apifetch.get<GetUsersRequests>(`/api/v1/gift/${id}`);
+      await apifetch.get<GetUsersRequests>(`/api/v1/gift/${id}`);
     } catch (error) {
       console.error(error);
     }
@@ -391,7 +374,7 @@ export const api: IApi = {
   updateGift: async (value: IEventID) => {
     try {
       const id = value.id;
-      const resp = await apifetch.patch<GetUsersRequests>(`/api/v1/gift/${id}`);
+      await apifetch.patch<GetUsersRequests>(`/api/v1/gift/${id}`);
     } catch (error) {
       console.error(error);
     }
@@ -399,9 +382,7 @@ export const api: IApi = {
   deleteGift: async (value: IEventID) => {
     try {
       const id = value.id;
-      const resp = await apifetch.delete<GetUsersResponse>(
-        `/api/v1/event/${id}`
-      );
+      await apifetch.delete<GetUsersResponse>(`/api/v1/event/${id}`);
     } catch (error) {
       console.error(error);
     }
@@ -409,9 +390,7 @@ export const api: IApi = {
   bookGift: async (value: IEventID) => {
     try {
       const id = value.id;
-      const resp = await apifetch.post<GetUsersRequests>(
-        `/api/v1/gift/book/${id}`
-      );
+      await apifetch.post<GetUsersRequests>(`/api/v1/gift/book/${id}`);
     } catch (error) {
       console.error(error);
     }
@@ -419,9 +398,7 @@ export const api: IApi = {
   unbookGift: async (value: IEventID) => {
     try {
       const id = value.id;
-      const resp = await apifetch.delete<GetUsersRequests>(
-        `/api/v1/gift/book/${id}`
-      );
+      await apifetch.delete<GetUsersRequests>(`/api/v1/gift/book/${id}`);
     } catch (error) {
       console.error(error);
     }

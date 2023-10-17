@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAppDispatch } from "../../hooks";
 import { deleteGift } from "../../store/ThunkCreator";

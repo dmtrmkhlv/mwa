@@ -8,9 +8,9 @@ import Typography from "@mui/material/Typography";
 import { Entry } from "../Button";
 import "./Header.css";
 import { ChakraProvider, ColorMode } from "@chakra-ui/react";
-import { Box as BoxSwitcher, useColorMode } from "@chakra-ui/react";
+import { Box as BoxSwitcher } from "@chakra-ui/react";
 import { ColorModeSwitcher } from "../Switcher/ColorModeSwitcher";
-import { navItemsProps, PropsHeader } from "./HeaderProps";
+import { navItemsProps } from "./HeaderProps";
 
 interface CustomeProps {
   handleDrawerToggle: () => void;

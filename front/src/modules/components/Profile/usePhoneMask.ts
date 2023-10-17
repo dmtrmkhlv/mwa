@@ -14,7 +14,7 @@ export const usePhoneMask = () => {
 
   const setPhoneValue = (inputValue: string) => {
     let matrix = "+7(___)___-__-__";
-    inputValue = inputValue;
+    // inputValue = inputValue;
     let i = 0;
     let def = matrix.replace(/\D/g, "");
     let val = inputValue.replace(/\D/g, "");

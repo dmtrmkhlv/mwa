@@ -1,7 +1,6 @@
 import { Button, Typography } from "@mui/material";
 import { useCustomeNavigate } from "../../hooks";
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
 
 export function ConfirmEmailComponent() {
   const [navigateToProfile] = useCustomeNavigate("/profile", true);

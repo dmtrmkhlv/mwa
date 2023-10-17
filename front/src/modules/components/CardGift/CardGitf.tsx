@@ -3,15 +3,9 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import {
-  selectListGift,
-  selectUser,
-  useAppDispatch,
-  useCustomeNavigate,
-} from "../..";
-import { useRole } from "../../requireAuth";
+import { selectListGift, selectUser, useAppDispatch } from "../..";
 import { getGifts } from "../../store/ThunkCreator";
 import { useEffect, useState } from "react";
 import { ListGift } from "../../../interfaces";
@@ -95,7 +89,6 @@ const SubCardGift = () => {
   const [role, setRole] = useState("creator");
   const { value: user } = useSelector(selectUser);
   const { value: gift } = useSelector(selectListGift);
-  const dispatch = useAppDispatch();
   const { slug } = useParams();
   useEffect(() => {
     const resp = gift.find((el) => el.eventId === slug)?.userCreatorId || "";

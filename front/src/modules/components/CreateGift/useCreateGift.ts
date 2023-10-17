@@ -1,12 +1,7 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import {
-  IData,
-  IGift,
-  selectListEvent,
-  useAppDispatch,
-} from "../../../modules";
+import { ChangeEvent, useState } from "react";
+import { IGift, selectListEvent, useAppDispatch } from "../../../modules";
 import { useSelector } from "react-redux";
-import { createEvent, createGift } from "../../store/ThunkCreator";
+import { createGift } from "../../store/ThunkCreator";
 
 interface OutLogin {
   title: string;
@@ -20,7 +15,7 @@ interface OutLogin {
 type useCreateFunc = (eventId: string) => OutLogin;
 
 export const useCreateGift: useCreateFunc = (eventId) => {
-  const { value: listevent, error } = useSelector(selectListEvent);
+  const { error } = useSelector(selectListEvent);
   const dispatch = useAppDispatch();
   const [form, setForm] = useState({
     title: "",

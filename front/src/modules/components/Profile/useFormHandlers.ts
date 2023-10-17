@@ -227,7 +227,7 @@ export const useFormHandlers = (
         error: true,
       };
     }
-    const emailValidate = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
+    const emailValidate = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(
       userFormData.profile.email
     );
     if (emailValidate === false && userFormData.profile.email !== "") {

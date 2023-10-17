@@ -27,7 +27,6 @@ import { useNavigate } from "react-router-dom";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { ListEvent } from "../../../interfaces";
 import ShortcutIcon from "@mui/icons-material/Shortcut";
-import { baseURL } from "../../api/baseURL";
 
 interface ListEventsProps {
   event: ListEvent;

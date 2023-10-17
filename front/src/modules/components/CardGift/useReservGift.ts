@@ -1,7 +1,6 @@
-import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAppDispatch } from "../../hooks";
-import { deleteGift, reserveGift } from "../../store/ThunkCreator";
+import { reserveGift } from "../../store/ThunkCreator";
 
 type onClick = {
   onClick: () => void;
